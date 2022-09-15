@@ -14,6 +14,7 @@ import {
   ImageBackground,
   Alert,
   Dimensions,
+  KeyboardAvoidingView,
 } from "react-native";
 import {
   colors,
@@ -440,7 +441,7 @@ class ProfileComponent extends PureComponent {
           </Text>
           <View style={{ height: 10 }} />
 
-          <ScrollView
+          <KeyboardAvoidingView
             style={{ flexGrow: 1 }}
             showsVerticalScrollIndicator={false}
           >
@@ -790,10 +791,12 @@ console.log("data_val",data_val)
               ) : null}
 
             </View>
+
           </ScrollView>
         {userInfo?.hasOwnProperty("image") &&
                 userInfo?.image.length >= 0 &&
                 !full_name ? (
+
             <TouchableOpacity onPress={() => this.callUpdateProfileData()} style={{
     height: 46,
     width: WINDOW_WIDTH - 60,
