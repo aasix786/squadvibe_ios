@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "116261501435",
+    "project_id": "squadvibe-94816",
+    "storage_bucket": "squadvibe-94816.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116261501435:android:5f27bad868a3698b40b35e",
+        "android_client_info": {
+          "package_name": "com.squadvibe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "116261501435-l1qd2g3kjogpgvn30kq0gjbihmu17cq4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkBAXtIBhjeYHyH9jF7Sm_mEriaErq-7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116261501435-l1qd2g3kjogpgvn30kq0gjbihmu17cq4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "116261501435-r2v08kbjl89t9n0m9m65j76jurs8va7q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.amin.squadvibe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SquadVibe</string>
+    <string name="facebook_app_id">546926419841085</string>
+    <string name="default_notification_channel_id">com.squadvibe</string>
+</resources>
