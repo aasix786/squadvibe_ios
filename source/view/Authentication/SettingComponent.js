@@ -600,7 +600,7 @@ class SettingComponent extends PureComponent {
               </View>
               <View style={{ marginTop: 15 }}>
                 <Slider
-                  value={this.state.radius}
+                  value={parseInt(this.state.radius)}
                   maximumValue={100}
                   style={{
                     zIndex: 5,
@@ -657,7 +657,7 @@ class SettingComponent extends PureComponent {
 
               <View style={{ marginTop: 15 }}>
                 <Slider
-                  value={this.state.age}
+                  value={parseInt(this.state.age)}
                   maximumValue={100}
                   style={{
                     zIndex: 5,
