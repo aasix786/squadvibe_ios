@@ -754,7 +754,7 @@ class ProfileComponent extends PureComponent {
     justifyContent:"center",
     marginBottom:50
   }}>
-                <Text style={{fontSize:18, textAlign:"center"}}>Save</Text>
+                <Text style={{fontSize:18, textAlign:"center"}}>Done</Text>
 
                
               </TouchableOpacity>

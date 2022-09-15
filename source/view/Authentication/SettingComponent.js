@@ -232,19 +232,19 @@ class SettingComponent extends PureComponent {
           <Text style={styles.buttonContainerText}>Account Settings</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={this.deleteAccount}
           style={styles.buttonContainer}
         >
           <Text style={styles.buttonContainerText}>Delete Account</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={this.logoutPopup}
           style={styles.buttonContainer}
         >
           <Text style={styles.buttonContainerText}>Logout</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </>
     );
   }
@@ -489,7 +489,7 @@ class SettingComponent extends PureComponent {
             searchIcon={false}
           />
 
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
@@ -520,8 +520,8 @@ class SettingComponent extends PureComponent {
             >
               <Text style={{ fontSize: 12 }}>Current location</Text>
             </TouchableOpacity>
-          </View>
-          <View
+          </View> */}
+          {/* <View
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
@@ -558,7 +558,7 @@ class SettingComponent extends PureComponent {
                     }
                   />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View
             style={{
               marginTop: 14,
@@ -600,7 +600,7 @@ class SettingComponent extends PureComponent {
               </View>
               <View style={{ marginTop: 15 }}>
                 <Slider
-                  value={parseInt(this.state.radius)}
+                  value={this.state.radius ? parseInt(this.state.radius) : 0}
                   maximumValue={100}
                   style={{
                     zIndex: 5,
@@ -657,7 +657,7 @@ class SettingComponent extends PureComponent {
 
               <View style={{ marginTop: 15 }}>
                 <Slider
-                  value={parseInt(this.state.age)}
+                  value={this.state.age ? parseInt(this.state.age):0}
                   maximumValue={100}
                   style={{
                     zIndex: 5,
@@ -686,7 +686,7 @@ class SettingComponent extends PureComponent {
 
           <Button
             style={{ bottom: 0, top: 30, position: "relative" }}
-            name="Save"
+            name="Done"
             bg={colors.white}
             textColor={"black"}
             clicked={this.save}
@@ -694,21 +694,21 @@ class SettingComponent extends PureComponent {
 
           <View style={{ height: 20 }} />
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={this.deletePopup}
             style={[styles.textContainer, { marginTop: 30, marginBottom: 20 }]}
           >
             <Text style={styles.text}>Delete Account</Text>
             <FontAwesome name="angle-right" size={20} color="gray" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={this.logoutPopup}
             style={styles.textContainer}
           >
             <Text style={styles.text}>Logout</Text>
             <FontAwesome name="angle-right" size={20} color="gray" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <View style={{ height: 20 }} />
         </ScrollView>
@@ -761,19 +761,23 @@ class SettingComponent extends PureComponent {
           marginTop: 15,
           borderRadius: 20,
           height: "auto",
+           borderColor: "white",
+              borderWidth: 2,
           flexDirection: "row",
         }}
       >
-        {/* <Image
+        <View style={{paddingTop:13,paddingHorizontal:10}}>
+        <Image
           source={require("../../assets/locationMarker.png")}
           style={{ height: 16, width: 16 }}
-        /> */}
+        />
+        </View>
         <GooglePlacesAutocomplete
           styles={{
             textInput: {
               borderRadius: 25,
-              borderColor: "white",
-              borderWidth: 2,
+              // borderColor: "white",
+              // borderWidth: 2,
               backgroundColor: "transparent",
               color: "white",
             },

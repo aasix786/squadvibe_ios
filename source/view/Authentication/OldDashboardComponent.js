@@ -32,35 +32,25 @@ class DashboardComponent extends Component {
       code: "",
       isCheck: false,
       birthDate: "",
-      images: [
-        // "",
-       "",
-       "",
-        // "",
-         "",
-          "",
-          //  "",
-            ""],
+      images: ["", "", "", "", "", "", ""],
       arrGridColors: [
-        // "#C7158C",
         "#C7158C",
         "#C7158C",
-        // "#EE435A",
+        "#EE435A",
         "#1583BC",
         "#E7E2D2",
-        // "#00A351",
+        "#00A351",
         "#00A351",
       ],
       // arrGridTitle: ['My Squads', 'Games again', 'Shuffle', 'Friendlist', 'Scouting', 'Settings'],
       arrGridTitle: [
-        // "Notifications",
+        "Notifications",
         "My Squads",
-        "Games Again",
-        "Shuffle",
-        // "My Profile",
+        "My Profile",
         "Friends List",
         "Shop",
-        // "Settings",
+        "Settings",
+        "Shuffle",
       ],
       selectedIndex: -1,
       arrInterest: ["Drinking", "Playing games"],
@@ -162,31 +152,14 @@ class DashboardComponent extends Component {
           style={{ height: "100%", width: "100%" }}
           source={require("../../assets/menuBgImage.png")}
         >
-          <View style={{ width:"100%"}}>
-            
+          <View style={{ flex: 1 }}>
             <View
               style={{
                 justifyContent: "center",
                 alignItems: "center",
-                flexDirection:"row"
               }}
             >
-               <View
-              style={{
-                backgroundColor: "transparent",
-                justifyContent: "center",
-                alignItems: "center",
-               width:"15%"
-              }}
-            >
-                <Image
-                          source={require(`../../assets/left_icon2.png`)}
-                          style={{ height: 25, width: 25,resizeMode:"contain" }}
-                        />
-            </View>
-<View style={{ width:"70%",justifyContent:"center",alignItems:"center"}}>
-  <View style={{width:"19%"}}>
-  <TouchableOpacity
+              <TouchableOpacity
                 active={0.8}
                 onPress={() => {
                   navigation.navigate("Profile");
@@ -194,10 +167,9 @@ class DashboardComponent extends Component {
                 style={{
                   marginTop: 70,
                   backgroundColor: "transparent",
-                  borderRadius: 78,
+                  borderRadius: 100,
                   borderColor: colors.white,
                   borderWidth: 1,
-                 
                 }}
               >
                 {userInfo &&
@@ -215,9 +187,7 @@ class DashboardComponent extends Component {
                   />
                 )}
               </TouchableOpacity>
-            
-  </View>
-  <Text
+              <Text
                 style={{
                   color: colors.white,
                   fontFamily: fonts.Medium,
@@ -228,24 +198,6 @@ class DashboardComponent extends Component {
               >
                 {userInfo.full_name}
               </Text>
-</View>
-<TouchableOpacity
-
-              style={{
-                backgroundColor: "transparent",
-                justifyContent: "center",
-                alignItems: "center",
-               width:"15%"
-              }}
-              onPress={() => this.props.navigation.navigate("Setting")}
-            >
-                <Image
-                          source={require(`../../assets/setting2.png`)}
-                          style={{ height: 22, width: 22,resizeMode:"contain" }}
-
-                        />
-            </TouchableOpacity>
-             
             </View>
 
             <ScrollView
@@ -272,57 +224,42 @@ class DashboardComponent extends Component {
                         alignItems: "center",
                       }}
                     >
-                      {/* {index == 0 ? (
+                      {index == 0 ? (
                         <Image
                           source={require(`../../assets/new_notification.png`)}
                           style={{ height: 24, width: 24 }}
                         />
-                      ) :  */}
-                      
-                     { index == 0 ? (
+                      ) : index == 1 ? (
                         <Image
                           source={require(`../../assets/mySquad.png`)}
                           style={{ height: 25, width: 25 }}
                         />
-                      )
-                      //  : index == 1 ? (
-                      //   <Image
-                      //     source={require("../../assets/new_profile.png")}
-                      //     style={{ height: 25, width: 25 }}
-                      //   />
-                      // ) 
-                      : index == 1 ? (
+                      ) : index == 2 ? (
                         <Image
-                          source={require(`../../assets/playing_games3.png`)}
-                          style={{ height: 20, width: 20 }}
+                          source={require("../../assets/new_profile.png")}
+                          style={{ height: 25, width: 25 }}
                         />
-                      ) 
-                      : index == 2 ? (
-                        <Image
-                          source={require(`../../assets/shuffle-bottom.png`)}
-                          style={{ height: 21, width: 21 }}
-                        />
-                      )
-                      : index == 3 ? (
+                      ) : index == 3 ? (
                         <Image
                           source={require(`../../assets/friendList.png`)}
-                          style={{ height: 21, width: 21 }}
+                          style={{ height: 20, width: 20 }}
                         />
-                      )
-                      : index == 4 ? (
+                      ) : index == 4 ? (
                         <Image
                           source={require(`../../assets/shop.png`)}
                           style={{ height: 21, width: 21 }}
                         />
-                      ) 
-                      // : index == 4 ? (
-                      //   <Image
-                      //     source={require(`../../assets/setting.png`)}
-                      //     style={{ height: 25, width: 25 }}
-                      //   />
-                      // ) 
-                   
-                       : null}
+                      ) : index == 5 ? (
+                        <Image
+                          source={require(`../../assets/setting.png`)}
+                          style={{ height: 25, width: 25 }}
+                        />
+                      ) : index == 6 ? (
+                        <Image
+                          source={require(`../../assets/shuffle-bottom.png`)}
+                          style={{ height: 20, width: 20 }}
+                        />
+                      ) : null}
                     </View>
                     <View
                       style={{
@@ -353,7 +290,7 @@ class DashboardComponent extends Component {
                           height: 14,
                           width: 14,
                         }}
-                        source={require("../../assets/back.png")}
+                        source={require("../../assets/leftArrow.png")}
                       />
                     </View>
                   </TouchableOpacity>
@@ -369,31 +306,27 @@ class DashboardComponent extends Component {
   onPressOption = (index) => {
     const { navigation } = this.props;
     switch (index) {
-      // case 0:
-      //   navigation.navigate("NotificationPanel");
-      //   break;
       case 0:
+        navigation.navigate("NotificationPanel");
+        break;
+      case 1:
         navigation.navigate("MySquad");
         break;
-        case 1:
-          navigation.navigate("ActivateScounting",{activeScout:false});
-          break;
-          case 2:
-            navigation.navigate("ActivateScounting",{activeScout:false});
-            break;
-      // case 1:
-      //   navigation.navigate("Profile");
-      //   break;
       case 2:
-        navigation.navigate("AddFriend");
+        navigation.navigate("Profile");
         break;
       case 3:
+        navigation.navigate("AddFriend");
+        break;
+      case 4:
         navigation.navigate("ActivateScounting");
         break;
-      // case 4:
-      //   navigation.navigate("Setting");
-      //   break;
-
+      case 5:
+        navigation.navigate("Setting");
+        break;
+      case 6:
+        navigation.navigate("ActivateScounting",{activeScout:false});
+        break;
       default:
         break;
     }
