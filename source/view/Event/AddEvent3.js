@@ -487,7 +487,7 @@ class AddEventComponent extends Component {
                   );
                 })}
               </View>
-              <View style={{ alignItems: "center", paddingBottom: 120 }}>
+              <View style={{ alignItems: "center" }}>
                 <TouchableOpacity
                   onPress={() =>
                     this.setState({
@@ -511,7 +511,7 @@ class AddEventComponent extends Component {
               </View>
             </>
           )}
-          <View style={{ marginHorizontal: 30, marginTop: 15 }}>
+          <View style={{ marginHorizontal: 30, marginTop: 15, paddingBottom: 120 }}>
 
 
             <TouchableOpacity

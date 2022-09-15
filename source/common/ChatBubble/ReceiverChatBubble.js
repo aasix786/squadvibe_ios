@@ -13,10 +13,17 @@ import { Image } from "react-native-elements";
 
 export default class ReceiverChatBubble extends Component {
   render() {
-    const { value, type, name } = this.props;
+    const { value, type, name, image } = this.props;
     return (
       <View style={[styles.item, styles.itemIn]}>
-        <View style={[styles.balloon, { backgroundColor: "#E7F9FF" }]}>
+      {image ? (
+        <View style={{width:40, height:40, borderRadius:40}}>
+        <Image source={{uri:image}} style={{width:"100%", height:"100%", borderRadius:40}} />
+      </View>
+      ) : null}
+     
+
+        <View style={[styles.balloon, { backgroundColor: "#E7F9FF", marginLeft:15 }]}>
           {name ? (
             <Text
               style={{
@@ -33,7 +40,7 @@ export default class ReceiverChatBubble extends Component {
             <Text
               style={{
                 paddingTop: 0,
-                color: colors.white,
+                color: colors.black,
                 fontFamily: fonts.Bold,
                 fontSize: 14,
               }}

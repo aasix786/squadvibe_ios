@@ -14,6 +14,7 @@ import {
   ImageBackground,
   Alert,
   Dimensions,
+  KeyboardAvoidingView,
 } from "react-native";
 import {
   colors,
