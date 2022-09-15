@@ -458,7 +458,11 @@ console.log(item)
             <Icon2 name="archive" size={18} color= "#708090" />
             </TouchableOpacity>
             <TouchableOpacity style={{width:"50%"}}
-            onPress={()=>this.deletemessage(item)}>
+            onPress={()=>{
+              alert("Coming soon")
+              // this.deletemessage(item)
+            }}
+            >
             <Icon1 name="md-trash-bin-sharp" size={18} color= "#708090" />
             </TouchableOpacity>
             </TouchableOpacity>
@@ -561,7 +565,9 @@ console.log(item)
     <Icon2 name="archive" size={15} color= "#708090" />
     </TouchableOpacity>
     <TouchableOpacity style={{width:"90%"}}
-    onPress={()=>this.props.navigation.navigate("Archived")}>
+    onPress={()=>{
+      alert("Feature in progress dummy data right now")
+      this.props.navigation.navigate("Archived")}}>
 <Text style={{ fontSize: 15, color: "#7e7e7e",fontFamily:fonts.Bold }}>
   Archived
   </Text>

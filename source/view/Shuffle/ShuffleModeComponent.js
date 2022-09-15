@@ -122,7 +122,7 @@ class ShuffleModeComponent extends PureComponent {
                     })
                   }
                 >
-                  <Image
+                  {/* <Image
                     style={{
                       height: 160,
                       width: 120,
@@ -131,7 +131,289 @@ class ShuffleModeComponent extends PureComponent {
                       alignSelf: "center",
                     }}
                     source={{ uri: item.event_image }}
-                  />
+                  /> */}
+                  <View
+                  style={{
+                    width: 160,
+                    borderRadius: 10,
+                    backgroundColor: "white",
+                    marginVertical: 10,
+                    alignSelf: "center",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {item.group_member.length === 1 ? (
+                    <Image
+                      source={{ uri: item.group_member[0].user_image }}
+                      style={{
+                        height: 132,
+                        width: 122,
+                        borderRadius: 10,
+                        marginTop: 19,
+                      }}
+                    />
+                  ) : item.group_member.length === 2 ? (
+                    <View
+                      style={{
+                        height: 132,
+                        width: 122,
+                        alignSelf: "center",
+                        marginTop: 19,
+                      }}
+                    >
+                      <Image
+                        source={{ uri: item.group_member[0].user_image }}
+                        style={{
+                          height: "50%",
+                          width: 122,
+                          borderTopLeftRadius: 10,
+                          borderTopRightRadius: 10,
+                        }}
+                      />
+                      <View
+                        style={{
+                          height: 2,
+                          width: 122,
+                          backgroundColor: "white",
+                        }}
+                      />
+                      <Image
+                        source={{ uri: item.group_member[1].user_image }}
+                        style={{
+                          height: "50%",
+                          width: 122,
+                          borderBottomLeftRadius: 10,
+                          borderBottomRightRadius: 10,
+                        }}
+                      />
+                    </View>
+                  ) : item.group_member.length === 3 ? (
+                    <View
+                      style={{
+                        height: 132,
+                        width: 122,
+                        alignSelf: "center",
+                        marginTop: 19,
+                      }}
+                    >
+                      <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[0].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopLeftRadius: 10,
+                              // borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            height: 66,
+                            width: 2,
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[1].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                      </View>
+                      <View
+                        style={{
+                          height: 2,
+                          width: 122,
+                          backgroundColor: "white",
+                        }}
+                      />
+                      <View style={{ flex: 1 }}>
+                        <Image
+                          source={{ uri: item.group_member[2].user_image }}
+                          style={{
+                            height: "100%",
+                            width: 122,
+                            borderBottomLeftRadius: 10,
+                            borderBottomRightRadius: 10,
+                          }}
+                        />
+                      </View>
+                    </View>
+                  ) : item.group_member.length === 4 ? (
+                    <View
+                      style={{
+                        height: 132,
+                        width: 122,
+                        alignSelf: "center",
+                        marginTop: 19,
+                      }}
+                    >
+                      <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[0].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopLeftRadius: 10,
+                              // borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            height: 66,
+                            width: 2,
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[1].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                      </View>
+                      <View
+                        style={{
+                          height: 2,
+                          width: 122,
+                          backgroundColor: "white",
+                        }}
+                      />
+                      <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[2].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderBottomLeftRadius: 10,
+                              // borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            height: 66,
+                            width: 2,
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[3].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderBottomRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                      </View>
+                    </View>
+                  ) : (
+                    <View
+                      style={{
+                        height: 132,
+                        width: 122,
+                        alignSelf: "center",
+                        marginTop: 19,
+                      }}
+                    >
+                      <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[0].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopLeftRadius: 10,
+                              // borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            height: 66,
+                            width: 2,
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[1].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                      </View>
+                      <View
+                        style={{
+                          height: 2,
+                          width: 122,
+                          backgroundColor: "white",
+                        }}
+                      />
+                      <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[2].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderBottomLeftRadius: 10,
+                            }}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            height: 66,
+                            width: 2,
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <View style={{ flex: 1 }}>
+                          <Image
+                            source={{ uri: item.group_member[3].user_image }}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderBottomRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                      </View>
+                    </View>
+                  )}
+
+                  <Text
+                    style={{
+                      marginTop: 13,
+                      fontSize: 14,
+                      fontFamily: fonts.Medium,
+                      color: "black",
+                      paddingBottom: 15,
+                    }}
+                    numberOfLines={1}
+                  >
+                    {item.squad_name}
+                  </Text>
+                </View>
 
                   <View style={{ marginLeft: 5, justifyContent: "flex-start" }}>
                     <View style={{ height: 2 }} />
@@ -184,7 +466,36 @@ class ShuffleModeComponent extends PureComponent {
                         justifyContent: "flex-end",
                       }}
                     >
-                      <Text style={{ fontSize: 17, color: "#666666" }}>
+                    <View style={{flexDirection:"row"}}>
+                    {item.group_member.length > 0 ? item.group_member.map((member_item, member_index) => {
+                      if(member_index < 4){
+                        return(
+  <View style={{width:25, height:25, borderRadius:25, borderColor:"#fff", borderWidth:2, marginLeft:-12}}>
+    <Image source={{uri:member_item.user_image}} style={{width:"100%", height:"100%", borderRadius:25}} />
+  </View>
+)
+                      }
+                    }) : null}
+                   
+                   
+                     {/* <View style={{width:25, height:25, borderRadius:25, borderColor:"#000", borderWidth:1, marginLeft:-12, backgroundColor:"#ff0000"}}></View>
+                     <View style={{width:25, height:25, borderRadius:25, borderColor:"#000", borderWidth:1, marginLeft:-12, backgroundColor:"#ff0000"}}></View>
+                     <View style={{width:25, height:25, borderRadius:25, borderColor:"#000", borderWidth:1, marginLeft:-12, backgroundColor:"#ff0000"}}></View> */}
+{item.group_member.length > 0 ? (
+  <View style={{paddingTop:5, paddingLeft:5}}>
+  {item.group_member.length > 4 ? (
+    <Text style={{fontSize:12, fontWeight:"bold"}}>+ {item.group_member.length - 4} Participants</Text>
+
+  ) : (
+    <Text style={{fontSize:12, fontWeight:"bold"}}>{item.group_member.length} Participants</Text>
+
+  )}
+                     </View>
+) : null}
+                 
+                    </View>
+                  
+                      {/* <Text style={{ fontSize: 17, color: "#666666" }}>
                         <Text>
                           {moment(item.event_date, "YYYY/MM/DD").format("DD")}
                         </Text>
@@ -198,7 +509,7 @@ class ShuffleModeComponent extends PureComponent {
                         <Text style={{ paddingLeft: 5 }}>
                           {item.event_time.slice(0, 5)}
                         </Text>
-                      </Text>
+                      </Text> */}
                     </View>
 
                     <View style={{ height: 5 }} />

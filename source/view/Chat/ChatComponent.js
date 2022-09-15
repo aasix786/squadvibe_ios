@@ -62,7 +62,7 @@ class ChatComponent extends Component {
         // {message:'my first message', type:"text", time:new Date,senderId:"1"},
         // {message:'my first message', type:"text", time:new Date,senderId:"1"},
       ],
-      senderId: "1",
+      senderId: this.props.userInfo.id,
       receiverId: "",
       chatRoomId: "",
       pageNo: 1,
@@ -259,6 +259,7 @@ console.log(res.data)
             message: elem.message,
             name: elem.user_name || elem.full_name,
             type: elem.type,
+            senderId: elem.user_id,
             event_image: elem.event_image,
             event_name: elem.event_name,
             user_image: elem.user_image,
@@ -292,9 +293,7 @@ console.log(res.data)
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
 
-          if (elem.sender_id === this.props.userInfo.id) {
-            obj.senderId = "1";
-          }
+        
           msgs.push(obj);
         }
         console.log("HHHH", msgs);
@@ -325,6 +324,7 @@ console.log(res.data)
             message: elem.message,
             name: elem.name,
             type: elem.type,
+            senderId: elem.user_id,
             event_image: elem.event_image,
             event_name: elem.event_name,
             user_image: elem.user_image,
@@ -359,9 +359,7 @@ console.log(res.data)
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
 
-          if (elem.user_id === this.props.userInfo.id) {
-            obj.senderId = "1";
-          }
+        
           msgs.push(obj);
         }
 
@@ -397,6 +395,7 @@ console.log(res.data.getAllMessages.messages.length)
             // message : elem.message,
             // type : elem.type,
             name: elem.full_name,
+            senderId: elem.user_id,
             event_image: elem.event_image,
             event_name: elem.event_name,
             user_image: elem.user_image,
@@ -428,9 +427,7 @@ console.log(res.data.getAllMessages.messages.length)
             obj.time =
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
-          if (elem.user_id === this.props.userInfo.id) {
-            obj.senderId = "1";
-          }
+        
           msgs.push(obj);
         }
         this.setState({ messages: [this.state.messages, ...msgs] });
@@ -442,7 +439,7 @@ console.log(res.data.getAllMessages.messages.length)
     const obj = {
       message,
       type: type,
-      senderId: "1",
+      senderId: this.props.userInfo.id,
     };
 
     const date = new Date();
@@ -737,6 +734,7 @@ console.log(res.data.getAllMessages.messages.length)
                     }}
                   />
                 </View>
+                <View>
                 <Text
                   style={{
                     textAlign: "center",
@@ -745,6 +743,8 @@ console.log(res.data.getAllMessages.messages.length)
                 >
                   {this.props.route.params.name}
                 </Text>
+                </View>
+              
               </View>
             </View>
           )}
@@ -765,7 +765,8 @@ console.log(res.data.getAllMessages.messages.length)
               data={this.state.messages}
               keyExtractor={(item) => item.id}
               renderItem={({ item, index }) => {
-                if (this.state.senderId == item.senderId) {
+                console.log(this.state.senderId+"<---------->"+item.senderId+">>>>>>>>>"+this.props.route.params.userData.id+">>>>>"+this.props.userInfo.id)
+                if (this.props.userInfo.id != item.senderId) {
                   return (
                     <>
                     
@@ -1067,6 +1068,7 @@ console.log(res.data.getAllMessages.messages.length)
                               name={item.name}
                               value={item.message}
                               type={item.type}
+                              image={this.props.userInfo.profile_photo}
                             />
                           </View>
                         ) : item.type == "image" ? (
@@ -1075,6 +1077,7 @@ console.log(res.data.getAllMessages.messages.length)
                               name={item.name}
                               value={item.message}
                               type={item.type}
+                              image={this.props.userInfo.profile_photo}
                             />
                           </View>
                         ) : item.type == "GroupSquad" ? (
@@ -1328,6 +1331,7 @@ console.log(res.data.getAllMessages.messages.length)
                                 &key=${GOOGLE_API_KEY}`}
                                   type={item.type}
                                   name={item.sender_name}
+                                  image={this.props.userInfo.profile_photo}
                                 />
                               ) : (
                                 <ReceiverChatBubble
@@ -1335,6 +1339,7 @@ console.log(res.data.getAllMessages.messages.length)
                           &markers=${item.latitude},${item.longitude}
                           &key=${GOOGLE_API_KEY}`}
                                   type={item.type}
+                                  image={this.props.userInfo.profile_photo}
                                 />
                               )}
                             </TouchableOpacity>

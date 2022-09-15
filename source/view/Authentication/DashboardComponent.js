@@ -366,6 +366,38 @@ class DashboardComponent extends Component {
     );
   }
 
+  // onPressOption = (index) => {
+  //   const { navigation } = this.props;
+  //   switch (index) {
+  //     // case 0:
+  //     //   navigation.navigate("NotificationPanel");
+  //     //   break;
+  //     case 0:
+  //       navigation.navigate("MySquad");
+  //       break;
+  //       case 1:
+  //         navigation.navigate("ActivateScounting",{activeScout:false});
+  //         break;
+  //         case 2:
+  //           navigation.navigate("ActivateScounting",{activeScout:false});
+  //           break;
+  //     // case 1:
+  //     //   navigation.navigate("Profile");
+  //     //   break;
+  //     case 2:
+  //       navigation.navigate("AddFriend");
+  //       break;
+  //     case 3:
+  //       navigation.navigate("ActivateScounting");
+  //       break;
+  //     // case 4:
+  //     //   navigation.navigate("Setting");
+  //     //   break;
+
+  //     default:
+  //       break;
+  //   }
+  // };
   onPressOption = (index) => {
     const { navigation } = this.props;
     switch (index) {
@@ -384,10 +416,10 @@ class DashboardComponent extends Component {
       // case 1:
       //   navigation.navigate("Profile");
       //   break;
-      case 2:
+      case 3:
         navigation.navigate("AddFriend");
         break;
-      case 3:
+      case 4:
         navigation.navigate("ActivateScounting");
         break;
       // case 4:
@@ -398,7 +430,6 @@ class DashboardComponent extends Component {
         break;
     }
   };
-
   updateLatLongApi = async () => {
     const latitude = await AsyncStorage.getItem("latitude");
     const longitude = await AsyncStorage.getItem("longitude");
