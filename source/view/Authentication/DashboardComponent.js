@@ -384,11 +384,11 @@ class DashboardComponent extends Component {
       // case 1:
       //   navigation.navigate("Profile");
       //   break;
-      case 2:
+      case 3:
         navigation.navigate("AddFriend");
         break;
-      case 3:
-        navigation.navigate("ActivateScounting");
+      case 4:
+        navigation.navigate("ActivateScounting",{activeScout:true});
         break;
       // case 4:
       //   navigation.navigate("Setting");

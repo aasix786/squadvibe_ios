@@ -11,6 +11,7 @@ import {
   ImageBackground,
   Image,
   StatusBar,
+  TextInput
 } from "react-native";
 import { colors, fonts } from "../../common/colors";
 import ApiHelper from "../../Networking/NetworkCall";
@@ -30,6 +31,8 @@ import { createIconSetFromFontello } from "react-native-vector-icons";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import Ripple from "react-native-material-ripple";
 import ToggleSwitch from 'toggle-switch-react-native';
+import { CustomInputField } from "../../common/inputField";
+
 const WINDOW_WIDTH = Dimensions.get("window").width;
 
 export function getAddressComponent(address_components, key) {
@@ -82,7 +85,7 @@ class SettingComponent extends PureComponent {
       Email_search: "",
       availability: "",
       current: "main",
-      location: "None",
+      location: "",
       multiSliderValue: [20, 50],
     };
   }
@@ -764,15 +767,26 @@ class SettingComponent extends PureComponent {
            borderColor: "white",
               borderWidth: 2,
           flexDirection: "row",
+          // backgroundColor:"#fff"
         }}
       >
-        <View style={{paddingTop:13,paddingHorizontal:10}}>
+        <View style={{marginTop:16,paddingHorizontal:10}}>
         <Image
           source={require("../../assets/locationMarker.png")}
           style={{ height: 16, width: 16 }}
         />
         </View>
-        <GooglePlacesAutocomplete
+        <View style={{}}>
+        <TextInput
+                keyboardType="email-address"
+                style={{ color: '#fff', fontSize: 16,justifyContent:"center" }}
+                placeholder={"Enter your Address "}
+                placeholderTextColor="#B2C2D2"
+                onChangeText={(location) => this.setState({ location })}
+                value={this.state.location}
+              />
+        </View>
+        {/* <GooglePlacesAutocomplete
           styles={{
             textInput: {
               borderRadius: 25,
@@ -859,7 +873,7 @@ class SettingComponent extends PureComponent {
           ref={(ref) => {
             this.placesRef = ref;
           }}
-        />
+        /> */}
       </View>
     );
   };
@@ -887,6 +901,8 @@ const styles = StyleSheet.create({
   inputStyle: {
     flex: 1,
     fontSize: 16,
+    borderWidth: 0,
+    // borderColor:'gray',
     fontFamily: fonts.Regular,
   },
   text: {

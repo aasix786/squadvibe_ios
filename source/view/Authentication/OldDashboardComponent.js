@@ -20,6 +20,8 @@ import Toast from "react-native-simple-toast";
 import { connect } from "react-redux";
 import { setLocation } from "../../redux/Actions/UserAction";
 // import { Image } from 'react-native-elements';
+
+
 import Geolocation from "react-native-geolocation-service";
 import HeaderWithoutBack from "../components/headerWithoutBack";
 import { postMethod } from "../../Networking/APIModel";

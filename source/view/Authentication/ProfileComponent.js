@@ -46,6 +46,7 @@ class ProfileComponent extends PureComponent {
       code: "",
       isCheck: false,
       birthDate: "",
+      profile_image: "",
       images: [],
       selectedIndex: -1,
       arrInterest: ["Drinking", "Playing games"],
@@ -58,7 +59,7 @@ class ProfileComponent extends PureComponent {
       showUsername: false,
       showInvite: false,
       ownProfile: true,
-      userInfo: [],
+      userInfo: null,
       data: {
         full_name: "",
         user_name: "",
@@ -72,7 +73,7 @@ class ProfileComponent extends PureComponent {
   componentDidMount() {
     this.props.navigation.addListener("focus", () => {
       const { userInfo } = this.props;
-      // this.setState({ user_name: userInfo.full_name, showUsername: true })
+      // this.setState({ user_name: userInfo?.full_name, showUsername: true })
       const id =
         this.props.route.params?.item?.user_id ||
         this.props.route.params?.item?.member_id;
@@ -109,6 +110,7 @@ class ProfileComponent extends PureComponent {
         alert(response.errorMessage);
         return;
       }
+      this.setState({profile_image: response.assets[0].uri})
       this.uploadProfileImage(response.assets[0].uri);
       // this.setFilePath2(response.assets[0]);
     });
@@ -155,7 +157,7 @@ class ProfileComponent extends PureComponent {
     const device_type = await AsyncStorage.getItem("device_type");
 
     var parameter = new FormData();
-    parameter.append("phone_number", this.props.userInfo.phone_number);
+    parameter.append("phone_number", this.props.userInfo?.phone_number);
     parameter.append("device_token", device_token);
     parameter.append("device_type", device_type);
 
@@ -170,9 +172,9 @@ class ProfileComponent extends PureComponent {
           });
           if (response.data.status == "SUCCESS") {
             let userInfo = response.data.viewProfile;
-            userInfo.image = [userInfo.image[userInfo.image.length - 1]];
+            userInfo.image = [userInfo?.image[userInfo?.image.length - 1]];
             console.log("IMAGEEEEE");
-            console.log(userInfo.image);
+            console.log(userInfo?.image);
             this.props.setUserInfo(userInfo);
             AsyncStorage.setItem("user_info", JSON.stringify(userInfo));
           } else {
@@ -195,21 +197,23 @@ class ProfileComponent extends PureComponent {
     axios
       .post("http://squadvibes.onismsolution.com/api/userDetails", parameter)
       .then((res) => {
-        this.setState({ data: res.data.userDetails, user_name : res.data.userDetails.user_name, bio : res.data.userDetails.bio });
+        this.setState({ data: res.data.userDetails, user_name : res.data.userDetails.user_name, bio : res.data.userDetails.bio, profile_image: res.data.userDetails.profile_photo  });
         console.log("DATA_interest_list", res.data.userDetails.interest_list);
         console.log("DATA_image", res.data.userDetails.image);
+        console.log("userInfo", res.data);
+
       })
       .catch((err) => console.log("ERROR", err));
   };
 
   getMyProfile = () => {
     const parameter = new FormData();
-    parameter.append("user_id", this.props.userInfo.id);
+    parameter.append("user_id", this.props.userInfo?.id);
 
     axios
       .post("http://squadvibes.onismsolution.com/api/userDetails", parameter)
       .then((res) => {
-        this.setState({ userInfo: res.data.userDetails, user_name:res.data.userDetails.user_name, bio : res.data.userDetails.bio });
+        this.setState({ userInfo: res.data.userDetails, user_name:res.data.userDetails.user_name, bio : res.data.userDetails.bio, profile_image: res.data.userDetails.profile_photo });
         console.log("userInfo", res.data);
       })
       .catch((err) => console.log("ERROR", err));
@@ -217,11 +221,11 @@ class ProfileComponent extends PureComponent {
 
   updateProfileImage = (uri) => {
     var formData = new FormData();
-    // formData.append('token', this.props.userInfo.token)
+    // formData.append('token', this.props.userInfo?.token)
     // formData.append('image', uri)
 
-    formData.append("token", this.props.userInfo.token);
-    formData.append("user_id", this.props.userInfo.id);
+    formData.append("token", this.props.userInfo?.token);
+    formData.append("user_id", this.props.userInfo?.id);
     formData.append("image", uri);
 
     ApiHelper.post("updateProfilePic", formData)
@@ -260,6 +264,8 @@ class ProfileComponent extends PureComponent {
       cropping: true,
       mediaType: "photo",
     }).then((image) => {
+      this.setState({profile_image: image.path})
+
       this.uploadProfileImage(image.path);
     });
   };
@@ -284,7 +290,7 @@ class ProfileComponent extends PureComponent {
               let image = response.data.uploadProfileImage.image;
               // this.images.push(image)
               // this.getUserProfile()
-              // this.setState({ images: image })
+              this.setState({ images: image })
               this.updateProfileImage(image);
             }
           } else {
@@ -329,10 +335,10 @@ class ProfileComponent extends PureComponent {
     );
   };
   removeFriend = () => {
-    console.log(this.props.userInfo.token)
+    console.log(this.props.userInfo?.token)
     console.log(this.state.user_id)
     const parameter = new FormData();
-    parameter.append("token", this.props.userInfo.token);
+    parameter.append("token", this.props.userInfo?.token);
     parameter.append("user_id", this.state.user_id);
 
     postMethod(
@@ -361,16 +367,16 @@ class ProfileComponent extends PureComponent {
       gender,
     } = this.state.data;
     const userInfo = this.state.userInfo;
-    console.log("interest ==", interest_list);
+  
 
-    interest_list = full_name ? interest_list : userInfo.interest_list || [];
-    email = full_name ? email : userInfo.email;
-    gender = full_name ? gender : userInfo.gender;
+    interest_list = interest_list ? interest_list : userInfo?.interest_list || [];
+    email = email ? email : userInfo?.email;
+    gender = gender ? gender : userInfo?.gender;
 
     image = !image ? [] : image;
     console.log("userInfo interest", userInfo);
     console.log("URL", image[0]?.image);
-    console.log("user_id", this.props.userInfo.id);
+    console.log("user_id", this.props.userInfo?.id);
     console.log("this.state.user_id", this.state.user_id);
 
     return (
@@ -448,10 +454,20 @@ class ProfileComponent extends PureComponent {
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() =>
+                {
+                    let data_val = this.state.userInfo;
+
+                    if(!this.state.userInfo){
+                      data_val = this.state.data
+                    }
+// console.log("data",this.state.data)
+// console.log("this.state.userInfo",this.state.userInfo)
+console.log("data_val",data_val)
                   this.props.navigation.navigate("ProfileView", {
-                    user: this.state.userInfo,
+                    user: data_val,
                   })
                 }
+              }
                 style={{
                   backgroundColor: "transparent",
                   padding: 8,
@@ -460,7 +476,16 @@ class ProfileComponent extends PureComponent {
                   borderWidth: 3,
                 }}
               >
-                {image[0]?.image && full_name ? (
+                 <Image
+                    style={{
+                      height: 134,
+                      width: 134,
+                      borderRadius: 100,
+                    }}
+                    source={{ uri: this.state.profile_image }}
+                    loadingIndicatorSource={<ActivityIndicator />}
+                  />
+                {/* {image[0]?.image && full_name ? (
                   <Image
                     style={{
                       height: 134,
@@ -475,14 +500,14 @@ class ProfileComponent extends PureComponent {
                     style={{ height: 134, width: 134, borderRadius: 100 }}
                     source={require("../../assets/userPlaceholder.png")}
                   />
-                ) : userInfo.image?.length > 0 ? (
+                ) : userInfo?.image?.length > 0 ? (
                   <Image
                     style={{
                       height: 134,
                       width: 134,
                       borderRadius: 100,
                     }}
-                    source={{ uri: userInfo.image[0].image }}
+                    source={{ uri: userInfo?.image[0].image }}
                     loadingIndicatorSource={<ActivityIndicator />}
                   />
                 ) : (
@@ -490,12 +515,12 @@ class ProfileComponent extends PureComponent {
                     style={{ height: 134, width: 134, borderRadius: 100 }}
                     source={require("../../assets/userPlaceholder.png")}
                   />
-                )}
+                )} */}
               </TouchableOpacity>
 
               {userInfo &&
-                userInfo.hasOwnProperty("image") &&
-                userInfo.image.length >= 0 &&
+                userInfo?.hasOwnProperty("image") &&
+                userInfo?.image.length >= 0 &&
                 !full_name ? (
                 <TouchableOpacity
                   style={{ marginTop: -25 }}
@@ -525,8 +550,13 @@ class ProfileComponent extends PureComponent {
             <View style={{ height: 30 }} />
 
             <View style={{ flex: 1 }}>
+              
               <View style={styles.viewStyle}>
-                <TextInput
+                {userInfo?.hasOwnProperty("image") &&
+                userInfo?.image.length >= 0 &&
+                !full_name ? (
+                  <TextInput
+                
                   style={[
                     styles.inputStyle,
                     {
@@ -539,6 +569,20 @@ class ProfileComponent extends PureComponent {
                   onChangeText={(user_name) => this.setState({ user_name })}
                 />
 
+
+                ):(
+                  <Text  style={[
+                    styles.inputStyle,
+                    {
+                      textAlign: "center",
+                    },
+                  ]}>
+                    {this.state.user_name}
+                  </Text>
+                )
+              
+              }
+               
                
               </View>
 
@@ -634,7 +678,7 @@ class ProfileComponent extends PureComponent {
                       paddingLeft: 40,
                     },
                   ]}
-                  // value={full_name ? full_name : userInfo.full_name}
+                  // value={full_name ? full_name : userInfo?.full_name}
                   placeholder="Send Invite"
                   placeholderTextColor="#989ba2"
                   editable={false}
@@ -677,6 +721,10 @@ class ProfileComponent extends PureComponent {
     justifyContent:"center",
     paddingHorizontal:20,
     paddingVertical:10}}>
+
+{userInfo?.hasOwnProperty("image") &&
+                userInfo?.image.length >= 0 &&
+                !full_name ? (
                 <TextInput
                   style={[
                     styles.inputStyle,
@@ -691,10 +739,17 @@ class ProfileComponent extends PureComponent {
                   editable={true}
                 onChangeText={(bio) => this.setState({ bio })}
                 />
+                ):(
+                <Text   style={[
+                  styles.inputStyle,
+                  {
+                    textAlign: "center",
+                  },
+                ]}>{this.state.bio}</Text>
 
-              
+                )}
               </View>
-              {this.props.userInfo.id != this.props.userInfo.id ? (
+              {this.props.userInfo?.id != this.props.userInfo?.id ? (
                 <View style={{ paddingBottom: 10 }}>
                     <View style={{ height: 20 }} />
                   <View style={styles.viewStyle}>
@@ -706,7 +761,7 @@ class ProfileComponent extends PureComponent {
                           paddingLeft: 40,
                         },
                       ]}
-                      // value={full_name ? full_name : userInfo.full_name}
+                      // value={full_name ? full_name : userInfo?.full_name}
                       placeholder="Remove Friend"
                       placeholderTextColor="#989ba2"
                       editable={false}
@@ -736,7 +791,9 @@ class ProfileComponent extends PureComponent {
 
             </View>
           </ScrollView>
-          {this.props.userInfo.id == this.props.userInfo.id ? (
+        {userInfo?.hasOwnProperty("image") &&
+                userInfo?.image.length >= 0 &&
+                !full_name ? (
             <TouchableOpacity onPress={() => this.callUpdateProfileData()} style={{
     height: 46,
     width: WINDOW_WIDTH - 60,
@@ -793,7 +850,7 @@ class ProfileComponent extends PureComponent {
   callUpdateUserName = () => {
     this.setState({ loading: true });
     var formdata = new FormData();
-    formdata.append("token", this.props.userInfo.token);
+    formdata.append("token", this.props.userInfo?.token);
     formdata.append("user_name", this.state.user_name);
     // formdata.append("images", this.state.images)
 
@@ -843,7 +900,7 @@ class ProfileComponent extends PureComponent {
   callUpdateProfileData = () => {
     this.setState({ loading: true });
     var formdata = new FormData();
-    formdata.append("token", this.props.userInfo.token);
+    formdata.append("token", this.props.userInfo?.token);
     formdata.append("user_name", this.state.user_name);
     formdata.append("bio", this.state.bio);
     // formdata.append("images", this.state.images)
@@ -894,9 +951,9 @@ class ProfileComponent extends PureComponent {
   callSendInvite = (full_name) => {
     this.setState({ loading: true });
     var formdata = new FormData();
-    formdata.append("token", this.props.userInfo.token);
+    formdata.append("token", this.props.userInfo?.token);
     formdata.append("user_name", full_name);
-    // formdata.append("user_name", this.props.userInfo.user_name);
+    // formdata.append("user_name", this.props.userInfo?.user_name);
 
     ApiHelper.post("sendInvitition", formdata)
       .then((response) => {
@@ -931,7 +988,7 @@ class ProfileComponent extends PureComponent {
 
   callGetUserProfile = async () => {
     // this.setState({ loading: true })
-    let phoneNumber = this.props.userInfo.phone_number;
+    let phoneNumber = this.props.userInfo?.phone_number;
     const device_token = await AsyncStorage.getItem("token");
     const device_type = await AsyncStorage.getItem("device_type");
 

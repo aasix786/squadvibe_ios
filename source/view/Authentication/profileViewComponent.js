@@ -22,7 +22,9 @@ class ProfileViewComponent extends PureComponent {
 
   componentDidMount() {
     const user = this.props.route.params.user;
-    this.setState({ user });
+    console.log("user")
+    console.log(user)
+    this.setState({user:user});
   }
 
   render() {
@@ -138,8 +140,11 @@ class ProfileViewComponent extends PureComponent {
                   }}
                 >
                   <Image
-                    source={require("../../assets/trackingImage.png")}
-                    style={{ width: 25, height: 25 }}
+                    // source={require("../../assets/trackingImage.png")}
+                    source={{
+                      uri:interestData.image
+                    }}
+                    style={{ height: 46, width: 46, borderRadius: 78 }}
                     resizeMode={"contain"}
                   />
 
