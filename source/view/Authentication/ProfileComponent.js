@@ -39,6 +39,7 @@ import { CustomInputField } from "../../common/inputField";
 import Ripple from "react-native-material-ripple";
 
 const WINDOW_WIDTH = Dimensions.get("window").width;
+const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 class ProfileComponent extends PureComponent {
   constructor(props) {
@@ -446,7 +447,8 @@ class ProfileComponent extends PureComponent {
             style={{ flexGrow: 1 }}
             showsVerticalScrollIndicator={false}
           >
-            <View
+          <View style={{paddingBottom: WINDOW_HEIGHT / 2 }}>
+          <View
               style={{
                 justifyContent: "center",
                 position: "relative",
@@ -732,6 +734,7 @@ console.log("data_val",data_val)
                     styles.inputStyle,
                     {
                       textAlign: "center",
+                      height:"100%"
                     },
                   ]}
                   multiline={true}
@@ -740,6 +743,7 @@ console.log("data_val",data_val)
                   placeholderTextColor="#989ba2"
                   editable={true}
                 onChangeText={(bio) => this.setState({ bio })}
+                returnKeyType={"done"}
                 />
                 ):(
                 <Text   style={[
@@ -792,6 +796,9 @@ console.log("data_val",data_val)
               ) : null}
 
             </View>
+          </View>
+        
+
           </ScrollView>
         {userInfo?.hasOwnProperty("image") &&
                 userInfo?.image.length >= 0 &&

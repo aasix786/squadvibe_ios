@@ -688,7 +688,7 @@ class SettingComponent extends PureComponent {
           </View>
 
           <Button
-            style={{ bottom: 0, top: 30, position: "relative" }}
+            style={{ bottom: 0, top: 30, position: "relative",fontSize: 16, }}
             name="Done"
             bg={colors.white}
             textColor={"black"}
@@ -705,13 +705,12 @@ class SettingComponent extends PureComponent {
             <FontAwesome name="angle-right" size={20} color="gray" />
           </TouchableOpacity> */}
 
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={this.logoutPopup}
             style={styles.textContainer}
           >
             <Text style={styles.text}>Logout</Text>
-            <FontAwesome name="angle-right" size={20} color="gray" />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
 
           <View style={{ height: 20 }} />
         </ScrollView>
@@ -770,13 +769,13 @@ class SettingComponent extends PureComponent {
           // backgroundColor:"#fff"
         }}
       >
-        <View style={{marginTop:16,paddingHorizontal:10}}>
+        <View style={{paddingVertical:10,paddingHorizontal:10, width:"10%"}}>
         <Image
           source={require("../../assets/locationMarker.png")}
           style={{ height: 16, width: 16 }}
         />
         </View>
-        <View style={{}}>
+        <View style={{paddingTop:7, width:"90%"}}>
         <TextInput
                 keyboardType="email-address"
                 style={{ color: '#fff', fontSize: 16,justifyContent:"center" }}
@@ -888,13 +887,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   textContainer: {
-    flexDirection: "row",
     backgroundColor: "white",
     elevation: 2,
     borderRadius: 30,
     paddingVertical: 15,
     paddingHorizontal: 15,
-    justifyContent: "space-between",
     width: WINDOW_WIDTH - 60,
     alignSelf: "center",
   },

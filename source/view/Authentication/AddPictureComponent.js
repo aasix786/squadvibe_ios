@@ -493,7 +493,7 @@ console.log({
     var parameter = new FormData();
     parameter.append("login_type", this.props.login_type);
     parameter.append("full_name", this.props.full_name);
-    parameter.append("phone_number", this.props.mobile_number);
+    parameter.append("phone_number", "+"+this.props.mobile_number);
     parameter.append("email", this.props.email);
     parameter.append("gender", this.props.gender);
     parameter.append("subscribe_newsletter", this.props.subscribe_newsletter);
@@ -509,7 +509,7 @@ console.log({
     if (this.props.login_type.toLowerCase() != "normal") {
       parameter.append("social_id", this.props.social_Id);
     }
-console.log("phone_number", this.props.mobile_number)
+console.log("phone_number", "+"+this.props.mobile_number)
     ApiHelper.post("signUp", parameter)
       .then((response) => {
         this.setState({ loading: false });

@@ -13,8 +13,9 @@ export default function Button(props) {
           alignItems: "center",
           position: "absolute",
           bottom: 20,
-          left: 0,
-          right: 0,
+          left:0,
+          right:0,
+          height: 80
         },
         { ...props.style },
       ]}

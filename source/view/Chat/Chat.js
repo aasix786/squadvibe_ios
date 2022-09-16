@@ -260,6 +260,7 @@ class Chat extends Component {
           name: item.full_name,
           image: item.image,
           id: item.id,
+          address: item.address,
           lastMessage: { type: "text", message: "No message yet!!", time: "" },
         };
         const date_time = lastMsg[0]?.date_time;
@@ -521,6 +522,7 @@ console.log(item)
                         userData: item,
                         image: item.image,
                         name: item.name,
+                        address: item.address,
                         isGroup: item.isGroup ? item.isGroup : false,
                       })
                     }

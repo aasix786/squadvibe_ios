@@ -186,6 +186,7 @@ class MySquadComponent extends Component {
                         width: 122,
                         borderRadius: 10,
                         marginTop: 19,
+                        resizeMode:"cover"
                       }}
                     />
                   ) : item.group_member.length === 2 ? (
@@ -204,6 +205,8 @@ class MySquadComponent extends Component {
                           width: 122,
                           borderTopLeftRadius: 10,
                           borderTopRightRadius: 10,
+                        resizeMode:"cover"
+                          
                         }}
                       />
                       <View
@@ -220,6 +223,7 @@ class MySquadComponent extends Component {
                           width: 122,
                           borderBottomLeftRadius: 10,
                           borderBottomRightRadius: 10,
+                        resizeMode:"cover"
                         }}
                       />
                     </View>
@@ -240,6 +244,7 @@ class MySquadComponent extends Component {
                               height: "100%",
                               width: "100%",
                               borderTopLeftRadius: 10,
+                        resizeMode:"cover"
                               // borderTopRightRadius: 10,
                             }}
                           />
@@ -258,6 +263,7 @@ class MySquadComponent extends Component {
                               height: "100%",
                               width: "100%",
                               borderTopRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -277,6 +283,7 @@ class MySquadComponent extends Component {
                             width: 122,
                             borderBottomLeftRadius: 10,
                             borderBottomRightRadius: 10,
+                        resizeMode:"cover"
                           }}
                         />
                       </View>
@@ -299,6 +306,7 @@ class MySquadComponent extends Component {
                               width: "100%",
                               borderTopLeftRadius: 10,
                               // borderTopRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -316,6 +324,7 @@ class MySquadComponent extends Component {
                               height: "100%",
                               width: "100%",
                               borderTopRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -336,6 +345,7 @@ class MySquadComponent extends Component {
                               width: "100%",
                               borderBottomLeftRadius: 10,
                               // borderTopRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -353,6 +363,7 @@ class MySquadComponent extends Component {
                               height: "100%",
                               width: "100%",
                               borderBottomRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -376,6 +387,7 @@ class MySquadComponent extends Component {
                               width: "100%",
                               borderTopLeftRadius: 10,
                               // borderTopRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -393,6 +405,7 @@ class MySquadComponent extends Component {
                               height: "100%",
                               width: "100%",
                               borderTopRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -412,6 +425,7 @@ class MySquadComponent extends Component {
                               height: "100%",
                               width: "100%",
                               borderBottomLeftRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -429,6 +443,7 @@ class MySquadComponent extends Component {
                               height: "100%",
                               width: "100%",
                               borderBottomRightRadius: 10,
+                        resizeMode:"cover"
                             }}
                           />
                         </View>
@@ -563,6 +578,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[0].user_image
@@ -578,6 +594,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[1].user_image
@@ -593,6 +610,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[2].user_image
@@ -608,6 +626,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[3].user_image
@@ -623,6 +642,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[4].user_image
@@ -662,6 +682,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[0].user_image
@@ -677,6 +698,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[1].user_image
@@ -692,6 +714,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[2].user_image
@@ -707,6 +730,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[3].user_image
@@ -722,6 +746,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[4].user_image
@@ -741,6 +766,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[0].user_image
@@ -756,6 +782,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[1].user_image
@@ -771,6 +798,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[2].user_image
@@ -786,6 +814,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[3].user_image
@@ -805,6 +834,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[0].user_image
@@ -820,6 +850,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[1].user_image
@@ -835,6 +866,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[2].user_image
@@ -854,6 +886,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[0].user_image
@@ -869,6 +902,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[1].user_image
@@ -888,6 +922,7 @@ class MySquadComponent extends Component {
               borderRadius: 13,
               borderColor: "#211F1A",
               borderWidth: 3,
+                        resizeMode:"cover"
             }}
             source={
               data[0].user_image
@@ -908,6 +943,7 @@ class MySquadComponent extends Component {
                 borderRadius: 13,
                 borderColor: "#211F1A",
                 borderWidth: 3,
+                        resizeMode:"cover"
               }}
               source={require("../../assets/avtar.jpg")}
             />
@@ -919,6 +955,7 @@ class MySquadComponent extends Component {
                 borderRadius: 13,
                 borderColor: "#211F1A",
                 borderWidth: 3,
+                        resizeMode:"cover"
               }}
               source={require("../../assets/avtar.jpg")}
             />
@@ -930,6 +967,7 @@ class MySquadComponent extends Component {
                 borderRadius: 13,
                 borderColor: "#211F1A",
                 borderWidth: 3,
+                        resizeMode:"cover"
               }}
               source={require("../../assets/avtar.jpg")}
             />
@@ -941,6 +979,7 @@ class MySquadComponent extends Component {
                 borderRadius: 13,
                 borderColor: "#211F1A",
                 borderWidth: 3,
+                        resizeMode:"cover"
               }}
               source={require("../../assets/avtar.jpg")}
             />
@@ -952,6 +991,7 @@ class MySquadComponent extends Component {
                 borderRadius: 13,
                 borderColor: "#211F1A",
                 borderWidth: 3,
+                        resizeMode:"cover"
               }}
               source={require("../../assets/avtar.jpg")}
             />

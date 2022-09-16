@@ -109,22 +109,46 @@ class InviteSinglePerson extends Component {
         Toast.show("Error in adding friend");
       });
   };
-
+  removeRequest = (userID) => {
+    var formdata = new FormData();
+    formdata.append("token", this.props.userInfo.token);
+    formdata.append("friend_id", userID);
+console.log(formdata)
+    axios
+      .post("http://squadvibes.onismsolution.com/api/removeRequest", formdata)
+      .then((res) => {
+        console.log(res)
+        Toast.show("Friend Request has been cancelled.");
+      })
+      .catch((err) => {
+        Toast.show("Error in adding friend");
+      });
+  };
   compareAll = (arrUsers) => {
     const data = this.props.route.params.friends;
     let filtered = [];
     arrUsers.map((main) => {
       let found = false;
-
       data.map((squad) => {
         if (squad.request_id == main.id) {
           found = true;
         }
       });
       if (!found) {
+        console.log("main",main)
+        let uid = main.data?.receiver_id;
+if(uid){
+  this.state.arrSelectedUserId.push(parseInt(uid));
+        this.setState({
+          arrSelectedUserId: this.state.arrSelectedUserId,
+        });
+}
+      
         filtered.push(main);
       }
     });
+console.log("arrSelectedUserId",this.state.arrSelectedUserId)
+
     this.setState({
       arrUsers: filtered,
     });
@@ -345,8 +369,10 @@ class InviteSinglePerson extends Component {
   onPressSelectedUser = (userId) => {
     // let userId = this.state.arrUsers[index].id
     let arrSelectedUserId = this.state.arrSelectedUserId;
+   
     if (arrSelectedUserId.includes(userId)) {
       const data = arrSelectedUserId.filter((data) => data != userId);
+      this.removeRequest(userId)
       this.setState({
         arrSelectedUserId: data,
       });

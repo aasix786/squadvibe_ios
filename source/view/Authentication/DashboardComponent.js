@@ -44,7 +44,6 @@ class DashboardComponent extends Component {
       arrGridColors: [
         // "#C7158C",
         "#C7158C",
-        "#C7158C",
         // "#EE435A",
         "#1583BC",
         "#E7E2D2",

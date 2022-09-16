@@ -150,6 +150,7 @@ class ChatComponent extends Component {
         }
       }
     });
+    console.log("this.props.route.params",this.props.route.params)
   }
 
   captureImage2 = () => {
@@ -710,7 +711,7 @@ console.log(res.data.getAllMessages.messages.length)
                 alignItems: "center",
               }}
             >
-              <View style={{ marginTop: 30, marginBottom: 30 }}>
+              <View style={{ marginTop: 30, marginBottom: 10 }}>
                 <View style={{ height: 90 }}>
                   <Image
                     style={{
@@ -734,11 +735,13 @@ console.log(res.data.getAllMessages.messages.length)
                     }}
                   />
                 </View>
-                <View>
+                <View style={{marginTop:20}}>
                 <Text
                   style={{
                     textAlign: "center",
-                    fontSize: 20,
+                    fontSize: 16,
+                    fontWeight:"bold",
+                    color:"#000"
                   }}
                 >
                   {this.props.route.params.name}
@@ -746,6 +749,22 @@ console.log(res.data.getAllMessages.messages.length)
                 </View>
               
               </View>
+              <View style={{flexDirection:"row"}}>
+                <View style={{width:"30%", paddingTop:5}}>
+              <View style={{width:"100%", borderWidth:1, borderColor:"#808080"}}></View>
+
+                </View>
+                <View style={{width:"40%"}}>
+                  <View style={{paddingHorizontal:10}}>
+                    <Text numberOfLines={1} style={{fontSize:10, textAlign:"center", overflow:"hidden"}}>{this.props.route.params.address}</Text>
+                  </View>
+                </View>
+                <View style={{width:"30%", paddingTop:5}}>
+              <View style={{width:"100%", borderWidth:1, borderColor:"#808080"}}></View>
+
+                </View>
+              </View>
+
             </View>
           )}
 
@@ -766,7 +785,7 @@ console.log(res.data.getAllMessages.messages.length)
               keyExtractor={(item) => item.id}
               renderItem={({ item, index }) => {
                 console.log(this.state.senderId+"<---------->"+item.senderId+">>>>>>>>>"+this.props.route.params.userData.id+">>>>>"+this.props.userInfo.id)
-                if (this.props.userInfo.id != item.senderId) {
+                if (this.props.userInfo.id == item.senderId) {
                   return (
                     <>
                     
@@ -1068,7 +1087,7 @@ console.log(res.data.getAllMessages.messages.length)
                               name={item.name}
                               value={item.message}
                               type={item.type}
-                              image={this.props.userInfo.profile_photo}
+                              image={this.props.route.params.image}
                             />
                           </View>
                         ) : item.type == "image" ? (
@@ -1077,7 +1096,7 @@ console.log(res.data.getAllMessages.messages.length)
                               name={item.name}
                               value={item.message}
                               type={item.type}
-                              image={this.props.userInfo.profile_photo}
+                              image={this.props.route.params.image}
                             />
                           </View>
                         ) : item.type == "GroupSquad" ? (
@@ -1331,7 +1350,7 @@ console.log(res.data.getAllMessages.messages.length)
                                 &key=${GOOGLE_API_KEY}`}
                                   type={item.type}
                                   name={item.sender_name}
-                                  image={this.props.userInfo.profile_photo}
+                                  image={this.props.route.params.image}
                                 />
                               ) : (
                                 <ReceiverChatBubble
@@ -1339,7 +1358,7 @@ console.log(res.data.getAllMessages.messages.length)
                           &markers=${item.latitude},${item.longitude}
                           &key=${GOOGLE_API_KEY}`}
                                   type={item.type}
-                                  image={this.props.userInfo.profile_photo}
+                                  image={this.props.route.params.image}
                                 />
                               )}
                             </TouchableOpacity>
