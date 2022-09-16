@@ -30,19 +30,23 @@ export default class UserDetailComponent extends PureComponent {
       arrInterest: ["Drinking", "Playing games"],
       isFromScouting: false,
       squadDetails: {},
-      group_interest: [],
+      squad_interests: [],
       group_members: [],
       squad_images: [],
     };
   }
 
   componentDidMount() {
+    console.log("this.props.route.params")
+    console.log(this.props.route.params)
     if (this.props.route.params != undefined) {
       const { isFromScouting, data } = this.props.route.params;
+      console.log("data")
+      console.log(data)
       this.setState({
         isFromScouting: isFromScouting,
         squadDetails: data,
-        group_interest: data.interest_data ? data.interest_data : [],
+        squad_interests: data.squad_interests ? data.squad_interests : [],
         group_members: data.group_member ? data.group_member : [],
         squad_images: data.squad_image ? data.squad_image : [],
       });
@@ -50,6 +54,8 @@ export default class UserDetailComponent extends PureComponent {
   }
 
   render() {
+    console.log("squad_interests")
+    console.log(this.state.squad_interests)
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
         <StatusBar
@@ -123,7 +129,7 @@ export default class UserDetailComponent extends PureComponent {
                   paddingLeft: 5,
                 }}
               >
-                {this.state.squadDetails.location}
+                {this.state.squadDetails.city}
               </Text>
               <Text
                 style={{
@@ -135,8 +141,51 @@ export default class UserDetailComponent extends PureComponent {
                 {this.state.squadDetails.distance} km
               </Text>
             </View>
+            <View
+              style={{  marginLeft: 15, marginTop: 15 }}
+            >
+           
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: "#7B7B7B",
+                  paddingLeft: 5,
+                }}
+              >
+     he Equalizer is a 2014 American vigilante action film directed by Antoine Fuqua,
+      loosely based on the 1980s TV series of the same title. Written by Richard Wenk,
+       it stars Denzel Washington in the lead role, Marton Csokas, Chloë Grace Moretz, 
+       David Harbour, Bill Pullman and Melissa Leo
+              </Text>
+        
+            </View>
           </View>
-
+          <View
+                style={{
+                  marginHorizontal: 16,
+                  paddingBottom: 10,
+                }}
+              >
+                
+                <View
+                  style={{
+                    marginVertical: 15,
+                    height: 200,
+                    borderRadius: 4,
+                    overflow: "hidden",
+                  }}
+                >
+                  <Image
+                    source={{
+                      uri:
+                        this.state.squad_images.length > 0
+                          ? this.state.squad_images[0].squad_image
+                          : "",
+                    }}
+                    style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  />
+                </View>
+              </View>
           <View
             style={{
               marginHorizontal: 16,
@@ -161,7 +210,7 @@ export default class UserDetailComponent extends PureComponent {
               />
             </View>
             <View style={{ flexDirection: "row", marginVertical: 10 }}>
-              {this.state.group_interest.map((interestData) => {
+              {this.state.squad_interests.map((interestData) => {
                 return (
                   <View
                     style={{
@@ -177,6 +226,7 @@ export default class UserDetailComponent extends PureComponent {
                         margin: 10,
                         fontSize: 13,
                         fontFamily: fonts.Regular,
+                        color:colors.deepskyblue,
                         paddingRight: 10,
                         paddingLeft: 10,
                       }}
@@ -197,7 +247,7 @@ export default class UserDetailComponent extends PureComponent {
                   paddingBottom: 10,
                 }}
               >
-                <View
+                {/* <View
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
@@ -213,7 +263,8 @@ export default class UserDetailComponent extends PureComponent {
                       fontFamily: fonts.SemiBold,
                     }}
                   />
-                </View>
+                </View> */}
+
                 <View
                   style={{
                     marginVertical: 15,
@@ -234,7 +285,7 @@ export default class UserDetailComponent extends PureComponent {
                 </View>
               </View>
 
-              <View
+              {/* <View
                 style={{
                   marginHorizontal: 16,
                   paddingBottom: 10,
@@ -281,9 +332,9 @@ export default class UserDetailComponent extends PureComponent {
                     {this.state.squadDetails.looking_for == 0 ? "Male Group" : this.state.squadDetails.looking_for == 1 ? "Female Group" : "Others"}
                   </Text>
                 </View>
-              </View>
+              </View> */}
 
-              <View
+              {/* <View
                 style={{
                   marginHorizontal: 16,
                   paddingBottom: 10,
@@ -342,8 +393,100 @@ export default class UserDetailComponent extends PureComponent {
                     </Text>
                   </View>
                 </View>
+              </View> */}
+    <View
+                style={{
+                  marginHorizontal: 16,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <HeadingText
+                  title={"Past Activities"}
+                  style={{
+                    fontSize: 18,
+                    color: colors.black,
+                    fontFamily: fonts.SemiBold,
+                  }}
+                />
               </View>
-
+              <View style={{ height: 16 }} />
+              <View
+                style={{
+                  paddingBottom: 10,
+                  marginHorizontal: 16,
+                }}
+              >
+                <FlatList
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  data={this.state.group_members}
+                  keyExtractor={(item) => item.member_id}
+                  renderItem={({ item, index }) => (
+                    
+                    <TouchableOpacity
+                      onPress={() => {
+                        this.setState({ selectedIndex: index });
+                        this.props.navigation.navigate("Profile", { item });
+                      }}
+                      activeOpacity={0.8}
+                      //   style={{ width: "25%", marginVertical: 5 }}
+                    >
+                      <View
+                        style={{
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginHorizontal: 8,
+                        }}
+                      >
+                        <Image
+                          source={{ uri: item.user_image }}
+                          style={{ height: 100, width: 100, borderRadius: 30 }}
+                        />
+                      </View>
+                      <Text
+                        style={{
+                          marginVertical: 8,
+                          color: "#0D110F",
+                          fontFamily: fonts.Regular,
+                          fontSize: 13,
+                          textAlign: "center",
+                        }}
+                      >
+                        {item.full_name}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            {/* </> */}
+            <View
+                style={{
+                  marginHorizontal: 16,
+                  paddingBottom: 10,
+                }}
+              >
+               
+                <View
+                  style={{
+                    marginVertical: 15,
+                    height: 200,
+                    borderRadius: 4,
+                    overflow: "hidden",
+                  }}
+                >
+                  <Image
+                    source={{
+                      uri:
+                        this.state.squad_images.length > 0
+                          ? this.state.squad_images[0].squad_image
+                          : "",
+                    }}
+                    style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  />
+                </View>
+              </View>
               <View
                 style={{
                   marginHorizontal: 16,
@@ -374,6 +517,7 @@ export default class UserDetailComponent extends PureComponent {
                   data={this.state.group_members}
                   keyExtractor={(item) => item.member_id}
                   renderItem={({ item, index }) => (
+                    
                     <TouchableOpacity
                       onPress={() => {
                         this.setState({ selectedIndex: index });
@@ -403,11 +547,80 @@ export default class UserDetailComponent extends PureComponent {
                           textAlign: "center",
                         }}
                       >
-                        {item.full_name}
+                        {item.full_name},{item.age}
                       </Text>
                     </TouchableOpacity>
                   )}
                 />
+              </View>
+              <View
+                style={{
+                  marginHorizontal: 16,
+                  paddingBottom: 10,
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginVertical: 10,
+                  }}
+                >
+                  <HeadingText
+                    title={"Songs"}
+                    style={{
+                      fontSize: 18,
+                      color: colors.black,
+                      fontFamily: fonts.SemiBold,
+                    }}
+                  />
+                  
+                </View>
+                <View
+              style={{ flexDirection: "row", marginTop: 5 }}
+            >
+              <Image
+                style={{ height: 18, width: 18, marginTop: 0 }}
+                source={require("../../assets/mixFriend.png")}
+              />
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: "#7B7B7B",
+                  paddingLeft: 5,
+                }}
+              >
+                Riton x Nightcrawlers .
+              </Text>
+              <Text
+                style={{
+                  fontSize: 13,
+                  color: colors.deepskyblue,
+                  paddingLeft: 4,
+                }}
+              >
+              Friday
+              </Text>
+            </View>
+                <View
+                  style={{
+                    marginVertical: 15,
+                    height: 200,
+                    borderRadius: 4,
+                    overflow: "hidden",
+                  }}
+                >
+                  <Image
+                    source={{
+                      uri:
+                        this.state.squad_images.length > 0
+                          ? this.state.squad_images[0].squad_image
+                          : "",
+                    }}
+                    style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  />
+                </View>
               </View>
             </>
           )}

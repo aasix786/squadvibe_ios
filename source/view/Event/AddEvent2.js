@@ -44,7 +44,7 @@ class AddEventComponent extends Component {
       selectedIndex: 1,
       isPickerVisible: false,
       eventDate: "",
-      eventTime: "",
+      eventTime: moment().format("hh:mm A"),
       filePath: "",
       imageResponse: "",
       selected_number_of_participant: false,
@@ -80,7 +80,7 @@ class AddEventComponent extends Component {
   };
 
   componentDidMount() {
-      console.log("Event 2")
+    console.log("Event 2")
     console.log("this.props.route.params")
 
     console.log(this.props.route.params)
@@ -157,6 +157,8 @@ class AddEventComponent extends Component {
   };
 
   render() {
+    console.log("eventTime")
+    console.log(this.state.eventTime)
     const userInfo = {
       user_name: "",
     };
@@ -196,7 +198,19 @@ class AddEventComponent extends Component {
                     Add Event
                   </Text>
                 </View>
-                <View style={styles.headerButtonsViewStyle} />
+                <View style={styles.headerButtonsViewStyle}>
+                  <Ripple
+                    rippleCentered={true}
+                    rippleContainerBorderRadius={50}
+                    style={styles.backButtonStyle}
+                  >
+                    <Image
+                      source={require("../../assets/bell_Icon.png")}
+                      style={{ width: 21, height: 21 }}
+                      resizeMode={"contain"}
+                    />
+                  </Ripple>
+                </View>
               </View>
             </View>
           </View>
@@ -277,9 +291,8 @@ class AddEventComponent extends Component {
               </TouchableOpacity>
             )}
 
-            {this.state.time ? (
+            {/* {this.state.time ? (
               <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-                {/* <Text style={{ marginLeft: 8, fontFamily: fonts.SemiBold, fontSize: 14, color: colors.headingTextColor }}>Set a Username</Text> */}
                 <View
                   style={{
                     alignContent: "center",
@@ -339,7 +352,6 @@ class AddEventComponent extends Component {
                       color: "black",
                       fontSize: 14,
                       fontWeight: "bold",
-                      //   marginBottom: 6,
                     }}
                   >
                     Time
@@ -352,7 +364,7 @@ class AddEventComponent extends Component {
                   source={require("../../assets/arrowRight.png")}
                 />
               </TouchableOpacity>
-            )}
+            )} */}
 
             {this.state.showAddress ? (
               <View style={{ marginHorizontal: 10 }}>
@@ -747,62 +759,64 @@ class AddEventComponent extends Component {
               <></>
 
             )}
-            <View style={{ width: "90%" ,marginTop:10 }}>
+            <View style={{ width: "90%", marginTop: 10 }}>
 
-            <RadioForm
-              formHorizontal={false}
-              animation={true}
-            >
-              {/* To create radio buttons, loop through your array of options */}
-              {
-                sex.map((obj, i) => (
-                  <RadioButton labelHorizontal={true} key={i} >
-                    {/*  You can set RadioButtonLabel before RadioButtonInput */}
-                    <View style={{ width: "100%" , paddingTop: 5,alignItems:"center"}}>
-                    <View style={{ width: "85%", flexDirection: "row",alignItems:"center" }}>
-                      <View style={{ paddingTop:2 }}>
+              <RadioForm
+                formHorizontal={false}
+                animation={true}
+              >
+                {/* To create radio buttons, loop through your array of options */}
+                {
+                  sex.map((obj, i) => (
+                    <RadioButton labelHorizontal={true} key={i} >
+                      {/*  You can set RadioButtonLabel before RadioButtonInput */}
+                      <View style={{ width: "100%", paddingTop: 5, alignItems: "center" }}>
+                        <View style={{ width: "85%", flexDirection: "row", alignItems: "center" }}>
+                          <View style={{ paddingTop: 2 }}>
 
-                        <RadioButtonInput
-                          obj={obj}
-                          index={i}
-                          onPress={(sex) => this.setState({ sex })}
-                          value={this.state.sex}
-                          isSelected={this.state.sex === obj.value}
-                          borderWidth={1}
-                          buttonInnerColor={'#50C4E9'}
-                          buttonOuterColor={"#787878"}
-                          buttonSize={10}
-                          buttonOuterSize={15}
-                          buttonStyle={{}}
-                          buttonWrapStyle={{  }}
-                        />
+                            <RadioButtonInput
+                              obj={obj}
+                              index={i}
+                              onPress={(sex) => this.setState({ sex })}
+                              value={this.state.sex}
+                              isSelected={this.state.sex === obj.value}
+                              borderWidth={1}
+                              buttonInnerColor={'#50C4E9'}
+                              buttonOuterColor={"#787878"}
+                              buttonSize={10}
+                              buttonOuterSize={15}
+                              buttonStyle={{}}
+                              buttonWrapStyle={{}}
+                            />
 
+                          </View>
+                          {/* <View style={{ width: "80%"}}> */}
+                          <RadioButtonLabel
+
+                            obj={obj}
+                            index={i}
+                            labelHorizontal={true}
+                            onPress={(sex) =>
+                              this.setState({ sex })}
+                            value={this.state.sex}
+                            labelStyle={{
+                              color: "#787878",
+                              fontSize: 13,
+                              fontWeight: "bold",
+                            }}
+                            labelWrapStyle={{}}
+
+                          />
+                          {/* </View> */}
+
+                        </View>
                       </View>
-                      {/* <View style={{ width: "80%"}}> */}
-                        <RadioButtonLabel
 
-                          obj={obj}
-                          index={i}
-                          labelHorizontal={true}
-                          onPress={(sex) =>
-                            this.setState({ sex })}
-                          value={this.state.sex}
-                          labelStyle={{  color: "#787878",
-                          fontSize: 13,
-                          fontWeight: "bold", }}
-                          labelWrapStyle={{}}
+                    </RadioButton>
+                  ))
+                }
 
-                        />
-                      {/* </View> */}
-
-                    </View>
-                    </View>
-
-                  </RadioButton>
-                ))
-              }
-
-            </RadioForm>
+              </RadioForm>
 
             </View>
           </ScrollView>
@@ -866,7 +880,7 @@ class AddEventComponent extends Component {
           }}
         />
 
-        <DateTimePickerModal
+        {/* <DateTimePickerModal
           isVisible={this.state.isTimeVisible}
           mode="time"
           onConfirm={(time) => {
@@ -886,7 +900,7 @@ class AddEventComponent extends Component {
               isTimeVisible: false,
             });
           }}
-        />
+        /> */}
       </>
     );
   }
@@ -1196,6 +1210,7 @@ class AddEventComponent extends Component {
   };
 
   callAddEventApi = async () => {
+    
     var formdata = new FormData();
     formdata.append("token", this.props.userInfo.token);
     formdata.append("event_title", this.state.title);

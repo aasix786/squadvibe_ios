@@ -274,7 +274,7 @@ class AddEventComponent extends Component {
                   </Text>
                 </View>
                 <View style={styles.headerButtonsViewStyle}>
-                  {/* <Ripple
+                  <Ripple
                     rippleCentered={true}
                     rippleContainerBorderRadius={50}
                     style={styles.backButtonStyle}
@@ -284,7 +284,7 @@ class AddEventComponent extends Component {
                       style={{ width: 21, height: 21 }}
                       resizeMode={"contain"}
                     />
-                  </Ripple> */}
+                  </Ripple>
                 </View>
               </View>
             </View>

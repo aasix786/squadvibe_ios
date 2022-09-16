@@ -114,12 +114,54 @@ class ProfileViewComponent extends PureComponent {
               textAlign: "center",
               width: WINDOW_WIDTH - 80,
               alignSelf: "center",
-              padding: 12,
+              // padding: 12,
             }}
           >
             {this.state.user && this.state.user.about && this.state.user.about}
           </Text>
         )}
+         <View style={{ justifyContent: "center", alignItems: "center" ,  flexDirection: "row",
+            // marginVertical: 20,
+            marginHorizontal: 10,}}>
+              <Image
+                style={{ height: 12, width: 12,resizeMode:"contain"}}
+                source={require("../../assets/marker.png")}
+              />
+              <Text
+              style={{
+                // textAlign: "center",
+                paddingHorizontal:5,
+                width: 200,
+                // alignSelf: "center",
+                // marginTop: 12,
+                color: colors.lightskyblue,
+                fontFamily: fonts.Bold,
+                fontSize: 12,
+              }}
+
+            >
+       {this.state.user && this.state.user.location && this.state.user.location}
+            </Text>
+            </View>
+            <View style={{ justifyContent: "center", alignItems: "center" ,  flexDirection: "row",
+            marginTop:5,
+            marginHorizontal: 10,}}>
+         
+              <Text
+              style={{
+                textAlign: "center",
+                width: 200,
+                alignSelf: "center",
+                // marginTop: 12,
+                color: colors.lightskyblue,
+                fontFamily: fonts.Bold,
+                fontSize: 12,
+              }}
+
+            >
+       {this.state.user && this.state.user.bio && this.state.user.bio}
+            </Text>
+            </View>
 
         <View
           style={{
@@ -139,6 +181,8 @@ class ProfileViewComponent extends PureComponent {
                     alignItems: "center",
                   }}
                 >
+                  
+           
                   <Image
                     // source={require("../../assets/trackingImage.png")}
                     source={{

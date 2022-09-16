@@ -70,6 +70,7 @@ class ProfileComponent extends PureComponent {
     };
   }
 
+  
   componentDidMount() {
     this.props.navigation.addListener("focus", () => {
       const { userInfo } = this.props;

@@ -223,7 +223,7 @@ class PollComponent extends Component {
     <View style={{ flex: 2, paddingHorizontal: 16, paddingBottom: 20 }}>
       {this.state.data.length !== 0 ? (
         this.state.data.map((elem) => {
-          console.log("DATA CHECKING", elem);
+          console.log("DATA CHECKING", elem.user_id);
           console.log("INFO", this.props.userInfo.id);
           let showPercentage = false;
           if (elem.answeredKeys) {
@@ -282,7 +282,7 @@ class PollComponent extends Component {
                {moment(elem.created_at).format("DD-MM-YYYY HH:mm:ss")}
                 </Text> */}
 
-                {this.props.userInfo.id === elem.user_id && (
+                {this.props.userInfo.id == elem.user_id && (
                   <TouchableOpacity
                     onPress={() => this.deleteID(elem.question_id)}
                     style={{
@@ -291,9 +291,9 @@ class PollComponent extends Component {
                       right: 0,
                     }}
                   >
-                    <AntDesign name="delete" color="red" size={25} />
+                    <AntDesign name="delete" color="#50C4E9" size={22} />
                   </TouchableOpacity>
-                )}
+                 )} 
               </View>
               <View
                 style={{
@@ -789,6 +789,7 @@ class PollComponent extends Component {
           this.setState({ loading: false });
           Toast.show(error.message);
         }
+        
       );
     } else {
       Toast.show("You can select single only");
@@ -829,7 +830,20 @@ class PollComponent extends Component {
                   Add Event
                 </Text>
               </View>
-              <View style={{ width: 60 }} />
+              <View style={styles.headerButtonsViewStyle}>
+              <Ripple
+                  rippleCentered={true}
+                  rippleContainerBorderRadius={50}
+                  style={styles.backButtonStyle}
+                  onPress={() => this.props.navigation.goBack()}
+                >
+                  <Image
+                    source={require("../../assets/bell_Icon.png")}
+                    style={{ width: 22, height: 22 }}
+                    resizeMode={"contain"}
+                  />
+                </Ripple>
+              </View>
             </View>
           </View>
         </View>

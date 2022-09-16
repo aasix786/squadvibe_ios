@@ -93,7 +93,20 @@ class EventsComponent extends Component {
                   Add Event
                 </Text>
               </View>
-              <View style={styles.headerButtonsViewStyle} />
+              <View style={styles.headerButtonsViewStyle}>
+                <Ripple
+                  rippleCentered={true}
+                  rippleContainerBorderRadius={50}
+                  style={styles.backButtonStyle}
+                  onPress={() => this.props.navigation.goBack()}
+                >
+                  <Image
+                    source={require("../../assets/bell_Icon.png")}
+                    style={{ width: 22, height: 22 }}
+                    resizeMode={"contain"}
+                  />
+                </Ripple>
+              </View>
             </View>
           </View>
         </View>
