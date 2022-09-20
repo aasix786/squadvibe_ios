@@ -97,7 +97,8 @@ const Percentage = ({ text, percentage }) => (
     <Text
       style={{ marginLeft: 15, color: "black", width: 50, textAlign: "center" }}
     >
-      {percentage.toFixed()}%
+      {percentage}%
+      {/* {percentage.toFixed()}% */}
     </Text>
   </View>
 );
@@ -835,7 +836,7 @@ class PollComponent extends Component {
                   rippleCentered={true}
                   rippleContainerBorderRadius={50}
                   style={styles.backButtonStyle}
-                  onPress={() => this.props.navigation.goBack()}
+                  onPress={() => this.props.navigation.navigate("NotificationPanel")}
                 >
                   <Image
                     source={require("../../assets/bell_Icon.png")}

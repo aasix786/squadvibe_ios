@@ -183,6 +183,8 @@ export default function ChangeNumber({ navigation, route }) {
 
           const month = getMonth(parseInt(date_time?.slice(5, 7)));
           const time = `${msgDay}-${month}`;
+
+          console.log("elem",elem)
           return (
             <TouchableOpacity
               onPress={() => open(elem)}
@@ -193,7 +195,7 @@ export default function ChangeNumber({ navigation, route }) {
               activeOpacity={0.8}
             >
               <View style={styles.itemView}>
-                <Image style={styles.profileImg} source={{ uri: image }} />
+                <Image style={styles.profileImg} source={{ uri: elem.image }} />
                 <View style={{ marginLeft: 15 }}>
                   <Text style={{ color: "black", fontSize: 17 }}>{title}</Text>
                   <Text style={{ marginTop: 5 }}>{elem.message}</Text>

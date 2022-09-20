@@ -74,6 +74,7 @@ class NotificationComponent extends Component {
                     source={require("../../assets/bell_Icon.png")}
                     style={{ width: 21, height: 21 }}
                     resizeMode={"contain"}
+                    onPress={() => this.props.navigation.navigate("NotificationPanel")}
                   />
                 </Ripple>
               </View>

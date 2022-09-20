@@ -192,20 +192,42 @@ class ChatComponent extends Component {
           this.sendMessageData(this.props.route.params.eventData, "event");
         } else {
           if (this.props.route.params?.userData?.isSquad) {
-            this.getSquadMsgs();
+            const intervalSq = setInterval(() => {
+              this.getSquadMsgs();
             this.getSquadMembers();
+            }, 4000);
+            return () => clearInterval(intervalSq);
+            
           } else {
-            this.getMessages();
+            const intervalSimple = setInterval(() => {
+              this.getMessages();
+              console.log("???????????????????????????????????????")
+            }, 4000);
+            return () => clearInterval(intervalSimple);
+           
           }
         }
       } else if (this.props.route.params?.userData?.isSquad) {
-        this.getSquadMsgs();
-        this.getSquadMembers();
+        const intervalSquadSimple = setInterval(() => {
+          this.getSquadMsgs();
+          this.getSquadMembers();
+        }, 4000);
+        return () => clearInterval(intervalSquadSimple);
+       
       } else if (this.props.route.params?.userData.isSquadGroup) {
-        this.getGroupSquadMsgs();
+        const intervalSquad = setInterval(() => {
+          this.getGroupSquadMsgs();
         this.getGroupSquadMembers();
+        }, 4000);
+        return () => clearInterval(intervalSquad);
+
+      
       } else {
-        this.getMessages();
+        const interval = setInterval(() => {
+          this.getMessages();
+          console.log("???????????????????????????????????????")
+        }, 4000);
+        return () => clearInterval(interval);
       }
     });
   }
