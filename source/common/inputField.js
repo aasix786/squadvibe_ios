@@ -57,6 +57,7 @@ export const CustomInputField = (props) => {
           keyboardType={keyboardType}
           maxLength={maxLength}
           editable={editable}
+          returnKeyType={"done"}
         />
       </View>
     </View>
