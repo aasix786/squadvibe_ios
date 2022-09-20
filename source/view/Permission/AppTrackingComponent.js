@@ -69,11 +69,13 @@ class AppTrackingComponent extends PureComponent {
                   rippleCentered={true}
                   rippleContainerBorderRadius={50}
                   style={styles.backButtonStyle}
+                  onPress={() => this.props.navigation.navigate("NotificationPanel")}
                 >
                   <Image
                     source={require("../../assets/bell_Icon.png")}
                     style={{ width: 21, height: 21 }}
                     resizeMode={"contain"}
+
                   />
                 </Ripple>
               </View>

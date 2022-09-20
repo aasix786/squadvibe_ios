@@ -62,7 +62,7 @@ class ChatComponent extends Component {
         // {message:'my first message', type:"text", time:new Date,senderId:"1"},
         // {message:'my first message', type:"text", time:new Date,senderId:"1"},
       ],
-      senderId: "1",
+      senderId: this.props.userInfo.id,
       receiverId: "",
       chatRoomId: "",
       pageNo: 1,
@@ -150,6 +150,7 @@ class ChatComponent extends Component {
         }
       }
     });
+    console.log("this.props.route.params",this.props.route.params)
   }
 
   captureImage2 = () => {
@@ -191,20 +192,42 @@ class ChatComponent extends Component {
           this.sendMessageData(this.props.route.params.eventData, "event");
         } else {
           if (this.props.route.params?.userData?.isSquad) {
-            this.getSquadMsgs();
+            const intervalSq = setInterval(() => {
+              this.getSquadMsgs();
             this.getSquadMembers();
+            }, 4000);
+            return () => clearInterval(intervalSq);
+            
           } else {
-            this.getMessages();
+            const intervalSimple = setInterval(() => {
+              this.getMessages();
+              console.log("???????????????????????????????????????")
+            }, 4000);
+            return () => clearInterval(intervalSimple);
+           
           }
         }
       } else if (this.props.route.params?.userData?.isSquad) {
-        this.getSquadMsgs();
-        this.getSquadMembers();
+        const intervalSquadSimple = setInterval(() => {
+          this.getSquadMsgs();
+          this.getSquadMembers();
+        }, 4000);
+        return () => clearInterval(intervalSquadSimple);
+       
       } else if (this.props.route.params?.userData.isSquadGroup) {
-        this.getGroupSquadMsgs();
+        const intervalSquad = setInterval(() => {
+          this.getGroupSquadMsgs();
         this.getGroupSquadMembers();
+        }, 4000);
+        return () => clearInterval(intervalSquad);
+
+      
       } else {
-        this.getMessages();
+        const interval = setInterval(() => {
+          this.getMessages();
+          console.log("???????????????????????????????????????")
+        }, 4000);
+        return () => clearInterval(interval);
       }
     });
   }
@@ -259,6 +282,7 @@ console.log(res.data)
             message: elem.message,
             name: elem.user_name || elem.full_name,
             type: elem.type,
+            senderId: elem.user_id,
             event_image: elem.event_image,
             event_name: elem.event_name,
             user_image: elem.user_image,
@@ -292,9 +316,7 @@ console.log(res.data)
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
 
-          if (elem.sender_id === this.props.userInfo.id) {
-            obj.senderId = "1";
-          }
+        
           msgs.push(obj);
         }
         console.log("HHHH", msgs);
@@ -325,6 +347,7 @@ console.log(res.data)
             message: elem.message,
             name: elem.name,
             type: elem.type,
+            senderId: elem.user_id,
             event_image: elem.event_image,
             event_name: elem.event_name,
             user_image: elem.user_image,
@@ -359,9 +382,7 @@ console.log(res.data)
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
 
-          if (elem.user_id === this.props.userInfo.id) {
-            obj.senderId = "1";
-          }
+        
           msgs.push(obj);
         }
 
@@ -397,6 +418,7 @@ console.log(res.data.getAllMessages.messages.length)
             // message : elem.message,
             // type : elem.type,
             name: elem.full_name,
+            senderId: elem.user_id,
             event_image: elem.event_image,
             event_name: elem.event_name,
             user_image: elem.user_image,
@@ -428,9 +450,7 @@ console.log(res.data.getAllMessages.messages.length)
             obj.time =
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
-          if (elem.user_id === this.props.userInfo.id) {
-            obj.senderId = "1";
-          }
+        
           msgs.push(obj);
         }
         this.setState({ messages: [this.state.messages, ...msgs] });
@@ -442,7 +462,7 @@ console.log(res.data.getAllMessages.messages.length)
     const obj = {
       message,
       type: type,
-      senderId: "1",
+      senderId: this.props.userInfo.id,
     };
 
     const date = new Date();
@@ -713,7 +733,7 @@ console.log(res.data.getAllMessages.messages.length)
                 alignItems: "center",
               }}
             >
-              <View style={{ marginTop: 30, marginBottom: 30 }}>
+              <View style={{ marginTop: 30, marginBottom: 10 }}>
                 <View style={{ height: 90 }}>
                   <Image
                     style={{
@@ -737,15 +757,36 @@ console.log(res.data.getAllMessages.messages.length)
                     }}
                   />
                 </View>
+                <View style={{marginTop:20}}>
                 <Text
                   style={{
                     textAlign: "center",
-                    fontSize: 20,
+                    fontSize: 16,
+                    fontWeight:"bold",
+                    color:"#000"
                   }}
                 >
                   {this.props.route.params.name}
                 </Text>
+                </View>
+              
               </View>
+              <View style={{flexDirection:"row"}}>
+                <View style={{width:"30%", paddingTop:5}}>
+              <View style={{width:"100%", borderWidth:1, borderColor:"#808080"}}></View>
+
+                </View>
+                <View style={{width:"40%"}}>
+                  <View style={{paddingHorizontal:10}}>
+                    <Text numberOfLines={1} style={{fontSize:10, textAlign:"center", overflow:"hidden"}}>{this.props.route.params.address}</Text>
+                  </View>
+                </View>
+                <View style={{width:"30%", paddingTop:5}}>
+              <View style={{width:"100%", borderWidth:1, borderColor:"#808080"}}></View>
+
+                </View>
+              </View>
+
             </View>
           )}
 
@@ -765,7 +806,8 @@ console.log(res.data.getAllMessages.messages.length)
               data={this.state.messages}
               keyExtractor={(item) => item.id}
               renderItem={({ item, index }) => {
-                if (this.state.senderId == item.senderId) {
+                console.log(this.state.senderId+"<---------->"+item.senderId+">>>>>>>>>"+this.props.route.params.userData.id+">>>>>"+this.props.userInfo.id)
+                if (this.props.userInfo.id == item.senderId) {
                   return (
                     <>
                     
@@ -1067,6 +1109,7 @@ console.log(res.data.getAllMessages.messages.length)
                               name={item.name}
                               value={item.message}
                               type={item.type}
+                              image={this.props.route.params.image}
                             />
                           </View>
                         ) : item.type == "image" ? (
@@ -1075,6 +1118,7 @@ console.log(res.data.getAllMessages.messages.length)
                               name={item.name}
                               value={item.message}
                               type={item.type}
+                              image={this.props.route.params.image}
                             />
                           </View>
                         ) : item.type == "GroupSquad" ? (
@@ -1328,6 +1372,7 @@ console.log(res.data.getAllMessages.messages.length)
                                 &key=${GOOGLE_API_KEY}`}
                                   type={item.type}
                                   name={item.sender_name}
+                                  image={this.props.route.params.image}
                                 />
                               ) : (
                                 <ReceiverChatBubble
@@ -1335,6 +1380,7 @@ console.log(res.data.getAllMessages.messages.length)
                           &markers=${item.latitude},${item.longitude}
                           &key=${GOOGLE_API_KEY}`}
                                   type={item.type}
+                                  image={this.props.route.params.image}
                                 />
                               )}
                             </TouchableOpacity>

@@ -188,8 +188,7 @@ class ProfileViewComponent extends PureComponent {
                     source={{
                       uri:interestData.image
                     }}
-                    style={{ height: 46, width: 46, borderRadius: 78 }}
-                    resizeMode={"contain"}
+                    style={{ height: 46, width: 46, borderRadius: 46, resizeMode:"cover" }}
                   />
 
                   <Text

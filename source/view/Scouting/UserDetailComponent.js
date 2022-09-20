@@ -175,13 +175,17 @@ export default class UserDetailComponent extends PureComponent {
                     overflow: "hidden",
                   }}
                 >
-                  <Image
+                  {/* <Image
                     source={{
                       uri:
                         this.state.squad_images.length > 0
                           ? this.state.squad_images[0].squad_image
                           : "",
                     }}
+                    style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  /> */}
+                  <Image
+                    source={require("../../assets/main_squad.jpeg")}
                     style={{ width: "100%", height: "100%", borderRadius: 20 }}
                   />
                 </View>
@@ -476,13 +480,17 @@ export default class UserDetailComponent extends PureComponent {
                     overflow: "hidden",
                   }}
                 >
-                  <Image
+                  {/* <Image
                     source={{
                       uri:
                         this.state.squad_images.length > 0
                           ? this.state.squad_images[0].squad_image
                           : "",
                     }}
+                    style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  /> */}
+                  <Image
+                    source={require("../../assets/dance.webp")}
                     style={{ width: "100%", height: "100%", borderRadius: 20 }}
                   />
                 </View>
@@ -611,13 +619,17 @@ export default class UserDetailComponent extends PureComponent {
                     overflow: "hidden",
                   }}
                 >
-                  <Image
+                  {/* <Image
                     source={{
                       uri:
                         this.state.squad_images.length > 0
                           ? this.state.squad_images[0].squad_image
                           : "",
                     }}
+                    style={{ width: "100%", height: "100%", borderRadius: 20 }}
+                  /> */}
+                  <Image
+                    source={require("../../assets/song.jpeg")}
                     style={{ width: "100%", height: "100%", borderRadius: 20 }}
                   />
                 </View>

@@ -98,7 +98,7 @@ class EventsComponent extends Component {
                   rippleCentered={true}
                   rippleContainerBorderRadius={50}
                   style={styles.backButtonStyle}
-                  onPress={() => this.props.navigation.goBack()}
+                  onPress={() => this.props.navigation.navigate("NotificationPanel")}
                 >
                   <Image
                     source={require("../../assets/bell_Icon.png")}

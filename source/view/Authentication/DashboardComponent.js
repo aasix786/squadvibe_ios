@@ -33,22 +33,16 @@ class DashboardComponent extends Component {
       isCheck: false,
       birthDate: "",
       images: [
-        // "",
-       "",
-       "",
-        // "",
-         "",
-          "",
-          //  "",
-            ""],
+        "",
+        "",
+        "",
+        "",
+      ],
       arrGridColors: [
-        // "#C7158C",
         "#C7158C",
-        "#C7158C",
-        // "#EE435A",
+        "#EE435A",
         "#1583BC",
-        "#E7E2D2",
-        // "#00A351",
+        "#00A351",
         "#00A351",
       ],
       // arrGridTitle: ['My Squads', 'Games again', 'Shuffle', 'Friendlist', 'Scouting', 'Settings'],
@@ -104,7 +98,7 @@ class DashboardComponent extends Component {
           this.props.setUserInfo(success.viewProfile);
         }
       },
-      (error) => {}
+      (error) => { }
     );
   };
 
@@ -162,96 +156,96 @@ class DashboardComponent extends Component {
           style={{ height: "100%", width: "100%" }}
           source={require("../../assets/menuBgImage.png")}
         >
-          <View style={{ width:"100%"}}>
-            
+          <View style={{ width: "100%" }}>
+
             <View
               style={{
                 justifyContent: "center",
                 alignItems: "center",
-                flexDirection:"row"
+                flexDirection: "row"
               }}
             >
-               <View
-              style={{
-                backgroundColor: "transparent",
-                justifyContent: "center",
-                alignItems: "center",
-               width:"15%"
-              }}
-            >
-                <Image
-                          source={require(`../../assets/left_icon2.png`)}
-                          style={{ height: 25, width: 25,resizeMode:"contain" }}
-                        />
-            </View>
-<View style={{ width:"70%",justifyContent:"center",alignItems:"center"}}>
-  <View style={{width:"19%"}}>
-  <TouchableOpacity
-                active={0.8}
-                onPress={() => {
-                  navigation.navigate("Profile");
-                }}
+              <View
                 style={{
-                  marginTop: 70,
                   backgroundColor: "transparent",
-                  borderRadius: 78,
-                  borderColor: colors.white,
-                  borderWidth: 1,
-                 
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "15%"
                 }}
               >
-                {userInfo &&
-                userInfo.hasOwnProperty("image") &&
-                userInfo.image.length > 0 ? (
-                  <Image
-                    style={{ height: 46, width: 46, borderRadius: 78 }}
-                    source={{ uri: userInfo.image[0].image }}
-                    loadingIndicatorSource={<ActivityIndicator />}
-                  />
-                ) : (
-                  <Image
-                    style={{ height: 46, width: 46, borderRadius: 78 }}
-                    source={require("../../assets/userPlaceholder.png")}
-                  />
-                )}
-              </TouchableOpacity>
-            
-  </View>
-  <Text
-                style={{
-                  color: colors.white,
-                  fontFamily: fonts.Medium,
-                  fontSize: 12,
-                  paddingTop: 5,
-                  paddingBottom: 50,
-                }}
-              >
-                {userInfo.full_name}
-              </Text>
-</View>
-<TouchableOpacity
-
-              style={{
-                backgroundColor: "transparent",
-                justifyContent: "center",
-                alignItems: "center",
-               width:"15%"
-              }}
-              onPress={() => this.props.navigation.navigate("Setting")}
-            >
                 <Image
-                          source={require(`../../assets/setting2.png`)}
-                          style={{ height: 22, width: 22,resizeMode:"contain" }}
+                  source={require(`../../assets/left_icon2.png`)}
+                  style={{ height: 25, width: 25, resizeMode: "contain" }}
+                />
+              </View>
+              <View style={{ width: "70%", justifyContent: "center", alignItems: "center" }}>
+                <View style={{ width: "19%" }}>
+                  <TouchableOpacity
+                    active={0.8}
+                    onPress={() => {
+                      navigation.navigate("Profile");
+                    }}
+                    style={{
+                      marginTop: 70,
+                      backgroundColor: "transparent",
+                      borderRadius: 78,
+                      borderColor: colors.white,
+                      borderWidth: 1,
 
-                        />
-            </TouchableOpacity>
-             
+                    }}
+                  >
+                    {userInfo &&
+                      userInfo.hasOwnProperty("image") &&
+                      userInfo.image.length > 0 ? (
+                      <Image
+                        style={{ height: 46, width: 46, borderRadius: 78 }}
+                        source={{ uri: userInfo.image[0].image }}
+                        loadingIndicatorSource={<ActivityIndicator />}
+                      />
+                    ) : (
+                      <Image
+                        style={{ height: 46, width: 46, borderRadius: 78 }}
+                        source={require("../../assets/userPlaceholder.png")}
+                      />
+                    )}
+                  </TouchableOpacity>
+
+                </View>
+                <Text
+                  style={{
+                    color: colors.white,
+                    fontFamily: fonts.Medium,
+                    fontSize: 12,
+                    paddingTop: 5,
+                    paddingBottom: 50,
+                  }}
+                >
+                  {userInfo.full_name}
+                </Text>
+              </View>
+              <TouchableOpacity
+
+                style={{
+                  backgroundColor: "transparent",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "15%"
+                }}
+                onPress={() => this.props.navigation.navigate("Setting")}
+              >
+                <Image
+                  source={require(`../../assets/setting2.png`)}
+                  style={{ height: 22, width: 22, resizeMode: "contain" }}
+
+                />
+              </TouchableOpacity>
+
             </View>
 
-            <ScrollView
+            {/* <ScrollView
               showsVerticalScrollIndicator={false}
               style={{ marginHorizontal: 10 }}
-            >
+            > */}
               <FlatList
                 numColumns={1}
                 data={this.state.arrGridColors}
@@ -272,57 +266,42 @@ class DashboardComponent extends Component {
                         alignItems: "center",
                       }}
                     >
-                      {/* {index == 0 ? (
-                        <Image
-                          source={require(`../../assets/new_notification.png`)}
-                          style={{ height: 24, width: 24 }}
-                        />
-                      ) :  */}
-                      
-                     { index == 0 ? (
+                 
+
+                      {index == 0 ? (
                         <Image
                           source={require(`../../assets/mySquad.png`)}
                           style={{ height: 25, width: 25 }}
                         />
                       )
-                      //  : index == 1 ? (
-                      //   <Image
-                      //     source={require("../../assets/new_profile.png")}
-                      //     style={{ height: 25, width: 25 }}
-                      //   />
-                      // ) 
-                      : index == 1 ? (
-                        <Image
-                          source={require(`../../assets/playing_games3.png`)}
-                          style={{ height: 20, width: 20 }}
-                        />
-                      ) 
-                      : index == 2 ? (
-                        <Image
-                          source={require(`../../assets/shuffle-bottom.png`)}
-                          style={{ height: 21, width: 21 }}
-                        />
-                      )
-                      : index == 3 ? (
-                        <Image
-                          source={require(`../../assets/friendList.png`)}
-                          style={{ height: 21, width: 21 }}
-                        />
-                      )
-                      : index == 4 ? (
-                        <Image
-                          source={require(`../../assets/shop.png`)}
-                          style={{ height: 21, width: 21 }}
-                        />
-                      ) 
-                      // : index == 4 ? (
-                      //   <Image
-                      //     source={require(`../../assets/setting.png`)}
-                      //     style={{ height: 25, width: 25 }}
-                      //   />
-                      // ) 
-                   
-                       : null}
+                      
+                        : index == 1 ? (
+                          <Image
+                            source={require(`../../assets/playing_games3.png`)}
+                            style={{ height: 20, width: 20 }}
+                          />
+                        )
+                          : index == 2 ? (
+                            <Image
+                              source={require(`../../assets/shuffle-bottom.png`)}
+                              style={{ height: 21, width: 21 }}
+                            />
+                          )
+                            : index == 3 ? (
+                              <Image
+                                source={require(`../../assets/friendList.png`)}
+                                style={{ height: 21, width: 21 }}
+                              />
+                            )
+                              : index == 4 ? (
+                                <Image
+                                  source={require(`../../assets/shop.png`)}
+                                  style={{ height: 21, width: 21 }}
+                                />
+                              )
+                        
+
+                                : null}
                     </View>
                     <View
                       style={{
@@ -359,46 +338,68 @@ class DashboardComponent extends Component {
                   </TouchableOpacity>
                 )}
               />
-            </ScrollView>
+            {/* </ScrollView> */}
           </View>
         </ImageBackground>
       </View>
     );
   }
 
+  // onPressOption = (index) => {
+  //   const { navigation } = this.props;
+  //   switch (index) {
+  //     // case 0:
+  //     //   navigation.navigate("NotificationPanel");
+  //     //   break;
+  //     case 0:
+  //       navigation.navigate("MySquad");
+  //       break;
+  //       case 1:
+  //         navigation.navigate("ActivateScounting",{activeScout:false});
+  //         break;
+  //         case 2:
+  //           navigation.navigate("ActivateScounting",{activeScout:false});
+  //           break;
+  //     // case 1:
+  //     //   navigation.navigate("Profile");
+  //     //   break;
+  //     case 2:
+  //       navigation.navigate("AddFriend");
+  //       break;
+  //     case 3:
+  //       navigation.navigate("ActivateScounting");
+  //       break;
+  //     // case 4:
+  //     //   navigation.navigate("Setting");
+  //     //   break;
+
+  //     default:
+  //       break;
+  //   }
+  // };
   onPressOption = (index) => {
     const { navigation } = this.props;
     switch (index) {
-      // case 0:
-      //   navigation.navigate("NotificationPanel");
-      //   break;
       case 0:
         navigation.navigate("MySquad");
         break;
-        case 1:
-          navigation.navigate("ActivateScounting",{activeScout:false});
-          break;
-          case 2:
-            navigation.navigate("ActivateScounting",{activeScout:false});
-            break;
-      // case 1:
-      //   navigation.navigate("Profile");
-      //   break;
+      case 1:
+        navigation.navigate("ActivateScounting", { activeScout: false });
+        break;
+      case 2:
+        navigation.navigate("ActivateScounting", { activeScout: false });
+        break;
       case 3:
         navigation.navigate("AddFriend");
         break;
       case 4:
-        navigation.navigate("ActivateScounting",{activeScout:true});
-        break;
-      // case 4:
-      //   navigation.navigate("Setting");
-      //   break;
 
+        navigation.navigate("ActivateScounting", { activeScout: false });
+        break;
       default:
         break;
     }
   };
-
   updateLatLongApi = async () => {
     const latitude = await AsyncStorage.getItem("latitude");
     const longitude = await AsyncStorage.getItem("longitude");
