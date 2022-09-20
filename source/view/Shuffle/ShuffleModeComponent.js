@@ -88,6 +88,7 @@ class ShuffleModeComponent extends PureComponent {
           </View>
         </View>
 
+        {/* <View style={{ paddingBottom:30 }}> */}
         <View style={{ flex: 2, marginTop: 10 }}>
           {this.state.arrEvent ? (
             <FlatList
@@ -323,7 +324,84 @@ class ShuffleModeComponent extends PureComponent {
                         </View>
                       </View>
                     </View>
-                  ) : (
+                  ) : item.group_member.length === 0 ? (
+                    <View
+                      style={{
+                        height: 132,
+                        width: 122,
+                        alignSelf: "center",
+                        marginTop: 19,
+                      }}
+                    >
+                      <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                          <Image
+                              source={require("../../assets/userPlaceholder2.png")}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopLeftRadius: 10,
+                              // borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            height: 66,
+                            width: 2,
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <View style={{ flex: 1 }}>
+                          <Image
+                           source={require("../../assets/userPlaceholder2.png")}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                      </View>
+                      <View
+                        style={{
+                          height: 2,
+                          width: 122,
+                          backgroundColor: "white",
+                        }}
+                      />
+                      <View style={{ flex: 1, flexDirection: "row" }}>
+                        <View style={{ flex: 1 }}>
+                          <Image
+                           source={require("../../assets/userPlaceholder2.png")}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderBottomLeftRadius: 10,
+                              // borderTopRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            height: 66,
+                            width: 2,
+                            backgroundColor: "white",
+                          }}
+                        />
+                        <View style={{ flex: 1 }}>
+                          <Image
+                           source={require("../../assets/userPlaceholder2.png")}
+                            style={{
+                              height: "100%",
+                              width: "100%",
+                              borderBottomRightRadius: 10,
+                            }}
+                          />
+                        </View>
+                      </View>
+                    </View>
+                  ): (
                     <View
                       style={{
                         height: 132,
@@ -605,6 +683,7 @@ class ShuffleModeComponent extends PureComponent {
             </View>
           )}
         </View>
+        {/* </View> */}
         {/* <Loader loading={this.state.loading} /> */}
       </View>
     );

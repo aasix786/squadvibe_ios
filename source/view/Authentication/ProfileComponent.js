@@ -820,7 +820,7 @@ console.log("data_val",data_val)
     justifyContent:"center",
     marginBottom:50
   }}>
-                <Text style={{fontSize:18, textAlign:"center"}}>Done</Text>
+                <Text style={{fontSize:18, textAlign:"center"}}>update</Text>
 
                
               </TouchableOpacity>
@@ -1046,7 +1046,7 @@ const styles = StyleSheet.create({
     // marginHorizontal: 16,
   },
   inputStyle: {
-    flex: 1,
+    width:"100%",
     fontSize: 16,
     borderWidth: 0,
     // borderColor:'gray',

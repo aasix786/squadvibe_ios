@@ -689,7 +689,7 @@ class SettingComponent extends PureComponent {
 
           <Button
             style={{ bottom: 0, top: 30, position: "relative",fontSize: 16, }}
-            name="Done"
+            name="Update"
             bg={colors.white}
             textColor={"black"}
             clicked={this.save}
@@ -697,13 +697,13 @@ class SettingComponent extends PureComponent {
 
           <View style={{ height: 20 }} />
 
-          {/* <TouchableOpacity
+          <TouchableOpacity
             onPress={this.deletePopup}
-            style={[styles.textContainer, { marginTop: 30, marginBottom: 20 }]}
+            style={[styles.textContainer, {  marginBottom: 20 }]}
           >
             <Text style={styles.text}>Delete Account</Text>
-            <FontAwesome name="angle-right" size={20} color="gray" />
-          </TouchableOpacity> */}
+            {/* <FontAwesome name="angle-right" size={20} color="gray" /> */}
+          </TouchableOpacity>
 
           <TouchableOpacity
             onPress={this.logoutPopup}

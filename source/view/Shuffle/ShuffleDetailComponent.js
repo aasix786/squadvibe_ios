@@ -10,8 +10,8 @@ import {
   FlatList,
   ScrollView,
   StatusBar,
-  Share,
   Dimensions,
+  Linking,
 } from "react-native";
 import { colors, fonts, SCREEN_SIZE } from "../../common/colors";
 import { HeadingText } from "../../common/HeadingText";
@@ -31,7 +31,7 @@ import axios from "axios";
 import Toast from "react-native-simple-toast";
 import Ripple from "react-native-material-ripple";
 import LinearGradient from "react-native-linear-gradient";
-
+import Share from 'react-native-share';
 const WINDOW_WIDTH = Dimensions.get("window").width;
 
 class ShuffleDetailComponent extends PureComponent {
@@ -125,7 +125,7 @@ class ShuffleDetailComponent extends PureComponent {
         console.log(success)
         this.setState({
           loading: false,
-          
+
         });
       },
       (error) => {
@@ -489,47 +489,133 @@ class ShuffleDetailComponent extends PureComponent {
               </TouchableOpacity>
             </>
           )}
- <TouchableOpacity
-                onPress={() =>
-                  this.onShare()}
+          <View
+            onPress={() =>
+              this.onShare()}
+            // style={{
+            //   display: "flex",
+            //   elevation: 4,
+            //   padding: 20,
+            //   borderRadius: 10,
+            //   backgroundColor: "#50C4E9",
+            //   shadowColor: "gray",
+            //   shadowOffset: {
+            //     width: 2,
+            //     height: 2,
+            //   },
+            //   shadowOpacity: 0.9,
+            //   shadowRadius: 3,
+            //   marginTop: 20,
+            //   flexDirection: "row",
+            //   marginHorizontal: 20,
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            //   width: WINDOW_WIDTH - 35,
+            //   alignSelf: "center",
+            // }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: WINDOW_WIDTH - 35,
+              alignSelf: "center",
+            }}
+          >
+
+
+            <View style={{}}>
+              <Text
                 style={{
-                  display: "flex",
-                  elevation: 4,
-                  padding: 20,
-                  borderRadius: 10,
-                  backgroundColor: "#50C4E9",
-                  shadowColor: "gray",
-                  shadowOffset: {
-                    width: 2,
-                    height: 2,
-                  },
-                  shadowOpacity: 0.9,
-                  shadowRadius: 3,
-                  marginTop: 20,
-                  flexDirection: "row",
-                  marginHorizontal: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: WINDOW_WIDTH - 35,
-                  alignSelf: "center",
+                  color: "#000",
+                  fontSize: 14,
                 }}
               >
-                <Image
-                  style={{ width: 24, height: 24, resizeMode: "contain" }}
-                  source={require("../../assets/mySquad.png")}
-                />
+                Share to
+              </Text>
+            </View>
 
-                <View style={{ marginLeft: 15 }}>
-                  <Text
+          </View>
+          <View style={{ width: "100%",marginTop: 20 }}>
+
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "row"
+              }}
+            >
+            <View style={{ width: "33%", justifyContent: "center", alignItems: "center" }}>
+                  <TouchableOpacity
+                    active={0.8}
+                    onPress={() => {
+                      this.whatsApp();
+                    }}
                     style={{
-                      color: "white",
-                      fontSize: 14,
+                      
+                      backgroundColor: "transparent",
+                      borderRadius: 78,
+                      borderColor: colors.white,
+                      borderWidth: 1,
+
                     }}
                   >
-                    Share
-                  </Text>
-                </View>
-              </TouchableOpacity>
+
+                    <Image
+                      style={{ height: 46, width: 46, borderRadius: 78 }}
+                      source={require("../../assets/whatsapp-icon.png")}
+                    />
+                  </TouchableOpacity>
+
+
+              </View>
+              <View style={{ width: "33%", justifyContent: "center", alignItems: "center" }}>
+                  <TouchableOpacity
+                    active={0.8}
+                    onPress={() => {
+                      this.facebook();
+                    }}
+                    style={{
+                      backgroundColor: "transparent",
+                      borderRadius: 78,
+                      borderColor: colors.white,
+                      borderWidth: 1,
+
+                    }}
+                  >
+
+                    <Image
+                      style={{ height: 46, width: 46, borderRadius: 78 }}
+                      source={require("../../assets/Facebook_Logo.png")}
+                    />
+                  </TouchableOpacity>
+
+
+              </View>
+              <View style={{ width: "33%", justifyContent: "center", alignItems: "center" }}>
+                  <TouchableOpacity
+                    active={0.8}
+                    onPress={() => {
+                      this.instagram();
+                    }}
+                    style={{
+                      backgroundColor: "transparent",
+                      borderRadius: 78,
+                      borderColor: colors.white,
+                      borderWidth: 1,
+
+                    }}
+                  >
+
+                    <Image
+                      style={{ height: 60, width: 60, borderRadius: 78 }}
+                      source={require("../../assets/insta2.png")}
+                    />
+                  </TouchableOpacity>
+
+
+              </View>
+
+            </View>
+          </View>
           <View style={{ height: 50 }} />
 
           {showJoinBtn && (
@@ -641,35 +727,83 @@ class ShuffleDetailComponent extends PureComponent {
       </View>
     );
   }
-  onShare = async () => {
-    try {
-      const result = await Share.share({
-  
-        message:
-        'Title : ' + this.state.title 
-         +' Address :' + this.state. address + 
-         ', Description :' + this.state.Description +
-          ' event Time ' + this.state.time +
-           ' Minimum Age ' + this.state.minAge + 
-           ' Maximum Age ' + this.state.maxAge
-      
-      })
-    
-      if (shareImage.action === Share.sharedAction) {
-        if (shareImage.activityType) {
-          // shared with activity type of result.activityType
-          Alert.alert(shareImage.activityType);
-        } else {
-          // shared
-        }
-      } else if (shareImage.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error) {
-      alert(error.message);
-    }
+  // whatsApp = async () => {
+  //   try {
+  //     const result = await Share.share({
+
+  //       message:
+  //         'Title : ' + this.state.title
+  //         + ' Address :' + this.state.address +
+  //         ', Description :' + this.state.Description +
+  //         ' event Time ' + this.state.time +
+  //         ' Minimum Age ' + this.state.minAge +
+  //         ' Maximum Age ' + this.state.maxAge
+
+  //     })
+
+  //     if (shareImage.action === Share.sharedAction) {
+  //       if (shareImage.activityType) {
+  //         // shared with activity type of result.activityType
+  //         Alert.alert(shareImage.activityType);
+  //       } else {
+  //         // shared
+  //       }
+  //     } else if (shareImage.action === Share.dismissedAction) {
+  //       // dismissed
+  //     }
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // };
+  whatsApp = () => {
+     const shareOptions = {
+    title: this.state.title,
+    message: 'Title : ' + this.state.title
+    + ' Address :' + this.state.address +
+    ', Description :' + this.state.Description +
+    ' event Time ' + this.state.time +
+    ' Minimum Age ' + this.state.minAge +
+    ' Maximum Age ' + this.state.maxAge,
+    social: Share.Social.WHATSAPP,
+
+    filename: 'test' , // only for base64 file in Android
   };
 
+  Share.shareSingle(shareOptions)
+    .then((res) => { console.log(res) })
+    .catch((err) => { err && console.log(err); });
+  };
+  
+  
+  facebook = () => {
+     const shareOptions = {
+
+    title: this.state.title,
+    message: this.state.title.toString(),
+    // url: 'https://snack.expo.dev/@onismsolution/image-picker',
+    social: Share.Social.FACEBOOK,
+    whatsAppNumber: "9199999999",  // country code + phone number
+    filename: 'test' , // only for base64 file in Android
+  };
+
+  Share.shareSingle(shareOptions)
+    .then((res) => { console.log(res) })
+    .catch((err) => { err && console.log(err); });
+  };
+  instagram = () => {
+     const shareOptions = {
+    title: this.state.title,
+    message: 'some message',
+    url: 'https://snack.expo.dev/@onismsolution/image-picker',
+    social: Share.Social.INSTAGRAM,
+    whatsAppNumber: "9199999999",  // country code + phone number
+    filename: 'test' , // only for base64 file in Android
+  };
+
+  Share.shareSingle(shareOptions)
+    .then((res) => { console.log(res) })
+    .catch((err) => { err && console.log(err); });
+  };
   userRow = (item) => {
     return (
       <View
@@ -758,12 +892,12 @@ class ShuffleDetailComponent extends PureComponent {
       console.log("DAATAA");
       console.log(eventData.event_address);
       this.setState({
-        title:eventData.event_title,
-        address:eventData.event_address,
-        Description:eventData.event_description,
-        time:eventData.event_time,
-        minAge:eventData.min_age,
-        maxAge:eventData.max_age,
+        title: eventData.event_title,
+        address: eventData.event_address,
+        Description: eventData.event_description,
+        time: eventData.event_time,
+        minAge: eventData.min_age,
+        maxAge: eventData.max_age,
 
       })
       if (event_id) {
