@@ -521,7 +521,7 @@ class AddEventComponent extends Component {
                   title: this.props.route.params.title,
                   address: this.props.route.params.address,
                   latitude: this.props.route.params.latitude,
-                  longitude: this.props.route.params.latitude,
+                  longitude: this.props.route.params.longitude,
                 })
               }
               style={{
@@ -646,7 +646,7 @@ class AddEventComponent extends Component {
                   title: this.props.route.params.title,
                   address: this.props.route.params.address,
                   latitude: this.props.route.params.latitude,
-                  longitude: this.props.route.params.latitude,
+                  longitude: this.props.route.params.longitude,
                 })
               }
               style={{
@@ -828,19 +828,25 @@ class AddEventComponent extends Component {
           onPress={() => {
             const { eventDate, details } = this.state;
             if (eventDate && details) {
-              this.props.navigation.navigate("AddEvent3", {
-                date: this.state.eventDate + " " + this.state.eventTime,
-                details: this.state.details,
-                address: this.props.route.params.address,
-                location: this.props.route.params.location,
-                title: this.props.route.params.title,
-                latitude: this.props.route.params.latitude,
-                longitude: this.props.route.params.longitude,
-                friend: this.state.invite_friend,
-                squad: this.state.invite_squad,
-                participants_limit: this.state.participants_limit,
-                eventImg: this.props.route.params.eventImg,
-              });
+              if(this.state.invite_friend.length ==this.state.participants_limit){
+                this.props.navigation.navigate("AddEvent3", {
+                  date: this.state.eventDate + " " + this.state.eventTime,
+                  details: this.state.details,
+                  address: this.props.route.params.address,
+                  location: this.props.route.params.location,
+                  title: this.props.route.params.title,
+                  latitude: this.props.route.params.latitude,
+                  longitude: this.props.route.params.longitude,
+                  friend: this.state.invite_friend,
+                  squad: this.state.invite_squad,
+                  participants_limit: this.state.participants_limit,
+                  eventImg: this.props.route.params.eventImg,
+                });
+              }
+              else{
+                Toast.show("Participant are not allowed to add this event",);
+              }
+             
             } else {
               Toast.show("Missing Fields are there.");
             }
@@ -1275,7 +1281,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 2,
     width: "100%",
-    height: 65,
+    height: 50,
     borderRadius: 180,
     paddingHorizontal: 20,
     borderWidth: 1,
@@ -1288,7 +1294,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 2,
     width: "100%",
-    height: 120,
+    height: 60,
     marginTop: 10,
     borderRadius: 30,
     paddingHorizontal: 20,

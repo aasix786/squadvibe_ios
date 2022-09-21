@@ -609,10 +609,10 @@ class AddEventComponent extends Component {
       Toast.show("Please enter details");
       return;
     }
-    // else if (this.state.selected_number_of_participant.trim().length == 0) {
-    //     Toast.show('Please enter number of participant')
-    //     return
-    // }
+    else if (this.props.route.params.participants_limit.trim().length == 0) {
+        Toast.show('Please enter number of participant')
+        return
+    }
     // else if (this.state.invite_friend.length == 0) {
     //     Toast.show('Please add perticipant')
     //     return
@@ -673,7 +673,8 @@ class AddEventComponent extends Component {
   callAddEventApi = async () => {
     const { title, address, date, details, latitude, longitude,friend, squad, eventImg } =
       this.props.route.params;
-    // console.log("Parameter ", friend);
+    console.log("latitude ", latitude);
+    console.log("longitude ", longitude);
 
     const friends = friend.map((elem) => elem.id);
     const squads = squad.map((elem) => elem.squad_id);
@@ -732,7 +733,7 @@ class AddEventComponent extends Component {
         // this.joinEvent(success.createEvent.event_id)
       },
       (error) => {
-        console.error("postMethod error", error);
+        Toast.show( error.message);
       }
     );
   };

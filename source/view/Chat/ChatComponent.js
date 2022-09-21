@@ -207,7 +207,17 @@ class ChatComponent extends Component {
            
           }
         }
-      } else if (this.props.route.params?.userData?.isSquad) {
+      }
+      else if (this.props.route.params?.userData?.isEvent) {
+        // const intervalSq = setInterval(() => {
+          this.getEventMessage();
+        this.getEventMembers();
+        // }, 4000);
+        // return () => clearInterval(intervalSq);
+        
+      }
+      else if (this.props.route.params?.userData?.isSquad) {
+
         // const intervalSquadSimple = setInterval(() => {
           this.getSquadMsgs();
           this.getSquadMembers();
@@ -240,6 +250,16 @@ class ChatComponent extends Component {
       .post("http://squadvibes.onismsolution.com/api/getSquadMembers", parameter)
       .then((res) => {
         this.setState({ data: res.data.getSquadMembers });
+      });
+  };
+  getEventMembers = () => {
+    const parameter = new FormData();
+    parameter.append("token", this.props.userInfo.token);
+    parameter.append("event_id", this.props.route.params.receiverId);
+    axios
+      .post("http://squadvibes.onismsolution.com/api/getEventMembers", parameter)
+      .then((res) => {
+        this.setState({ data: res.data.getEventMembers });
       });
   };
 
@@ -275,6 +295,68 @@ console.log(res.data)
       .post("http://squadvibes.onismsolution.com/api/getSquadMessage", parameter)
       .then((res) => {
         console.log("getSquadMessage")
+        console.log(res.data)
+        const msgs = [];
+        for (let elem of res.data.getSquadMessage) {
+          const obj = {
+            message: elem.message,
+            name: elem.user_name || elem.full_name,
+            type: elem.type,
+            senderId: elem.user_id,
+            event_image: elem.event_image,
+            event_name: elem.event_name,
+            user_image: elem.user_image,
+            user_name: elem.user_name,
+            joined: elem.joined,
+            date_time: elem.date_time,
+            expired: elem.expired,
+            grp_name: elem.grp_name,
+            grp_image: elem.grp_image,
+            joinStatus: elem.joinStatus,
+          };
+          const msgDay = parseInt(elem.date_time.slice(8, 10));
+          let msgHour = parseInt(elem.date_time.slice(11, 13));
+
+          const date = new Date();
+          const day = date.getDate();
+
+          if (day > msgDay) {
+            const month = this.getMonth(parseInt(elem.date_time.slice(5, 7)));
+            obj.time = `${msgDay}-${month}`;
+          } else {
+            let am_pm = "AM";
+            if (msgHour > 12) {
+              msgHour = msgHour - 12;
+              am_pm = "PM";
+            }
+            if (msgHour <= 9) {
+              msgHour = `0${msgHour}`;
+            }
+            obj.time =
+              msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
+          }
+
+        
+          msgs.push(obj);
+        }
+        console.log("HHHH", msgs);
+        this.setState({ messages: [this.state.messages, ...msgs] });
+      })
+      .catch((err) => console.log("EREEEEROR", err));
+  };
+  getEventMessage = (pageNo = 1) => {
+    const limit = 20;
+
+    const parameter = new FormData();
+    parameter.append("token", this.props.userInfo.token);
+    parameter.append("event_id", this.props.route.params.receiverId);
+    parameter.append("limit", limit);
+    parameter.append("pageNo", pageNo);
+
+    axios
+      .post("http://squadvibes.onismsolution.com/api/getEventMessage", parameter)
+      .then((res) => {
+        console.log("getEventMessage")
         console.log(res.data)
         const msgs = [];
         for (let elem of res.data.getSquadMessage) {
@@ -508,7 +590,18 @@ console.log(res.data.getAllMessages.messages.length)
         })
         .catch((err) => console.log("ERROR", err));
     } 
-    
+    if (this.props.route.params.userData.isEvent) {
+      parameter.append("event_id", this.props.route.params.receiverId);
+      axios
+        .post("http://squadvibes.onismsolution.com/api/sendEventMessage", parameter)
+        .then((res) => {
+          this.setState({ txtMessage: "", sending: false });
+          if (type === "event") {
+            this.getEventMessage();
+          }
+        })
+        .catch((err) => console.log("ERROR", err));
+    } 
      if (this.props.route.params?.userData.isSquadGroup) {
       parameter.append("group_squad_id", this.props.route.params.receiverId);
       axios
@@ -543,7 +636,11 @@ console.log(res.data.getAllMessages.messages.length)
     this.setState({ pageNo: this.state.pageNo + 1 });
     if (this.props.route.params?.userData?.isSquad) {
       this.getSquadMsgs(this.state.pageNo + 1);
-    } else if (this.props.route.params?.userData.isSquadGroup) {
+    } 
+    else if (this.props.route.params?.userData?.isEvent) {
+      this.getEventMessage(this.state.pageNo + 1);
+    }
+    else if (this.props.route.params?.userData.isSquadGroup) {
       this.getGroupSquadMsgs(this.state.pageNo + 1);
     } else {
       this.getMessages(this.state.pageNo + 1);
@@ -620,7 +717,7 @@ console.log(res.data.getAllMessages.messages.length)
   };
 
   render() {
-    const { isSquad, isSquadGroup } = this.props.route.params.userData;
+    const { isSquad, isSquadGroup,isEvent } = this.props.route.params.userData;
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <StatusBar
@@ -648,7 +745,7 @@ console.log(res.data.getAllMessages.messages.length)
               </View>
               <View style={styles.headerTitleViewStyle}>
                 <Text style={{ fontSize: 15, fontFamily: fonts.Medium }}>
-                  {isSquad || isSquadGroup
+                  {isSquad || isSquadGroup || isEvent
                     ? this.props.route.params.name
                     : "Chat"}
                 </Text>
@@ -661,7 +758,7 @@ console.log(res.data.getAllMessages.messages.length)
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={[styles.container, { flex: 1 }]}
         >
-          {isSquad || isSquadGroup ? (
+          {isSquad || isSquadGroup || isEvent ? (
             <View
               style={{
                 backgroundColor: "white",
@@ -1509,7 +1606,7 @@ console.log(res.data.getAllMessages.messages.length)
                 }}
               />
 
-              {isSquad && (
+              {isSquad && isEvent && (
                 <TouchableOpacity
                   onPress={() => {
                     const message = {

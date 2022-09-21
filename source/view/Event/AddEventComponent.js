@@ -240,8 +240,10 @@ class AddEventComponent extends Component {
   }
 
   render() {
-    console.log("this.state.location")
-    console.log(this.state.location)
+    console.log("this.state.setLatitude")
+    console.log(this.state.setLatitude)  
+     console.log("this.state.setlongitude")
+    console.log(this.state.setLongitude)
     return (
       <>
         <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -528,6 +530,10 @@ class AddEventComponent extends Component {
           onPress={() => {
             const { title, location, address } = this.state;
             if (title && location && address !== -1) {
+              console.log("this.state.setLatitude")
+              console.log(this.state.setLatitude)
+              console.log("this.state.setLongitude")
+              console.log(this.state.setLongitude)
               this.props.navigation.navigate("AddEvent2", {
                 title: title,
                 location: location,
@@ -561,6 +567,7 @@ class AddEventComponent extends Component {
     this.state.arrSomeOneBrings.map((data, index) => {
       if (index != value) {
         arrData.push(data);
+
       }
     });
     console.log(arrData);
@@ -581,10 +588,10 @@ class AddEventComponent extends Component {
           alignItems: "center",
           marginHorizontal: 0,
           width: "100%",
-          elevation: 0,
-          borderColor: "gray",
-          borderWidth: 1,
-          backgroundColor: "transparent",
+          // elevation: 0,
+          // borderColor: "gray",
+          // borderWidth: 1,
+          // backgroundColor: "transparent",
         }}
       >
         <View
@@ -610,7 +617,10 @@ class AddEventComponent extends Component {
                 latitude: details.geometry.location.lat,
                 longitude: details.geometry.location.lng,
               };
-              this.setState({ location, address: details.formatted_address });
+              this.setState({ location, address: details.formatted_address,
+                setLatitude:details.geometry.location.lat,
+                setLongitude:details.geometry.location.lng
+              });
               this.marker.animateMarkerToCoordinate(location, 2);
             }}
             query={{
@@ -624,26 +634,26 @@ class AddEventComponent extends Component {
             nearbyPlacesAPI="GooglePlacesSearch"
             onFail={(error) => console.log(error)}
             onNotFound={(error) => console.log(error)}
-            // styles={{
-            //     container: {
-            //         borderBottomWidth: 0,
-            //         flex:1,
-            //         height:200
-            //     },
-            //     textInputContainer: {
-            //         borderRadius:40,
-            //         // height:200
+            styles={{
+                container: {
+                    borderBottomWidth: 0,
+                    flex:1,
+                    height:200
+                },
+                textInputContainer: {
+                    borderRadius:40,
+                    // height:200
 
-            //     },
-            //     textInput: {
-            //         // height : 180,
-            //         borderRadius: 180,
-            //         paddingHorizontal:20,
-            //         elevation:3,
-            //         borderWidth: 1,
-            //         borderColor: 'gray',
-            //     },
-            // }}
+                },
+                textInput: {
+                    // height : 180,
+                    borderRadius: 180,
+                    paddingHorizontal:20,
+                    elevation:3,
+                    borderWidth: 1,
+                    borderColor: 'gray',
+                },
+            }}
             ref={(ref) => {
               this.placesRef = ref;
             }}
@@ -913,7 +923,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     elevation: 2,
     width: "100%",
-    height: 65,
+    height: 45,
     borderRadius: 180,
     paddingHorizontal: 20,
   },
