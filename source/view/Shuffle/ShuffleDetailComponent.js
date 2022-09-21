@@ -518,6 +518,8 @@ class ShuffleDetailComponent extends PureComponent {
               alignItems: "center",
               width: WINDOW_WIDTH - 35,
               alignSelf: "center",
+              marginTop: 20,
+
             }}
           >
 
@@ -889,8 +891,8 @@ class ShuffleDetailComponent extends PureComponent {
     this._unsubscribe = this.props.navigation.addListener("focus", () => {
       const { eventData } = this.props.route.params;
       const { someone_bring, event_id, event_type } = eventData;
-      console.log("DAATAA");
-      console.log(eventData.event_address);
+      console.log("DAATAA>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      console.log(eventData);
       this.setState({
         title: eventData.event_title,
         address: eventData.event_address,
@@ -898,6 +900,8 @@ class ShuffleDetailComponent extends PureComponent {
         time: eventData.event_time,
         minAge: eventData.min_age,
         maxAge: eventData.max_age,
+        latitude: eventData.lats,
+        longitude: eventData.longs,
 
       })
       if (event_id) {
@@ -916,6 +920,10 @@ class ShuffleDetailComponent extends PureComponent {
   }
 
   showMap = () => {
+    console.log("this.state.latitude")
+    console.log(this.state.latitude)
+    console.log("this.state.longitude")
+    console.log(this.state.longitude)
     return (
       <View style={styles.container}>
         <MapView

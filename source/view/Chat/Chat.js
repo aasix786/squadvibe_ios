@@ -178,7 +178,8 @@ class Chat extends Component {
               }
             }
           }
-        } else if (item.group_squad_id) {
+        } 
+        else if (item.group_squad_id) {
           console.log("ITEMM", item);
           let groupSquad = response.messenger.groupSquads.filter(
             (elem) => item.group_squad_id == elem.id
@@ -203,7 +204,33 @@ class Chat extends Component {
               }
             }
           }
-        } else {
+        } 
+        else if (item.event_id) {
+          let event = response.messenger.events.filter(
+            (elem) => item.squad_id == elem.id
+          );
+          if (event.length) {
+            event = event[0];
+            obj = {
+              name: event.event_title,
+              image: event.event_image,
+              id:event.id,
+              isEvent: true,
+              lastMessage: { type: item.type, message: item.message, time: "" },
+            };
+            date_time = item.date_time;
+
+            // if (item.type == "EventInvite" || item.type == "event") {
+            //   if (item.sender_id == this.props.userInfo.id) {
+            //     obj.lastMessage.message = "You have invited users to an event.";
+            //   } else {
+            //     obj.lastMessage.message = "You are invited to an event.";
+            //   }
+            // }
+          }
+        }
+
+        else {
           let squad = response.messenger.squads.filter(
             (elem) => item.squad_id == elem.id
           );
@@ -298,9 +325,29 @@ class Chat extends Component {
         };
         return obj;
       });
-      
-console.log("squads")
+      console.log("squads")
 console.log(squads)
+
+      let events = response.messenger.events.map((item) => {
+        const lastMsg = response.messenger.messages.filter(
+          (elem) => item.id == elem.event_id
+        );
+
+        const obj = {
+          name: item.event_name,
+          image: item.event_image,
+          id: item.id,
+          isSquad: true,
+          lastMessage: {
+            type: "text",
+            time: "",
+            message: lastMsg.length ? lastMsg[0].message : "No message yet!!",
+          },
+        };
+        return obj;
+      });
+      console.log("events")
+      console.log(events)
 
       ids = [];
       squads = squads.filter((elem) => {
@@ -310,7 +357,16 @@ console.log(squads)
         }
         return find == -1;
       });
-      this.setState({ all_users: [...users, ...squads] });
+
+      ids = [];
+      events = events.filter((elem) => {
+        const find = ids.findIndex((item) => item == elem.id);
+        if (find == -1) {
+          ids.push(elem.id);
+        }
+        return find == -1;
+      });
+      this.setState({ all_users: [...users, ...squads, ...events] });
     });
   };
 

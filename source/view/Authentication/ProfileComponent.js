@@ -676,10 +676,10 @@ console.log("data_val",data_val)
               <View style={styles.viewStyle}>
                 <TextInput
                   style={[
-                    styles.inputStyle,
+                    styles.inputStyle_bio,
                     {
                       textAlign: "center",
-                      paddingLeft: 40,
+                      paddingLeft: 70,
                     },
                   ]}
                   // value={full_name ? full_name : userInfo?.full_name}
@@ -1047,6 +1047,12 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     width:"100%",
+    fontSize: 16,
+    borderWidth: 0,
+    // borderColor:'gray',
+    fontFamily: fonts.Regular,
+  }, inputStyle_bio: {
+    width:"73%",
     fontSize: 16,
     borderWidth: 0,
     // borderColor:'gray',

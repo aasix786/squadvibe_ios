@@ -428,7 +428,7 @@ class InviteSinglePerson extends Component {
         title: this.props.route.params.title,
         address: this.props.route.params.address,
         latitude: this.props.route.params.latitude,
-        longitude: this.props.route.params.latitude, });
+        longitude: this.props.route.params.longitude, });
     }
   };
 
