@@ -192,42 +192,42 @@ class ChatComponent extends Component {
           this.sendMessageData(this.props.route.params.eventData, "event");
         } else {
           if (this.props.route.params?.userData?.isSquad) {
-            const intervalSq = setInterval(() => {
+            // const intervalSq = setInterval(() => {
               this.getSquadMsgs();
             this.getSquadMembers();
-            }, 4000);
-            return () => clearInterval(intervalSq);
+            // }, 4000);
+            // return () => clearInterval(intervalSq);
             
           } else {
-            const intervalSimple = setInterval(() => {
+            // const intervalSimple = setInterval(() => {
               this.getMessages();
               console.log("???????????????????????????????????????")
-            }, 4000);
-            return () => clearInterval(intervalSimple);
+            // }, 4000);
+            // return () => clearInterval(intervalSimple);
            
           }
         }
       } else if (this.props.route.params?.userData?.isSquad) {
-        const intervalSquadSimple = setInterval(() => {
+        // const intervalSquadSimple = setInterval(() => {
           this.getSquadMsgs();
           this.getSquadMembers();
-        }, 4000);
-        return () => clearInterval(intervalSquadSimple);
+        // }, 4000);
+        // return () => clearInterval(intervalSquadSimple);
        
       } else if (this.props.route.params?.userData.isSquadGroup) {
-        const intervalSquad = setInterval(() => {
+        // const intervalSquad = setInterval(() => {
           this.getGroupSquadMsgs();
         this.getGroupSquadMembers();
-        }, 4000);
-        return () => clearInterval(intervalSquad);
+        // }, 4000);
+        // return () => clearInterval(intervalSquad);
 
       
       } else {
-        const interval = setInterval(() => {
+        // const interval = setInterval(() => {
           this.getMessages();
           console.log("???????????????????????????????????????")
-        }, 4000);
-        return () => clearInterval(interval);
+        // }, 4000);
+        // return () => clearInterval(interval);
       }
     });
   }

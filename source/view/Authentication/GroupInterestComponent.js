@@ -79,10 +79,12 @@ class GroupInterestComponent extends Component {
       } = this.props.route.params;
 
       if (isFromManageSquad) {
+        console.log("data",data)
         const interest = data
           .filter((elem) => elem.interest_id)
           .map((elem) => elem.interest_id);
         this.setState({ selectedInterest: interest });
+        console.log("interest", interest)
       } else if (isFromEditProfile && isFromEditProfile == true) {
         if (data !== undefined && data.length > 0) {
           const selectedInterest = data.map((data) => data.interest_id);
@@ -270,6 +272,7 @@ class GroupInterestComponent extends Component {
                 this.props.navigation.navigate("ManageSquad", {
                   isFromGroupInterest: true,
                   interest_data: this.state.interest,
+                  data: this.props.route.params.prev_data
                 });
               } else if (this.state.isFromCurrentStatus) {
                 this.props.setInterest(interest);
@@ -323,41 +326,7 @@ class GroupInterestComponent extends Component {
       });
   };
 
-  callUpdateInterest = () => {
-    this.setState({ loading: true });
-    var formdata = new FormData();
-    formdata.append("token", this.props.userInfo.token);
-    formdata.append("interest_id", this.state.selectedInterest.join(","));
-    formdata.append("squad_id", this.state.squad_id);
-    ApiHelper.post("updateSquadInterest", formdata)
-      .then((response) => {
-        if (response.status == 200) {
-          this.setState({ loading: false });
-          if (response.data.status == "SUCCESS") {
-            if (response.data.message) {
-              Toast.show(response.data.message);
-            }
-            this.props.navigation.navigate("MySquad");
-          } else {
-            console.error(response.data.message);
-            if (response.data.message) {
-              Toast.show(response.data.message);
-            }
-            if (
-              response.data.is_token_expired &&
-              Boolean(response.data.is_token_expired)
-            ) {
-              resetStackAndNavigate(this.props.navigation, "Login");
-            }
-          }
-        }
-      })
-      .catch((error) => {
-        this.setState({ loading: false });
-        console.error(error);
-        Toast.show(error.message);
-      });
-  };
+
 }
 
 const mapStateToProps = (state) => {
