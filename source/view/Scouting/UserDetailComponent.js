@@ -46,7 +46,7 @@ export default class UserDetailComponent extends PureComponent {
       this.setState({
         isFromScouting: isFromScouting,
         squadDetails: data,
-        squad_interests: data.squad_interests ? data.squad_interests : [],
+        squad_interests: data.interest_data ? data.interest_data : [],
         group_members: data.group_member ? data.group_member : [],
         squad_images: data.squad_image ? data.squad_image : [],
       });
@@ -55,7 +55,7 @@ export default class UserDetailComponent extends PureComponent {
 
   render() {
     console.log("squad_interests")
-    console.log(this.state.squad_interests)
+    console.log(this.state.interest_data)
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
         <StatusBar
@@ -214,7 +214,7 @@ export default class UserDetailComponent extends PureComponent {
               />
             </View>
             <View style={{ flexDirection: "row", marginVertical: 10 }}>
-              {this.state.squad_interests.map((interestData) => {
+              {this.state.interest_data.map((interestData) => {
                 return (
                   <View
                     style={{

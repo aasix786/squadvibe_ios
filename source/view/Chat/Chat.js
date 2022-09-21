@@ -10,7 +10,7 @@ import {
   Dimensions,
   StatusBar,
 } from "react-native";
-
+import axios from "axios";
 import { colors, fonts } from "../../common/colors";
 import { SearchBar } from "react-native-elements";
 import { postMethod } from "../../Networking/APIModel";
@@ -20,6 +20,7 @@ import LinearGradient from "react-native-linear-gradient";
 import Ripple from "react-native-material-ripple";
 import  Icon1 from 'react-native-vector-icons/Ionicons';
 import  Icon2 from 'react-native-vector-icons/Entypo';
+import Toast from "react-native-simple-toast";
 const WINDOW_WIDTH = Dimensions.get("window").width;
 
 class Chat extends Component {
@@ -276,7 +277,7 @@ class Chat extends Component {
         }
         return false;
       });
-
+console.log("data",data)
       this.setState({ arrUsers: data });
 
       let users = response.messenger.userProfiles.map((item) => {
@@ -369,7 +370,46 @@ console.log(squads)
       this.setState({ all_users: [...users, ...squads, ...events] });
     });
   };
-
+  deleteMessage = (auth_id, receiver_id) => {
+    let token = this.props.userInfo.token;
+    let body = {
+        "token" : token,
+        "auth_id" : auth_id,
+        "receiver_id" : receiver_id,
+    };
+    axios
+    .post(
+      "http://squadvibes.onismsolution.com/api/deleteChat",
+      body
+    )
+    .then((res) => {
+      this.getMessenger()
+      Toast.show(res.data.message);
+    })
+    .catch((err) => Toast.show("Error in Deleting CHat"));
+  }
+  archiveMessage = (auth_id, receiver_id) => {
+    let token = this.props.userInfo.token;
+    let body = {
+        "token" : token,
+        "auth_id" : auth_id,
+        "receiver_id" : receiver_id,
+    };
+  console.log(body)
+    axios
+    .post(
+      "http://squadvibes.onismsolution.com/api/archiveChat",
+      body
+    )
+    .then((res) => {
+      this.getMessenger()
+      Toast.show(res.data.message);
+    })
+    .catch((err) => {
+      console.log(err)
+      Toast.show("Error in Deleting CHat")
+    });
+  }
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener("focus", () => {
       this.getMessenger();
@@ -511,13 +551,24 @@ console.log(item)
             </View>
             <TouchableOpacity style={{width:"25%",alignItems:"center",flexDirection:"row",justifyContent:"space-between"}}>
             <TouchableOpacity style={{width:"50%"}}
-            onPress={()=>this.setState({Archive:true})}>
+            onPress={()=>{
+              let receiver_id = item.id;
+              let auth_id = this.props.userInfo.id;
+              this.archiveMessage(auth_id,receiver_id)
+              // this.setState({Archive:true})
+              }}>
             <Icon2 name="archive" size={18} color= "#708090" />
             </TouchableOpacity>
             <TouchableOpacity style={{width:"50%"}}
             onPress={()=>{
-              alert("Coming soon")
-              // this.deletemessage(item)
+              console.log(">>>>>>>>>>>>>>>>>>>>")
+              console.log(item)
+              console.log(this.props.userInfo.id)
+              console.log("<<<<<<<<<<<<<<<<<<<<<")
+              let receiver_id = item.id;
+              let auth_id = this.props.userInfo.id;
+              
+              this.deleteMessage(auth_id,receiver_id)
             }}
             >
             <Icon1 name="md-trash-bin-sharp" size={18} color= "#708090" />

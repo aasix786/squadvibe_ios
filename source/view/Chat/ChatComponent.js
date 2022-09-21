@@ -216,8 +216,8 @@ class ChatComponent extends Component {
         // return () => clearInterval(intervalSq);
         
       }
-      
       else if (this.props.route.params?.userData?.isSquad) {
+
         // const intervalSquadSimple = setInterval(() => {
           this.getSquadMsgs();
           this.getSquadMembers();
