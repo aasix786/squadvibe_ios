@@ -1,41 +1,42 @@
 {
   "project_info": {
-    "project_number": "20875555907",
-    "project_id": "squad-vibe-be4e1",
-    "storage_bucket": "squad-vibe-be4e1.appspot.com"
+    "project_number": "1022872579828",
+    "project_id": "squadvibes-ca2d9",
+    "storage_bucket": "squadvibes-ca2d9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:20875555907:android:4ddc7a57793c9be3df10f6",
+        "mobilesdk_app_id": "1:1022872579828:android:0ec0c21402b190e489b8a1",
         "android_client_info": {
           "package_name": "com.squadvibe"
         }
       },
       "oauth_client": [
         {
-          "client_id": "20875555907-a4tsfn9b78hvsflavl5alcnd5v9c5ftr.apps.googleusercontent.com",
+          "client_id": "1022872579828-ln41thg7qdhq7vutoh0nqpvev0ljchtf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.squadvibe",
+            "certificate_hash": "6bed0c0f67c0ebbf3a1982aec978bc7718f785ee"
+          }
+        },
+        {
+          "client_id": "1022872579828-rimmmijel3g5fis6dbs0h6qd0t756nqj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCnQCCl0vve8_3D-OIh1b7cpINpH723Fvg"
+          "current_key": "AIzaSyD8lYQivfFOSld3z9JHYjEHoh98i6sjqJI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "20875555907-a4tsfn9b78hvsflavl5alcnd5v9c5ftr.apps.googleusercontent.com",
+              "client_id": "1022872579828-rimmmijel3g5fis6dbs0h6qd0t756nqj.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "20875555907-92vhofngobppa8jrb1cpbj445uuug90t.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.amin.squadvibe"
-              }
             }
           ]
         }

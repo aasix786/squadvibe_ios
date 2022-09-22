@@ -54,8 +54,7 @@ export default class UserDetailComponent extends PureComponent {
   }
 
   render() {
-    console.log("squad_interests")
-    console.log(this.state.interest_data)
+    console.log(this.state.squad_interests)
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
         <StatusBar
@@ -214,7 +213,7 @@ export default class UserDetailComponent extends PureComponent {
               />
             </View>
             <View style={{ flexDirection: "row", marginVertical: 10 }}>
-              {this.state.interest_data.map((interestData) => {
+              {this.state.squad_interests.map((interestData) => {
                 return (
                   <View
                     style={{
@@ -333,7 +332,7 @@ export default class UserDetailComponent extends PureComponent {
                       paddingLeft: 10,
                     }}
                   >
-                    {this.state.squadDetails.looking_for == 0 ? "Male Group" : this.state.squadDetails.looking_for == 1 ? "Female Group" : "Others"}
+                    {this.state.squadDetails.looking_for == 1 ? "Male Group" : this.state.squadDetails.looking_for == 2 ? "Female Group" : "Others"}
                   </Text>
                 </View>
               </View> */}

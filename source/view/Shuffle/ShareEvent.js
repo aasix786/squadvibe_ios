@@ -134,6 +134,11 @@ class ShuffleModeComponent extends PureComponent {
                     this.props.navigation.navigate("Chat", {
                       eventData: item,
                       isFromShare: true,
+                      receiverId:this.props.route.params.receiverId,
+                      userData:this.props.route.params.userData,
+                      name:this.props.route.params.name,
+                      image:this.props.route.params.image,
+                      address:this.props.route.params.address
                     })
                   }
                 >

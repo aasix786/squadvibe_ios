@@ -338,7 +338,7 @@ console.log(squads)
           name: item.event_name,
           image: item.event_image,
           id: item.id,
-          isSquad: true,
+          isEvent: true,
           lastMessage: {
             type: "text",
             time: "",

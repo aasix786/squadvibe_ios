@@ -338,12 +338,21 @@ class LookingForGroupComponent extends Component {
                         <View style={{ width: 20 }} />
 
                         <TouchableOpacity activeOpacity={0.8} 
-                        onPress={() => this.likeDislikeSquad(squad.squad_id)}
+                        onPress={() => {
+                          this.likeDislikeSquad(squad.squad_id)
+                          }}
                         >
+                         {squad.liked ? (
+                          <Image
+                            style={{ height: 65, width: 65 }}
+                            source={require("../../assets/likeRed.png")}
+                          />
+                         ) : (
                           <Image
                             style={{ height: 65, width: 65 }}
                             source={require("../../assets/like.png")}
                           />
+                         )}
                         </TouchableOpacity>
 
                         <View style={{ width: 20 }} />

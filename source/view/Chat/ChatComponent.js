@@ -183,6 +183,7 @@ class ChatComponent extends Component {
   }
 
   componentDidMount() {
+    console.log("this.props.route.params?.userData?.isEvent",this.props.route.params?.userData?.isEvent)
     this.props.navigation.addListener("focus", () => {
       this.setState({ pageNo: 1, messages: [] });
 
@@ -253,6 +254,7 @@ class ChatComponent extends Component {
       });
   };
   getEventMembers = () => {
+
     const parameter = new FormData();
     parameter.append("token", this.props.userInfo.token);
     parameter.append("event_id", this.props.route.params.receiverId);
@@ -481,10 +483,9 @@ console.log(res.data)
     parameter.append("reciever_id", this.props.route.params.receiverId);
     parameter.append("pageNo", pageNo);
     parameter.append("limit", limit);
-    console.log(this.props.userInfo.token)
-    console.log(this.props.route.params.receiverId)
-    console.log(pageNo)
-    console.log(limit)
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    console.log(parameter)
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
 
     axios
       .post("http://squadvibes.onismsolution.com/api/getAllMessages", parameter)
@@ -1667,6 +1668,11 @@ console.log(res.data.getAllMessages.messages.length)
                     isFromChat: true,
                     chatRoomId: this.state.chatRoomId,
                     message: message,
+                    receiverId:this.props.route.params.receiverId,
+                      userData:this.props.route.params.userData,
+                      name:this.props.route.params.name,
+                      image:this.props.route.params.image,
+                      address:this.props.route.params.address
                   });
                 }}
               >

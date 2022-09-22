@@ -13,7 +13,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1DC0C54E9D7D33822C7496C1 /* libPods-SquadVibe-SquadVibeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4B74D8EF3DAD389C41FF73 /* libPods-SquadVibe-SquadVibeTests.a */; };
 		343B32F926980FDE00D4123D /* javed_GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 343B32F826980FDE00D4123D /* javed_GoogleService-Info.plist */; };
-		344E172826E5EC9E00368BA8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 344E172726E5EC9E00368BA8 /* GoogleService-Info.plist */; };
 		9A01AD5326866C0800FEFECF /* BeVietnam-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A01AD4526866C0700FEFECF /* BeVietnam-Bold.ttf */; };
 		9A01AD5426866C0800FEFECF /* BeVietnam-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A01AD4626866C0800FEFECF /* BeVietnam-LightItalic.ttf */; };
 		9A01AD5526866C0800FEFECF /* BeVietnam-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A01AD4726866C0800FEFECF /* BeVietnam-SemiBoldItalic.ttf */; };
@@ -29,6 +28,7 @@
 		9A01AD5F26866C0800FEFECF /* BeVietnam-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A01AD5126866C0800FEFECF /* BeVietnam-ExtraBold.ttf */; };
 		9A01AD6026866C0800FEFECF /* BeVietnam-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A01AD5226866C0800FEFECF /* BeVietnam-Thin.ttf */; };
 		9A275D992698D37500741AAC /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A275D982698D37500741AAC /* File.swift */; };
+		BB1E92B028DC68DB00D93DF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB1E92AF28DC68DB00D93DF2 /* GoogleService-Info.plist */; };
 		BBD63F8428CB4F27006BAB01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBD63F8328CB4F27006BAB01 /* LaunchScreen.storyboard */; };
 		EB923BF03172C5700FD72880 /* libPods-SquadVibe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 186D6F1FB06E8C44CEF76A3B /* libPods-SquadVibe.a */; };
 /* End PBXBuildFile section */
@@ -56,7 +56,6 @@
 		186D6F1FB06E8C44CEF76A3B /* libPods-SquadVibe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SquadVibe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4B74D8EF3DAD389C41FF73 /* libPods-SquadVibe-SquadVibeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SquadVibe-SquadVibeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		343B32F826980FDE00D4123D /* javed_GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "javed_GoogleService-Info.plist"; path = "SquadVibe/javed_GoogleService-Info.plist"; sourceTree = "<group>"; };
-		344E172726E5EC9E00368BA8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8CB6310D4C68C6C6FAA877EC /* Pods-SquadVibe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SquadVibe.debug.xcconfig"; path = "Target Support Files/Pods-SquadVibe/Pods-SquadVibe.debug.xcconfig"; sourceTree = "<group>"; };
 		9A01AD4526866C0700FEFECF /* BeVietnam-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnam-Bold.ttf"; sourceTree = "<group>"; };
 		9A01AD4626866C0800FEFECF /* BeVietnam-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnam-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		9A275D972698D37500741AAC /* SquadVibe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquadVibe-Bridging-Header.h"; sourceTree = "<group>"; };
 		9A275D982698D37500741AAC /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A88F1B67E0E2F286CDE2158D /* Pods-SquadVibe-SquadVibeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SquadVibe-SquadVibeTests.debug.xcconfig"; path = "Target Support Files/Pods-SquadVibe-SquadVibeTests/Pods-SquadVibe-SquadVibeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BB1E92AF28DC68DB00D93DF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Users/hamza/Documents/com_squadvibe/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BB78AF9E28CB9EE7004CE8B7 /* SquadVibe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = SquadVibe.entitlements; path = SquadVibe/SquadVibe.entitlements; sourceTree = "<group>"; };
 		BBD63F8328CB4F27006BAB01 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD313BF2E8541B55A447956 /* Pods-SquadVibe-SquadVibeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SquadVibe-SquadVibeTests.release.xcconfig"; path = "Target Support Files/Pods-SquadVibe-SquadVibeTests/Pods-SquadVibe-SquadVibeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,7 +122,6 @@
 		13B07FAE1A68108700A75B9A /* SquadVibe */ = {
 			isa = PBXGroup;
 			children = (
-				344E172726E5EC9E00368BA8 /* GoogleService-Info.plist */,
 				343B32F826980FDE00D4123D /* javed_GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -157,6 +156,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				BB1E92AF28DC68DB00D93DF2 /* GoogleService-Info.plist */,
 				9A01AD4426866BDB00FEFECF /* Resources */,
 				13B07FAE1A68108700A75B9A /* SquadVibe */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -317,7 +317,7 @@
 				9A01AD6026866C0800FEFECF /* BeVietnam-Thin.ttf in Resources */,
 				BBD63F8428CB4F27006BAB01 /* LaunchScreen.storyboard in Resources */,
 				9A01AD5326866C0800FEFECF /* BeVietnam-Bold.ttf in Resources */,
-				344E172826E5EC9E00368BA8 /* GoogleService-Info.plist in Resources */,
+				BB1E92B028DC68DB00D93DF2 /* GoogleService-Info.plist in Resources */,
 				9A01AD5726866C0800FEFECF /* BeVietnam-ExtraBoldItalic.ttf in Resources */,
 				343B32F926980FDE00D4123D /* javed_GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

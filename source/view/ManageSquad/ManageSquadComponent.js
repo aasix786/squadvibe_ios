@@ -919,7 +919,7 @@ let interests_id_arr = [];
                     paddingLeft: 10,
                   }}
                 >
-                  {this.state.looking_for == 0 ? "Male Group" : this.state.looking_for == 1 ? "Female Group" : "Others Group" }
+                  {this.state.looking_for == 1 ? "Male Group" : this.state.looking_for == 2 ? "Female Group" : "Others Group" }
                 </Text>
               </View>
 
