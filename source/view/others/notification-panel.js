@@ -195,15 +195,17 @@ export default function ChangeNumber({ navigation, route }) {
               activeOpacity={0.8}
             >
               <View style={styles.itemView}>
+                <View style={{width:"20%",paddingTop:8}}>
                 <Image style={styles.profileImg} source={{ uri: elem.image }} />
-                <View style={{ marginLeft: 15 }}>
+                </View>
+                <View style={{width:"60%",paddingLeft:5 }}>
                   <Text style={{ color: "black", fontSize: 17 }}>{title}</Text>
-                  <Text style={{ marginTop: 5 }}>{elem.message}</Text>
+                  <Text style={{  }}>{elem.message}</Text>
                 </View>
 
                 <View
                   style={{
-                    flex: 1,
+                    width:"20%",
                     justifyContent: "center",
                     alignItems: "flex-end",
                   }}

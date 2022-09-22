@@ -828,7 +828,7 @@ class AddEventComponent extends Component {
           onPress={() => {
             const { eventDate, details } = this.state;
             if (eventDate && details) {
-              if(this.state.invite_friend.length ==this.state.participants_limit){
+              if(this.state.invite_friend.length ==this.state.participants_limit ||this.state.invite_friend == "" ){
                 this.props.navigation.navigate("AddEvent3", {
                   date: this.state.eventDate + " " + this.state.eventTime,
                   details: this.state.details,

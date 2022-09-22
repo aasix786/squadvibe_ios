@@ -478,7 +478,7 @@ class ManageSquadComponent extends Component {
                   <View
                     style={{
                       alignSelf: "flex-end",
-                      top: 40,
+                      top: 35,
                       right: 17,
                     }}
                   >
@@ -495,7 +495,7 @@ class ManageSquadComponent extends Component {
               )}
 
               <>
-                <View style={{ alignSelf: "flex-end", top: 35, right: 17 }}>
+                {/* <View style={{ alignSelf: "flex-end", top: 35, right: 17 }}>
                   <TouchableOpacity
                     onPress={() =>
                       this.props.navigation.navigate("EditLocation", { data })
@@ -504,12 +504,12 @@ class ManageSquadComponent extends Component {
                   >
                     <Text style={{ color: colors.white }}>Add</Text>
                   </TouchableOpacity>
-                </View>
+                </View> */}
                 <View
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    marginVertical: 5,
+                    marginTop:15,
                     marginHorizontal: 17,
                   }}
                 >
@@ -892,7 +892,7 @@ class ManageSquadComponent extends Component {
                     paddingLeft: 10,
                   }}
                 >
-                  {this.state.looking_for == 0 ? "Male Group" : this.state.looking_for == 1 ? "Female Group" : "Others Group" }
+                  {this.state.looking_for == 0 ? "Male Group" : this.state.looking_for == 1 ? "Female Group" : "Mix Friend Group" }
                 </Text>
               </View>
 

@@ -150,7 +150,7 @@ class ChatComponent extends Component {
         }
       }
     });
-    console.log("this.props.route.params",this.props.route.params)
+    console.log("this.props.route.params", this.props.route.params)
   }
 
   captureImage2 = () => {
@@ -193,49 +193,49 @@ class ChatComponent extends Component {
         } else {
           if (this.props.route.params?.userData?.isSquad) {
             // const intervalSq = setInterval(() => {
-              this.getSquadMsgs();
+            this.getSquadMsgs();
             this.getSquadMembers();
             // }, 4000);
             // return () => clearInterval(intervalSq);
-            
+
           } else {
             // const intervalSimple = setInterval(() => {
-              this.getMessages();
-              console.log("???????????????????????????????????????")
+            this.getMessages();
+            console.log("???????????????????????????????????????")
             // }, 4000);
             // return () => clearInterval(intervalSimple);
-           
+
           }
         }
       }
       else if (this.props.route.params?.userData?.isEvent) {
         // const intervalSq = setInterval(() => {
-          this.getEventMessage();
+        this.getEventMessage();
         this.getEventMembers();
         // }, 4000);
         // return () => clearInterval(intervalSq);
-        
+
       }
-      
+
       else if (this.props.route.params?.userData?.isSquad) {
         // const intervalSquadSimple = setInterval(() => {
-          this.getSquadMsgs();
-          this.getSquadMembers();
+        this.getSquadMsgs();
+        this.getSquadMembers();
         // }, 4000);
         // return () => clearInterval(intervalSquadSimple);
-       
+
       } else if (this.props.route.params?.userData.isSquadGroup) {
         // const intervalSquad = setInterval(() => {
-          this.getGroupSquadMsgs();
+        this.getGroupSquadMsgs();
         this.getGroupSquadMembers();
         // }, 4000);
         // return () => clearInterval(intervalSquad);
 
-      
+
       } else {
         // const interval = setInterval(() => {
-          this.getMessages();
-          console.log("???????????????????????????????????????")
+        this.getMessages();
+        console.log("???????????????????????????????????????")
         // }, 4000);
         // return () => clearInterval(interval);
       }
@@ -271,7 +271,7 @@ class ChatComponent extends Component {
       .post("http://squadvibes.onismsolution.com/api/MergeGroupMembers", parameter)
       .then((res) => {
         console.log("MergeGroupMembers")
-console.log(res.data)
+        console.log(res.data)
         let array = [];
         res.data.MergeGroupMembers.forEach((element) => {
           if (!array.find((o) => o.id == element.id)) {
@@ -336,7 +336,7 @@ console.log(res.data)
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
 
-        
+
           msgs.push(obj);
         }
         console.log("HHHH", msgs);
@@ -398,7 +398,7 @@ console.log(res.data)
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
 
-        
+
           msgs.push(obj);
         }
         console.log("HHHH", msgs);
@@ -464,7 +464,7 @@ console.log(res.data)
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
 
-        
+
           msgs.push(obj);
         }
 
@@ -490,8 +490,8 @@ console.log(res.data)
       .post("http://squadvibes.onismsolution.com/api/getAllMessages", parameter)
       .then((res) => {
         const msgs = [];
-console.log("res.data.getAllMessages.messages")
-console.log(res.data.getAllMessages.messages.length)
+        console.log("res.data.getAllMessages.messages")
+        console.log(res.data.getAllMessages.messages.length)
         for (let elem of res.data.getAllMessages.messages) {
           const obj = {
             message: elem.message,
@@ -504,6 +504,10 @@ console.log(res.data.getAllMessages.messages.length)
             event_image: elem.event_image,
             event_name: elem.event_name,
             user_image: elem.user_image,
+            event_image: elem.event_image,
+            event_members: elem.event_members,
+            event_address: elem.event_address,
+            event_description: elem.event_description,
             user_name: elem.user_name,
             joined: elem.joined,
             date_time: elem.date_time,
@@ -532,7 +536,7 @@ console.log(res.data.getAllMessages.messages.length)
             obj.time =
               msgHour + ":" + elem.date_time.slice(14, 16) + " " + am_pm;
           }
-        
+
           msgs.push(obj);
         }
         this.setState({ messages: [this.state.messages, ...msgs] });
@@ -589,7 +593,7 @@ console.log(res.data.getAllMessages.messages.length)
           }
         })
         .catch((err) => console.log("ERROR", err));
-    } 
+    }
     if (this.props.route.params.userData.isEvent) {
       parameter.append("event_id", this.props.route.params.receiverId);
       axios
@@ -601,8 +605,8 @@ console.log(res.data.getAllMessages.messages.length)
           }
         })
         .catch((err) => console.log("ERROR", err));
-    } 
-     if (this.props.route.params?.userData.isSquadGroup) {
+    }
+    if (this.props.route.params?.userData.isSquadGroup) {
       parameter.append("group_squad_id", this.props.route.params.receiverId);
       axios
         .post("http://squadvibes.onismsolution.com/api/MergeGroupMessage", parameter)
@@ -636,7 +640,7 @@ console.log(res.data.getAllMessages.messages.length)
     this.setState({ pageNo: this.state.pageNo + 1 });
     if (this.props.route.params?.userData?.isSquad) {
       this.getSquadMsgs(this.state.pageNo + 1);
-    } 
+    }
     else if (this.props.route.params?.userData?.isEvent) {
       this.getEventMessage(this.state.pageNo + 1);
     }
@@ -717,7 +721,9 @@ console.log(res.data.getAllMessages.messages.length)
   };
 
   render() {
-    const { isSquad, isSquadGroup,isEvent } = this.props.route.params.userData;
+    console.log("this.state.message")
+    console.log(this.state.messages)
+    const { isSquad, isSquadGroup, isEvent } = this.props.route.params.userData;
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <StatusBar
@@ -854,32 +860,32 @@ console.log(res.data.getAllMessages.messages.length)
                     }}
                   />
                 </View>
-                <View style={{marginTop:20}}>
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontSize: 16,
-                    fontWeight:"bold",
-                    color:"#000"
-                  }}
-                >
-                  {this.props.route.params.name}
-                </Text>
+                <View style={{ marginTop: 20 }}>
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontSize: 16,
+                      fontWeight: "bold",
+                      color: "#000"
+                    }}
+                  >
+                    {this.props.route.params.name}
+                  </Text>
                 </View>
-              
+
               </View>
-              <View style={{flexDirection:"row"}}>
-                <View style={{width:"30%", paddingTop:5}}>
-              <View style={{width:"100%", borderWidth:1, borderColor:"#808080"}}></View>
+              <View style={{ flexDirection: "row" }}>
+                <View style={{ width: "30%", paddingTop: 5 }}>
+                  <View style={{ width: "100%", borderWidth: 1, borderColor: "#808080" }}></View>
 
                 </View>
-                <View style={{width:"40%"}}>
-                  <View style={{paddingHorizontal:10}}>
-                    <Text numberOfLines={1} style={{fontSize:10, textAlign:"center", overflow:"hidden"}}>{this.props.route.params.address}</Text>
+                <View style={{ width: "40%" }}>
+                  <View style={{ paddingHorizontal: 10 }}>
+                    <Text numberOfLines={1} style={{ fontSize: 10, textAlign: "center", overflow: "hidden" }}>{this.props.route.params.address}</Text>
                   </View>
                 </View>
-                <View style={{width:"30%", paddingTop:5}}>
-              <View style={{width:"100%", borderWidth:1, borderColor:"#808080"}}></View>
+                <View style={{ width: "30%", paddingTop: 5 }}>
+                  <View style={{ width: "100%", borderWidth: 1, borderColor: "#808080" }}></View>
 
                 </View>
               </View>
@@ -903,11 +909,11 @@ console.log(res.data.getAllMessages.messages.length)
               data={this.state.messages}
               keyExtractor={(item) => item.id}
               renderItem={({ item, index }) => {
-                console.log(this.state.senderId+"<---------->"+item.senderId+">>>>>>>>>"+this.props.route.params.userData.id+">>>>>"+this.props.userInfo.id)
+                console.log(this.state.senderId + "<---------->" + item.senderId + ">>>>>>>>>" + this.props.route.params.userData.id + ">>>>>" + this.props.userInfo.id)
                 if (this.props.userInfo.id == item.senderId) {
                   return (
                     <>
-                    
+
                       {item.type == "text" ? (
                         <View
                           style={{
@@ -922,7 +928,7 @@ console.log(res.data.getAllMessages.messages.length)
                             type={item.type}
                             name={"javed"}
                           />
-                         
+
                         </View>
                       ) : item.type == "image" ? (
                         <View
@@ -1039,6 +1045,7 @@ console.log(res.data.getAllMessages.messages.length)
                             marginHorizontal: 20,
                           }}
                         >
+
                           <View
                             style={{
                               elevation: 3,
@@ -1049,28 +1056,101 @@ console.log(res.data.getAllMessages.messages.length)
                           >
                             <View
                               style={{
-                                flexDirection: "row",
+                                // flexDirection: "row",
                                 alignItems: "center",
+                                justifyContent: "center"
                               }}
                             >
-                              <Image
-                                style={{
-                                  width: 50,
-                                  resizeMode: "contain",
-                                  height: 50,
-                                }}
-                                source={{ uri: item.event_image }}
-                              />
 
-                              <View style={{ marginLeft: 10, width: "100%" }}>
+                              <View style={{
+                                marginLeft: 10, width: "100%", alignItems: "center",
+                                justifyContent: "center"
+                              }}>
+                                <Image
+                                  style={{
+
+
+                                    width: 50,
+                                    resizeMode: "cover",
+                                    height: 50,
+                                     borderRadius: 50
+                                  }}
+                                  source={{ uri: item.event_image }}
+                                />
+
                                 <Text
                                   numberOfLines={2}
                                   multiline={false}
-                                  style={{ fontSize: 19, width: "60%" }}
+                                  style={{ fontSize: 12, width: "70%", textAlign: "center", fontFamily: "BeVietnam-SemiBold" }}
                                 >
                                   {item.event_name}
                                 </Text>
+                                <View style={{ flexDirection: "row" }}>
+                                  <Image
+                                    style={{
+                                      height: 9, width: 9, marginTop: 3, alignSelf: "center"
+                                      ,
+                                    }}
+                                    source={require("../../assets/marker.png")}
+                                  />
+                                  <Text
+                                    numberOfLines={1}
+                                    multiline={false}
+
+                                    style={{
+                                      fontSize: 12, color: "#38A5CA", textAlign: "center",
+                                      fontFamily: "BeVietnam-SemiBold", paddingHorizontal: 3
+                                    }}
+                                  >
+                                 {item.event_address}
+                                  </Text>
+
+                                </View>
+                                <Text
+                                  numberOfLines={2}
+                                  multiline={false}
+                                  style={{
+                                    fontSize: 12, width: "60%", textAlign: "center", fontFamily: "BeVietnam-SemiBold",
+                                    color: "#A3A8B8",
+                                  }}
+                                >
+                                  {item.event_description}
+                                </Text>
+
+                                <View
+                                  style={{
+                                    flex: 1,
+                                    justifyContent: "flex-end",
+                                  }}
+                                >
+                                  <View style={{ flexDirection: "row" }}>
+                                    {item.event_members.length > 0 ? item.event_members.map((member_item, member_index) => {
+                                      if (member_index < 4) {
+                                        return (
+                                          <View style={{ width: 25, height: 25, borderRadius: 25, borderColor: "#fff", borderWidth: 2, marginLeft: -12 }}>
+                                            <Image source={{ uri: member_item.user_image }} style={{ width: "100%", height: "100%", borderRadius: 25 }} />
+                                          </View>
+                                        )
+                                      }
+                                    }) : null}
+
+                                    {item.event_members.length > 0 ? (
+                                      <View style={{ paddingTop: 5, paddingLeft: 5 }}>
+                                        {item.event_members.length > 4 ? (
+                                          <Text style={{ fontSize: 12, fontWeight: "bold" }}>+ {item.event_members.length - 4} Participants</Text>
+
+                                        ) : (
+                                          <Text style={{ fontSize: 12, fontWeight: "bold" }}>{item.event_members.length} Participants</Text>
+
+                                        )}
+                                      </View>
+                                    ) : null}
+
+                                  </View>
+
+                                </View>
                               </View>
+
                             </View>
 
                             <TouchableOpacity
@@ -1081,7 +1161,7 @@ console.log(res.data.getAllMessages.messages.length)
                                     : "#4AACCD",
                                 borderRadius: 15,
                                 padding: 5,
-                                marginTop: 15,
+                                marginTop: 5,
                               }}
                               onPress={() => this.joinEvent(item)}
                             >
@@ -1557,20 +1637,29 @@ console.log(res.data.getAllMessages.messages.length)
           )}
 
           {this.state.selectedType == 0 ? (
-            <View
-              style={{
-                height: 50,
-                width: WINDOW_WIDTH - 60,
-                alignSelf: "center",
-                flexDirection: "row",
-                borderRadius: 30,
-                backgroundColor: "#EFEFEF",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: 10,
-              }}
-            >
-              {this.state.txtMessage.length === 0 && (
+            <View style={{
+              width: WINDOW_WIDTH - 20,
+              borderWidth: 17, borderColor: "#EFEFEF",
+              marginBottom: 10,
+              alignSelf: "center",
+              alignItems: "center",
+              borderRadius: 10,
+
+
+            }}>
+              <View
+                style={{
+                  height: 40,
+                  width: WINDOW_WIDTH - 55,
+                  alignSelf: "center",
+                  flexDirection: "row",
+
+                  backgroundColor: "#fff",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {/* {this.state.txtMessage.length === 0 && (
                 <TouchableOpacity
                   style={{
                     height: 40,
@@ -1590,43 +1679,76 @@ console.log(res.data.getAllMessages.messages.length)
                     style={{}}
                   />
                 </TouchableOpacity>
-              )}
-              <TextInput
-                placeholder={"Message..."}
-                style={[styles.textInput]}
-                multiline
-                // blurOnSubmit
-                // returnKeyLabel='Done'
-                // autoCorrect={false}
-                // returnKeyType='done'
-                value={this.state.txtMessage}
-                // onFocus={() => this.flatlistMessages.scrollToEnd({ animated: true })}
-                onChangeText={(message) => {
-                  this.setState({ txtMessage: message });
-                }}
-              />
-
-              {isSquad && isEvent && (
-                <TouchableOpacity
-                  onPress={() => {
-                    const message = {
-                      senderId: this.state.current_user_Id,
-                      receiverId: this.state.receiverId,
-                      read:
-                        this.state.is_receiver_online == undefined
-                          ? false
-                          : this.state.is_receiver_online,
-                      type: "poll",
-                      sender_name: this.state.isGroup
-                        ? this.state.current_user_name
-                        : "",
-                    };
-                    this.props.navigation.navigate("poll", {
-                      chatRoomId: this.state.chatRoomId,
-                      squad_id: this.props.route.params.userData.id,
-                      message: message,
-                    });
+              )} */}
+                <TextInput
+                  placeholder={"Type a Message"}
+                  style={[styles.textInput]}
+                  multiline
+                  // blurOnSubmit
+                  // returnKeyLabel='Done'
+                  // autoCorrect={false}
+                  // returnKeyType='done'
+                  value={this.state.txtMessage}
+                  // onFocus={() => this.flatlistMessages.scrollToEnd({ animated: true })}
+                  onChangeText={(message) => {
+                    this.setState({ txtMessage: message });
                   }}
+                />
+
+                {isSquad && isEvent && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      const message = {
+                        senderId: this.state.current_user_Id,
+                        receiverId: this.state.receiverId,
+                        read:
+                          this.state.is_receiver_online == undefined
+                            ? false
+                            : this.state.is_receiver_online,
+                        type: "poll",
+                        sender_name: this.state.isGroup
+                          ? this.state.current_user_name
+                          : "",
+                      };
+                      this.props.navigation.navigate("poll", {
+                        chatRoomId: this.state.chatRoomId,
+                        squad_id: this.props.route.params.userData.id,
+                        message: message,
+                      });
+                    }}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      alignSelf: "center",
+                    }}
+                  >
+                    <Image
+                      style={{ width: 20, height: 20 }}
+                      source={require("../../assets/ballot.png")}
+                    />
+                  </TouchableOpacity>
+                )}
+                {this.state.txtMessage.length === 0 && (
+                  <TouchableOpacity
+                    style={{
+                      height: 30,
+                      width: 30,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      alignSelf: "center",
+                    }}
+                    activeOpacity={0.8}
+                    onPress={() => this.openImagePicker()}
+                  >
+                    <Image
+                      source={require("../../assets/camera_ic_chat3.png")}
+                      style={{ width: 18, height: 18, resizeMode: "contain" }}
+                    />
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity
                   style={{
                     height: 30,
                     width: 30,
@@ -1634,88 +1756,77 @@ console.log(res.data.getAllMessages.messages.length)
                     alignItems: "center",
                     alignSelf: "center",
                   }}
-                >
-                  <Image
-                    style={{ width: 20, height: 20 }}
-                    source={require("../../assets/ballot.png")}
-                  />
-                </TouchableOpacity>
-              )}
-
-              <TouchableOpacity
-                style={{
-                  height: 30,
-                  width: 30,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  alignSelf: "center",
-                }}
-                onPress={() => {
-                  const message = {
-                    senderId: this.state.current_user_Id,
-                    receiverId: this.state.receiverId,
-                    read:
-                      this.state.is_receiver_online == undefined
-                        ? false
-                        : this.state.is_receiver_online,
-                    type: "event",
-                    sender_name: this.state.isGroup
-                      ? this.state.current_user_name
-                      : "",
-                  };
-                  this.props.navigation.navigate("ShareEvent", {
-                    isFromChat: true,
-                    chatRoomId: this.state.chatRoomId,
-                    message: message,
-                  });
-                }}
-              >
-                <Image
-                  source={require("../../assets/calendar_ic_black.png")}
-                  style={{ marginRight: 10 }}
-                />
-              </TouchableOpacity>
-
-              {this.state.txtMessage.length > 0 && (
-                <TouchableOpacity
-                  style={{
-                    justifyContent: "center",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
                   onPress={() => {
-                    const messageTime = moment().unix();
                     const message = {
                       senderId: this.state.current_user_Id,
                       receiverId: this.state.receiverId,
-                      message: this.state.txtMessage,
-                      time: messageTime,
                       read:
                         this.state.is_receiver_online == undefined
                           ? false
                           : this.state.is_receiver_online,
-                      type: "text",
+                      type: "event",
                       sender_name: this.state.isGroup
                         ? this.state.current_user_name
                         : "",
                     };
-                    if (!this.state.sending && message.message) {
-                      this.sendMessageData(message.message);
-                    }
+                    this.props.navigation.navigate("ShareEvent", {
+                      isFromChat: true,
+                      chatRoomId: this.state.chatRoomId,
+                      message: message,
+                    });
                   }}
                 >
-                  <Text
+                  <Image
+                    source={require("../../assets/calendar_ic3.png")}
+                    style={{ marginRight: 10, width: 18, height: 17, resizeMode: "contain" }}
+                  />
+                </TouchableOpacity>
+
+                {this.state.txtMessage.length > 0 && (
+                  <TouchableOpacity
                     style={{
-                      color: "#4AACCD",
-                      fontSize: 16,
-                      fontWeight: "bold",
-                      paddingRight: 15,
+                      justifyContent: "center",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: "#4AACCD",
+                      height: 40,
+                      width: WINDOW_WIDTH - 300,
+                      borderRadius: 5
+                    }}
+                    onPress={() => {
+                      const messageTime = moment().unix();
+                      const message = {
+                        senderId: this.state.current_user_Id,
+                        receiverId: this.state.receiverId,
+                        message: this.state.txtMessage,
+                        time: messageTime,
+                        read:
+                          this.state.is_receiver_online == undefined
+                            ? false
+                            : this.state.is_receiver_online,
+                        type: "text",
+                        sender_name: this.state.isGroup
+                          ? this.state.current_user_name
+                          : "",
+                      };
+                      if (!this.state.sending && message.message) {
+                        this.sendMessageData(message.message);
+                      }
                     }}
                   >
-                    Send
-                  </Text>
-                </TouchableOpacity>
-              )}
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontSize: 16,
+                        fontWeight: "bold",
+
+                      }}
+                    >
+                      Send
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
             </View>
           ) : null}
         </KeyboardAvoidingView>
@@ -1864,7 +1975,7 @@ console.log(res.data.getAllMessages.messages.length)
                   value={
                     item.select_option1.includes(this.state.current_user_Id)
                       ? item.select_option1.length /
-                        this.state.group_member.length
+                      this.state.group_member.length
                       : 0
                   }
                   variant={"determinate"}
@@ -1881,13 +1992,13 @@ console.log(res.data.getAllMessages.messages.length)
                   }}
                 >
                   {item.creator_id == this.state.current_user_Id ||
-                  item.select_option1.includes(this.state.current_user_Id) ||
-                  item.select_option2.includes(this.state.current_user_Id)
+                    item.select_option1.includes(this.state.current_user_Id) ||
+                    item.select_option2.includes(this.state.current_user_Id)
                     ? `${parseInt(
-                        (item.select_option1.length /
-                          this.state.group_member.length) *
-                          100
-                      )}%`
+                      (item.select_option1.length /
+                        this.state.group_member.length) *
+                      100
+                    )}%`
                     : ""}
                 </Text>
               </TouchableOpacity>
@@ -1921,13 +2032,13 @@ console.log(res.data.getAllMessages.messages.length)
                   }}
                 >
                   {item.creator_id == this.state.current_user_Id ||
-                  item.select_option1.includes(this.state.current_user_Id) ||
-                  item.select_option2.includes(this.state.current_user_Id)
+                    item.select_option1.includes(this.state.current_user_Id) ||
+                    item.select_option2.includes(this.state.current_user_Id)
                     ? `${parseInt(
-                        (item.select_option2.length /
-                          this.state.group_member.length) *
-                          100
-                      )}%`
+                      (item.select_option2.length /
+                        this.state.group_member.length) *
+                      100
+                    )}%`
                     : ""}
                 </Text>
               </TouchableOpacity>

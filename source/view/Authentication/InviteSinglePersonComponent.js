@@ -524,12 +524,10 @@ class InviteSinglePerson extends Component {
               this.props.navigation.navigate("MySquad");
             }
             if (response.data.message) {
-              alert("1")
               Toast.show(response.data.message);
             }
           } else {
             if (response.data.requestKey) {
-              alert("2")
               Toast.show(response.data.requestKey);
             }
             if (

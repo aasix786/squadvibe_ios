@@ -672,7 +672,10 @@ console.log("data_val",data_val)
               </TouchableOpacity> */}
 
               {/* <View style={{ height: 20 }} /> */}
-
+              {userInfo &&
+                userInfo?.hasOwnProperty("image") &&
+                userInfo?.image.length >= 0 &&
+                full_name ? (
               <View style={styles.viewStyle}>
                 <TextInput
                   style={[
@@ -706,6 +709,9 @@ console.log("data_val",data_val)
                   onPress={() => this.callSendInvite(user_name)}
                 />
               </View>
+               ) : (
+                <></>
+              )}
               <View style={{ height: 20 }} />
 
               <View style={{  height: 100,
