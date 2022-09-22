@@ -183,6 +183,7 @@ class ChatComponent extends Component {
   }
 
   componentDidMount() {
+    console.log("this.props.route.params?.userData?.isEvent",this.props.route.params?.userData?.isEvent)
     this.props.navigation.addListener("focus", () => {
       this.setState({ pageNo: 1, messages: [] });
 
@@ -218,6 +219,7 @@ class ChatComponent extends Component {
       }
 
       else if (this.props.route.params?.userData?.isSquad) {
+
         // const intervalSquadSimple = setInterval(() => {
         this.getSquadMsgs();
         this.getSquadMembers();
@@ -253,6 +255,7 @@ class ChatComponent extends Component {
       });
   };
   getEventMembers = () => {
+
     const parameter = new FormData();
     parameter.append("token", this.props.userInfo.token);
     parameter.append("event_id", this.props.route.params.receiverId);
@@ -481,10 +484,9 @@ class ChatComponent extends Component {
     parameter.append("reciever_id", this.props.route.params.receiverId);
     parameter.append("pageNo", pageNo);
     parameter.append("limit", limit);
-    console.log(this.props.userInfo.token)
-    console.log(this.props.route.params.receiverId)
-    console.log(pageNo)
-    console.log(limit)
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    console.log(parameter)
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
 
     axios
       .post("http://squadvibes.onismsolution.com/api/getAllMessages", parameter)

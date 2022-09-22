@@ -341,6 +341,7 @@ class GroupTypeComponent extends PureComponent {
     console.log(strUsers)
     console.log("formdata")
     console.log(formdata)
+
     ApiHelper.post("createSquad", formdata)
       .then((response) => {
         console.log("response.data")

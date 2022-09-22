@@ -337,11 +337,22 @@ class LookingForGroupComponent extends Component {
 
                         <View style={{ width: 20 }} />
 
-                        <TouchableOpacity activeOpacity={0.8}>
+                        <TouchableOpacity activeOpacity={0.8} 
+                        onPress={() => {
+                          this.likeDislikeSquad(squad.squad_id)
+                          }}
+                        >
+                         {squad.liked ? (
+                          <Image
+                            style={{ height: 65, width: 65 }}
+                            source={require("../../assets/likeRed.png")}
+                          />
+                         ) : (
                           <Image
                             style={{ height: 65, width: 65 }}
                             source={require("../../assets/like.png")}
                           />
+                         )}
                         </TouchableOpacity>
 
                         <View style={{ width: 20 }} />
@@ -586,32 +597,55 @@ class LookingForGroupComponent extends Component {
     this.getAllSquad();
     this.swiper.initDeck();
   };
-
-  likeDislikeSquad = (squadID, status) => {
+  likeDislikeSquad = (squadID) => {
     this.setState({ loading: true });
     var formdata = new FormData();
     formdata.append("token", this.props.userInfo.token);
     formdata.append("squad_id", squadID);
-    formdata.append("like_dislike_status", status);
-
     postMethod(
       this.props.navigation,
-      "likedislikeSquad",
+      "likeSquad",
       formdata,
       (success) => {
         console.log("likedislikeSquad")
         console.log(success)
+
         this.setState({
           loading: false,
         });
+        Toast.show(success.message)
       },
       (error) => {
         console.log("ERROR", error);
         this.setState({ loading: false });
-        // Toast.show("card not found")
       }
     );
   };
+  // likeDislikeSquad = (squadID, status) => {
+  //   this.setState({ loading: true });
+  //   var formdata = new FormData();
+  //   formdata.append("token", this.props.userInfo.token);
+  //   formdata.append("squad_id", squadID);
+  //   formdata.append("like_dislike_status", status);
+
+  //   postMethod(
+  //     this.props.navigation,
+  //     "likedislikeSquad",
+  //     formdata,
+  //     (success) => {
+  //       console.log("likedislikeSquad")
+  //       console.log(success)
+  //       this.setState({
+  //         loading: false,
+  //       });
+  //     },
+  //     (error) => {
+  //       console.log("ERROR", error);
+  //       this.setState({ loading: false });
+  //       // Toast.show("card not found")
+  //     }
+  //   );
+  // };
 }
 
 const styles = StyleSheet.create({
