@@ -352,9 +352,9 @@ class GroupTypeComponent extends PureComponent {
             if (response.data.hasOwnProperty("createSquad")) {
               this.props.navigation.reset({
                 index: 0,
-                routes: [{ name: "HomeTab" }],
+                routes: [{ name: "MySquad" }],
               });
-              this.props.navigation.navigate("HomeTab");
+              this.props.navigation.navigate("MySquad");
               this.resetData();
             }
             if (response.data.message) {
@@ -410,7 +410,7 @@ class GroupTypeComponent extends PureComponent {
       .then((response) => {
         if (response.status == 200) {
           if (response.data.status == "SUCCESS") {
-            resetStackAndNavigate(this.props.navigation, "HomeTab");
+            resetStackAndNavigate(this.props.navigation, "MySquad");
 
             if (response.data.message) {
               Toast.show(response.data.message);

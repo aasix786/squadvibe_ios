@@ -361,6 +361,7 @@ class AddEventComponent extends Component {
                   </Text>
                 </View>
 
+
                 <Image
                   style={{ height: 16, width: 16, marginRight: 15 }}
                   source={require("../../assets/arrowRight.png")}
