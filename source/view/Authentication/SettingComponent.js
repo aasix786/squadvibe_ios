@@ -133,7 +133,7 @@ class SettingComponent extends PureComponent {
           console.log("viewProfileviewProfile", response.data.viewProfile);
           if (response.data.status == "SUCCESS") {
             let userInfo = response.data.viewProfile;
-            console.log("INFOOABC", userInfo.phone_number, userInfo.email);
+            console.log("INFOOABC", userInfo);
             this.setState({
               Telephone_search: userInfo.phone_number,
               Email_search: userInfo.email,
@@ -169,7 +169,7 @@ class SettingComponent extends PureComponent {
     } else {
       Toast.show("Please Select Location");
     }
-
+console.log(formdata)
     postMethod(
       this.props.navigation,
       "updateUserFields",

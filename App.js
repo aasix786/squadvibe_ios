@@ -15,7 +15,8 @@ import {
   PermissionsAndroid,
   Platform,
   ToastAndroid,
-  AppState
+  AppState,
+  View
 } from 'react-native';
 
 import NavigationStack from './source/navigation/Stack';
@@ -53,12 +54,13 @@ const persistor = persistStore(store);
 
 // Register background handler
 messaging().setBackgroundMessageHandler(async remoteMessage => {
+  alert("as")
   console.log('Message handled in the background!', remoteMessage);
 });
 
 messaging().onMessage(async remoteMessage => {
   console.log("Notification onMessage ====> ",remoteMessage);
-  // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+  Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
   // if(AppState.currentState == 'active'){
     if(Platform.OS == 'ios'){
       PushNotificationIOS.addNotificationRequest({
@@ -70,7 +72,7 @@ messaging().onMessage(async remoteMessage => {
     } else {
       console.log("Android");
       PushNotification.localNotification({
-        channelId:'com.squadvibe',
+        channelId:'com.squadvibe.app',
         id: remoteMessage.messageId,
         title: remoteMessage.notification.title, // (optional)
         message: remoteMessage.notification.body, // (required)
@@ -115,8 +117,8 @@ class App extends React.Component {
 
   componentDidMount() {
     // AsyncStorage.clear()
-    // this.requestNotificationPermission();
-    this.getFcmToken()
+    this.requestNotificationPermission();
+    // this.getFcmToken()
     AsyncStorage.setItem(
       'device_type',
       Platform.OS == 'android' ? 'android' : 'iOS',
@@ -271,9 +273,9 @@ class App extends React.Component {
 
     if (enabled) {
       console.log('Authorization status:', authStatus);
-      // this.getFcmToken();
+      this.getFcmToken();
     }
-    this.getFcmToken();
+    
   }
 
   locationPermission = async () => {

@@ -343,6 +343,7 @@ class LookingForGroupComponent extends Component {
                         <TouchableOpacity activeOpacity={0.8} 
                         onPress={() => {
                           this.likeDislikeSquad(squad.squad_id,index)
+
                           }}
                         >
                          {squad.liked ? (
