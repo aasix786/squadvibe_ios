@@ -51,7 +51,7 @@ class EventsComponent extends Component {
     axios
       .post("http://squadvibes.onismsolution.com/api/JoinEvent", parameter)
       .then((res) => {
-        Toast.show("Event joined successfully.");
+        Toast.show(res.data.message);
         const filtered = this.state.arrOpenEvent.filter(
           (elem) => elem.event_id !== item.event_id
         );

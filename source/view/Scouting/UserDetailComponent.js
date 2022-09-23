@@ -46,7 +46,7 @@ export default class UserDetailComponent extends PureComponent {
       this.setState({
         isFromScouting: isFromScouting,
         squadDetails: data,
-        squad_interests: data.squad_interests ? data.squad_interests : [],
+        squad_interests: data.interest_data ? data.interest_data : [],
         group_members: data.group_member ? data.group_member : [],
         squad_images: data.squad_image ? data.squad_image : [],
       });
@@ -54,7 +54,6 @@ export default class UserDetailComponent extends PureComponent {
   }
 
   render() {
-    console.log("squad_interests")
     console.log(this.state.squad_interests)
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
@@ -333,7 +332,7 @@ export default class UserDetailComponent extends PureComponent {
                       paddingLeft: 10,
                     }}
                   >
-                    {this.state.squadDetails.looking_for == 0 ? "Male Group" : this.state.squadDetails.looking_for == 1 ? "Female Group" : "Others"}
+                    {this.state.squadDetails.looking_for == 1 ? "Male Group" : this.state.squadDetails.looking_for == 2 ? "Female Group" : "Others"}
                   </Text>
                 </View>
               </View> */}

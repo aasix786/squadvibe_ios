@@ -393,7 +393,6 @@ class DashboardComponent extends Component {
         navigation.navigate("AddFriend");
         break;
       case 4:
-
         navigation.navigate("ActivateScounting", { activeScout: false });
         break;
       default:

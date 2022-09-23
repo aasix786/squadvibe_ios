@@ -55,6 +55,7 @@ class ManageSquadComponent extends Component {
         data,
         gender,
         isFromGroupInterest,
+        isFromEditSquad,
         isFromEditLocation,
         interest_data,
         isFromGender,
@@ -62,8 +63,10 @@ class ManageSquadComponent extends Component {
       
    
       const { looking_for, group_interest } = this.state;
-
+   
       if (isFromGroupInterest) {
+        console.log("?????????????????????????????????")
+        console.log("interest_data",interest_data)
         let interest = interest_data.filter((item) => {
           const find = group_interest.findIndex(
             (elem) => elem.interest_id === item.interest_id
@@ -73,21 +76,43 @@ class ManageSquadComponent extends Component {
         interest.map(
           (elem, index) => (interest[index]["interest_id"] = elem.id)
         );
+        console.log("this.props.route.params",this.props.route.params)
+if(this.props.route.params.data){
 
-        interest.forEach((elem) => {
-          const parameter = new FormData();
-          parameter.append("token", this.props.userInfo.token);
-          parameter.append("squad_id", this.props.route.params.data.squad_id);
-          parameter.append("interest_id", elem.interest_id);
+let interests_id_arr = [];
+  interest.forEach((elem) => {
+  interests_id_arr.push(elem.interest_id)
+  });
 
-          axios
-            .post(
-              "http://squadvibes.onismsolution.com/api/updateSquadInterest",
-              parameter
-            )
-            .then((res) => Toast.show("Interest added successfully"))
-            .catch((err) => Toast.show("Error in adding Interest"));
-        });
+  const parameter = new FormData();
+  parameter.append("token", this.props.userInfo.token);
+  parameter.append("squad_id", this.props.route.params.data.squad_id);
+  parameter.append("interest_id", interests_id_arr);
+  console.log(">>>>>>>>>>>>>>>>>>>>>>")
+  console.log("interests_id_arr",interests_id_arr)
+  console.log("token", this.props.userInfo.token)
+  console.log("squad_id", this.props.route.params.data.squad_id)
+  console.log(">>>>>>>>>>>>>>>>>>>>>>")
+  let body = {
+    "token" : this.props.userInfo.token,
+    "squad_id" : this.props.route.params.data.squad_id,
+    "interest_id" : interests_id_arr,
+  }
+  if(interests_id_arr.length > 0){
+    axios
+    .post(
+      "http://squadvibes.onismsolution.com/api/updateSquadInterest",
+      body
+    )
+    .then((res) => {
+      console.log("res" , res.data)
+      Toast.show("Interest added successfully")
+    })
+    .catch((err) => Toast.show("Error in adding Interest"));
+  }
+
+}
+       
         this.setState({
           group_interest: [...this.state.group_interest, ...interest],
         });
@@ -561,7 +586,8 @@ class ManageSquadComponent extends Component {
                 backgroundColor: "#4AACCD",
               }}
               onPress={() =>
-                this.props.navigation.navigate("InviteSinglePerson", { data,
+                this.props.navigation.navigate("InviteSinglePerson", { 
+                  data,
               group_member: data.group_member,
               // (8/24/22)=> friends: data.group_member,
              })
@@ -696,6 +722,7 @@ class ManageSquadComponent extends Component {
                   this.props.navigation.navigate("GroupInterest", {
                     isFromManageSquad: true,
                     data: this.state.group_interest,
+                    prev_data : this.props.route.params.data
                   })
                 }
               >
@@ -892,7 +919,7 @@ class ManageSquadComponent extends Component {
                     paddingLeft: 10,
                   }}
                 >
-                  {this.state.looking_for == 0 ? "Male Group" : this.state.looking_for == 1 ? "Female Group" : "Mix Friend Group" }
+                  {this.state.looking_for == 1 ? "Male Group" : this.state.looking_for == 2 ? "Female Group" : "Others Group" }
                 </Text>
               </View>
 

@@ -15,6 +15,7 @@ import {
   Alert,
   Dimensions,
   KeyboardAvoidingView,
+  Share
 } from "react-native";
 import {
   colors,
@@ -37,7 +38,6 @@ import Header from "../components/header";
 import axios from "axios";
 import { CustomInputField } from "../../common/inputField";
 import Ripple from "react-native-material-ripple";
-import Share from 'react-native-share';
 
 const WINDOW_WIDTH = Dimensions.get("window").width;
 const WINDOW_HEIGHT = Dimensions.get("window").height;
@@ -966,20 +966,41 @@ console.log("data_val",data_val)
         Toast.show(error.message);
       });
   };
-  callSendInvite = () => {
-      const shareOptions = {
-     title: this.state.title,
-     message:"Please Join Squad Vibe using this Link :",
-     social: Share.Social.WHATSAPP,
+  callSendInvite = async () => {
+    try {
+      const result = await Share.share({
+        message:"Please Join Squad Vibe using this Link :",
+      })
+
+      if (shareImage.action === Share.sharedAction) {
+        if (shareImage.activityType) {
+          // shared with activity type of result.activityType
+          Alert.alert(shareImage.activityType);
+        } else {
+          // shared
+        }
+      } else if (shareImage.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
  
-     filename: 'test' , // only for base64 file in Android
-   };
+  // callSendInvite = () => {
+  //     const shareOptions = {
+  //    title: this.state.title,
+  //    message:"Please Join Squad Vibe using this Link :",
+  //    social: Share.Social.WHATSAPP,
  
-   Share.shareSingle(shareOptions)
-     .then((res) => { console.log(res) })
-     .catch((err) => { err && console.log(err); });
+  //    filename: 'test' , // only for base64 file in Android
+  //  };
+ 
+  //  Share.shareSingle(shareOptions)
+  //    .then((res) => { console.log(res) })
+  //    .catch((err) => { err && console.log(err); });
    
-  }
+  // }
   // callSendInvite = (full_name) => {
   //   this.setState({ loading: true });
   //   var formdata = new FormData();

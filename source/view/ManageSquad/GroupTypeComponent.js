@@ -341,6 +341,7 @@ class GroupTypeComponent extends PureComponent {
     console.log(strUsers)
     console.log("formdata")
     console.log(formdata)
+
     ApiHelper.post("createSquad", formdata)
       .then((response) => {
         console.log("response.data")
@@ -351,9 +352,9 @@ class GroupTypeComponent extends PureComponent {
             if (response.data.hasOwnProperty("createSquad")) {
               this.props.navigation.reset({
                 index: 0,
-                routes: [{ name: "MySquad" }],
+                routes: [{ name: "HomeTab" }],
               });
-              this.props.navigation.navigate("MySquad");
+              this.props.navigation.navigate("HomeTab");
               this.resetData();
             }
             if (response.data.message) {
