@@ -147,8 +147,7 @@ class InviteSinglePerson extends Component {
   };
 
   render() {
-    console.log("this.state.arrUser")
-    console.log(this.state.arrUsers)
+   
     return (
       <View style={styles.container}>
         <StatusBar
@@ -524,6 +523,7 @@ class InviteSinglePerson extends Component {
               this.props.navigation.navigate("MySquad");
             }
             if (response.data.message) {
+              this.props.navigation.navigate("MySquad");
               Toast.show(response.data.message);
             }
           } else {
@@ -541,7 +541,7 @@ class InviteSinglePerson extends Component {
       })
       .catch((error) => {
         this.setState({ loading: false });
-        alert("3")
+        // alert("3")
         Toast.show(error.message);
       });
   };

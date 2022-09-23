@@ -37,6 +37,7 @@ import Header from "../components/header";
 import axios from "axios";
 import { CustomInputField } from "../../common/inputField";
 import Ripple from "react-native-material-ripple";
+import Share from 'react-native-share';
 
 const WINDOW_WIDTH = Dimensions.get("window").width;
 const WINDOW_HEIGHT = Dimensions.get("window").height;
@@ -672,10 +673,11 @@ console.log("data_val",data_val)
               </TouchableOpacity> */}
 
               {/* <View style={{ height: 20 }} /> */}
+            
               {userInfo &&
                 userInfo?.hasOwnProperty("image") &&
                 userInfo?.image.length >= 0 &&
-                full_name ? (
+                !full_name ? (
               <View style={styles.viewStyle}>
                 <TextInput
                   style={[
@@ -709,9 +711,10 @@ console.log("data_val",data_val)
                   onPress={() => this.callSendInvite(user_name)}
                 />
               </View>
-               ) : (
-                <></>
-              )}
+                ) : (
+                  <></>
+                )}
+  
               <View style={{ height: 20 }} />
 
               <View style={{  height: 100,
@@ -963,43 +966,57 @@ console.log("data_val",data_val)
         Toast.show(error.message);
       });
   };
-  callSendInvite = (full_name) => {
-    this.setState({ loading: true });
-    var formdata = new FormData();
-    formdata.append("token", this.props.userInfo?.token);
-    formdata.append("user_name", full_name);
-    // formdata.append("user_name", this.props.userInfo?.user_name);
+  callSendInvite = () => {
+      const shareOptions = {
+     title: this.state.title,
+     message:"Please Join Squad Vibe using this Link :",
+     social: Share.Social.WHATSAPP,
+ 
+     filename: 'test' , // only for base64 file in Android
+   };
+ 
+   Share.shareSingle(shareOptions)
+     .then((res) => { console.log(res) })
+     .catch((err) => { err && console.log(err); });
+   
+  }
+  // callSendInvite = (full_name) => {
+  //   this.setState({ loading: true });
+  //   var formdata = new FormData();
+  //   formdata.append("token", this.props.userInfo?.token);
+  //   formdata.append("user_name", full_name);
+  //   // formdata.append("user_name", this.props.userInfo?.user_name);
 
-    ApiHelper.post("sendInvitition", formdata)
-      .then((response) => {
-        this.setState({ loading: false });
-        if (response.status == 200) {
-          if (response.data.status == "SUCCESS") {
-            if (response.data.hasOwnProperty("sendInvitition")) {
-            }
-            if (response.data.message) {
-              Toast.show(response.data.message);
-            }
-          } else {
-            if (response.data.requestKey) {
-              console.error(response.data.requestKey);
-              Toast.show(response.data.requestKey);
-            }
-            if (
-              response.data.is_token_expired &&
-              Boolean(response.data.is_token_expired)
-            ) {
-              this.clearData();
-              resetStackAndNavigate(this.props.navigation, "Login");
-            }
-          }
-        }
-      })
-      .catch((error) => {
-        this.setState({ loading: false });
-        Toast.show(error.message);
-      });
-  };
+  //   ApiHelper.post("sendInvitition", formdata)
+  //     .then((response) => {
+  //       this.setState({ loading: false });
+  //       if (response.status == 200) {
+  //         if (response.data.status == "SUCCESS") {
+  //           if (response.data.hasOwnProperty("sendInvitition")) {
+  //           }
+  //           if (response.data.message) {
+  //             Toast.show(response.data.message);
+  //           }
+  //         } else {
+  //           if (response.data.requestKey) {
+  //             console.error(response.data.requestKey);
+  //             Toast.show(response.data.requestKey);
+  //           }
+  //           if (
+  //             response.data.is_token_expired &&
+  //             Boolean(response.data.is_token_expired)
+  //           ) {
+  //             this.clearData();
+  //             resetStackAndNavigate(this.props.navigation, "Login");
+  //           }
+  //         }
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       this.setState({ loading: false });
+  //       Toast.show(error.message);
+  //     });
+  // };
 
   callGetUserProfile = async () => {
     // this.setState({ loading: true })
