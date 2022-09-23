@@ -150,7 +150,7 @@ class Archived extends Component {
     const authToken = this.props.userInfo.token;
     var formdata = new FormData();
     formdata.append("token", authToken);
-    postMethod(this.props.navigation, "messenger", formdata, (response) => {
+    postMethod(this.props.navigation, "archive_messenger", formdata, (response) => {
       let data = response.messenger.messages.map((item) => {
         let date_time;
         let obj = {};

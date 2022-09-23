@@ -575,7 +575,11 @@ class ChatComponent extends Component {
   };
 
   sendMessageData = (message, type = "text") => {
+   
     this.setState({ sending: true });
+ 
+
+ 
     if (type !== "event") {
       this.sendMsgObj(message, type);
     }
@@ -596,7 +600,8 @@ class ChatComponent extends Component {
         })
         .catch((err) => console.log("ERROR", err));
     }
-    if (this.props.route.params.userData.isEvent) {
+    else if (this.props.route.params.userData.isEvent) {
+      console.log("this.props.route.params",this.props.route.params)
       parameter.append("event_id", this.props.route.params.receiverId);
       axios
         .post("http://squadvibes.onismsolution.com/api/sendEventMessage", parameter)
@@ -608,7 +613,7 @@ class ChatComponent extends Component {
         })
         .catch((err) => console.log("ERROR", err));
     }
-    if (this.props.route.params?.userData.isSquadGroup) {
+    else if (this.props.route.params?.userData.isSquadGroup) {
       parameter.append("group_squad_id", this.props.route.params.receiverId);
       axios
         .post("http://squadvibes.onismsolution.com/api/MergeGroupMessage", parameter)
@@ -620,6 +625,7 @@ class ChatComponent extends Component {
         })
         .catch((err) => console.log("ERROR", err));
     } else {
+      
       parameter.append("reciever_id", this.props.route.params.receiverId);
 
       axios
@@ -1697,7 +1703,7 @@ class ChatComponent extends Component {
                   }}
                 />
 
-                {isSquad && isEvent && (
+                {isSquad && (
                   <TouchableOpacity
                     onPress={() => {
                       const message = {

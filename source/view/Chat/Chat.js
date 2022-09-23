@@ -153,11 +153,13 @@ class Chat extends Component {
     var formdata = new FormData();
     formdata.append("token", authToken);
     postMethod(this.props.navigation, "messenger", formdata, (response) => {
-      let data = response.messenger.messages.map((item) => {
+      let data = response.messenger.messages.map((item, index) => {
+   
         let date_time;
         let obj = {};
 
-        if (item.user_id && !item.group_squad_id) {
+        if (item.user_id && item.reciever_id) {
+          console.log("ITEM 1 > ", item)
           let user = response.messenger.userProfiles.filter(
             (elem) => item.user_id == elem.id || item.reciever_id == elem.id
           );
@@ -181,7 +183,7 @@ class Chat extends Component {
           }
         } 
         else if (item.group_squad_id) {
-          console.log("ITEMM", item);
+          console.log("ITEM 2 > ", item)
           let groupSquad = response.messenger.groupSquads.filter(
             (elem) => item.group_squad_id == elem.id
           );
@@ -207,13 +209,14 @@ class Chat extends Component {
           }
         } 
         else if (item.event_id) {
+          console.log("ITEM 3 > ", item)
           let event = response.messenger.events.filter(
-            (elem) => item.squad_id == elem.id
+            (elem) => item.event_id == elem.id
           );
           if (event.length) {
             event = event[0];
             obj = {
-              name: event.event_title,
+              name: event.event_name,
               image: event.event_image,
               id:event.id,
               isEvent: true,
@@ -230,8 +233,8 @@ class Chat extends Component {
             // }
           }
         }
-
         else {
+          console.log("ITEM 4 > ", item)
           let squad = response.messenger.squads.filter(
             (elem) => item.squad_id == elem.id
           );
@@ -269,6 +272,7 @@ class Chat extends Component {
         return obj;
       });
       let ids = [];
+      console.log("data",data)
       data = data.filter((elem) => {
         const find = ids.findIndex((val) => elem.name == val);
         if (find == -1) {
@@ -277,7 +281,7 @@ class Chat extends Component {
         }
         return false;
       });
-console.log("data",data)
+      console.log("ids",ids)
       this.setState({ arrUsers: data });
 
       let users = response.messenger.userProfiles.map((item) => {
@@ -306,8 +310,7 @@ console.log("data",data)
       });
 
       users = users.filter((elem) => elem.id != this.props.userInfo.id);
-      console.log("users")
-      console.log(users)
+
       let squads = response.messenger.squads.map((item) => {
         const lastMsg = response.messenger.messages.filter(
           (elem) => item.id == elem.squad_id
@@ -326,8 +329,7 @@ console.log("data",data)
         };
         return obj;
       });
-      console.log("squads")
-console.log(squads)
+
 
       let events = response.messenger.events.map((item) => {
         const lastMsg = response.messenger.messages.filter(
@@ -347,8 +349,7 @@ console.log(squads)
         };
         return obj;
       });
-      console.log("events")
-      console.log(events)
+
 
       ids = [];
       squads = squads.filter((elem) => {
@@ -370,12 +371,27 @@ console.log(squads)
       this.setState({ all_users: [...users, ...squads, ...events] });
     });
   };
-  deleteMessage = (auth_id, receiver_id) => {
+  getArchivedLength = async () => {
+    const authToken = this.props.userInfo.token;
+    var formdata = new FormData();
+    formdata.append("token", authToken);
+    postMethod(this.props.navigation, "archive_messenger", formdata, (response) => {
+     let data_archived = response.messenger.messages;
+     let archiveStatus = false;
+     if(data_archived.length > 0){
+      archiveStatus = true
+     }
+     this.setState({Archive : archiveStatus})
+
+    });
+  };
+  deleteMessage = (auth_id, receiver_id, type) => {
     let token = this.props.userInfo.token;
     let body = {
         "token" : token,
         "auth_id" : auth_id,
         "receiver_id" : receiver_id,
+        "type": type
     };
     axios
     .post(
@@ -384,18 +400,19 @@ console.log(squads)
     )
     .then((res) => {
       this.getMessenger()
+      this.getArchivedLength()
       Toast.show(res.data.message);
     })
     .catch((err) => Toast.show("Error in Deleting CHat"));
   }
-  archiveMessage = (auth_id, receiver_id) => {
+  archiveMessage = (auth_id, receiver_id, type) => {
     let token = this.props.userInfo.token;
     let body = {
         "token" : token,
         "auth_id" : auth_id,
         "receiver_id" : receiver_id,
+        "type" : type,
     };
-  console.log(body)
     axios
     .post(
       "http://squadvibes.onismsolution.com/api/archiveChat",
@@ -403,16 +420,18 @@ console.log(squads)
     )
     .then((res) => {
       this.getMessenger()
+      this.getArchivedLength()
       Toast.show(res.data.message);
     })
     .catch((err) => {
       console.log(err)
-      Toast.show("Error in Deleting CHat")
+      Toast.show("Error in Archive CHat")
     });
   }
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener("focus", () => {
       this.getMessenger();
+      this.getArchivedLength()
     });
   }
   Archive = (item) =>{
@@ -554,21 +573,42 @@ console.log(item)
             onPress={()=>{
               let receiver_id = item.id;
               let auth_id = this.props.userInfo.id;
-              this.archiveMessage(auth_id,receiver_id)
+              let type = "";
+              if(item.isSquad){
+                type = "squad";
+              }else if(item.isSquadGroup){
+                type = "squad_group";
+              }else if(item.isEvent){
+                type = "event";
+              }else{
+                type = "message";
+              }
+              console.log("receiver_id",receiver_id)
+              console.log("auth_id",auth_id)
+              console.log("type",type)
+              this.archiveMessage(auth_id,receiver_id, type)
               // this.setState({Archive:true})
               }}>
             <Icon2 name="archive" size={18} color= "#708090" />
             </TouchableOpacity>
             <TouchableOpacity style={{width:"50%"}}
             onPress={()=>{
-              console.log(">>>>>>>>>>>>>>>>>>>>")
-              console.log(item)
-              console.log(this.props.userInfo.id)
-              console.log("<<<<<<<<<<<<<<<<<<<<<")
               let receiver_id = item.id;
               let auth_id = this.props.userInfo.id;
-              
-              this.deleteMessage(auth_id,receiver_id)
+              let type = "";
+              if(item.isSquad){
+                type = "squad";
+              }else if(item.isSquadGroup){
+                type = "squad_group";
+              }else if(item.isEvent){
+                type = "event";
+              }else{
+                type = "message";
+              }
+              console.log("receiver_id",receiver_id)
+              console.log("auth_id",auth_id)
+              console.log("type",type)
+              this.deleteMessage(auth_id,receiver_id,type)
             }}
             >
             <Icon1 name="md-trash-bin-sharp" size={18} color= "#708090" />
@@ -675,7 +715,6 @@ console.log(item)
     </TouchableOpacity>
     <TouchableOpacity style={{width:"90%"}}
     onPress={()=>{
-      alert("Feature in progress dummy data right now")
       this.props.navigation.navigate("Archived")}}>
 <Text style={{ fontSize: 15, color: "#7e7e7e",fontFamily:fonts.Bold }}>
   Archived
