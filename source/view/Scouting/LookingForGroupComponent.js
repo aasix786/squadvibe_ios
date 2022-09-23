@@ -38,6 +38,7 @@ class LookingForGroupComponent extends Component {
       selectedIndex: 0,
       arrAllSquad: [],
       showPopup: false,
+      squadlike: false,
     };
   }
 
@@ -267,7 +268,9 @@ class LookingForGroupComponent extends Component {
                           horizontal={true}
                         >
                           {squad.group_member &&
-                            squad.group_member.map((member) => (
+                            squad.group_member.map((member,index) =>
+                             (
+                             
                               <Image
                                 style={{
                                   height: 65,
@@ -339,7 +342,8 @@ class LookingForGroupComponent extends Component {
 
                         <TouchableOpacity activeOpacity={0.8} 
                         onPress={() => {
-                          this.likeDislikeSquad(squad.squad_id)
+                          this.likeDislikeSquad(squad.squad_id,index)
+
                           }}
                         >
                          {squad.liked ? (
@@ -597,8 +601,21 @@ class LookingForGroupComponent extends Component {
     this.getAllSquad();
     this.swiper.initDeck();
   };
-  likeDislikeSquad = (squadID) => {
-    this.setState({ loading: true });
+  likeDislikeSquad = (squadID,likeIndex) => {
+    let like=likeIndex
+    // console.log("squadID")
+    // console.log(squadID)
+    // console.log("likeIndex")
+    // console.log(like)
+    let isLike=!this.state.arrSquads[like].liked
+    // console.log("isLike")
+    // console.log(isLike)
+    this.state.arrSquads[like].liked=isLike
+    console.log("this.state.arrSquads[like].liked")
+    console.log(this.state.arrSquads[like])
+    this.setState({ loading: true, arrSquads:this.state.arrSquads});
+    this.state.arrSquads=this.state.arrSquads
+  
     var formdata = new FormData();
     formdata.append("token", this.props.userInfo.token);
     formdata.append("squad_id", squadID);
@@ -611,6 +628,7 @@ class LookingForGroupComponent extends Component {
         console.log(success)
 
         this.setState({
+          // squadlike:this.state.arrSquads[like].liked,
           loading: false,
         });
         Toast.show(success.message)

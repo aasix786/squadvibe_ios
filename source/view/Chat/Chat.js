@@ -281,7 +281,6 @@ class Chat extends Component {
         }
         return false;
       });
-      console.log("ids",ids)
       this.setState({ arrUsers: data });
 
       let users = response.messenger.userProfiles.map((item) => {
@@ -371,6 +370,7 @@ class Chat extends Component {
       this.setState({ all_users: [...users, ...squads, ...events] });
     });
   };
+
   getArchivedLength = async () => {
     const authToken = this.props.userInfo.token;
     var formdata = new FormData();

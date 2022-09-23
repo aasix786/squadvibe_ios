@@ -757,6 +757,7 @@ class ShuffleDetailComponent extends PureComponent {
   //     alert(error.message);
   //   }
   // };
+ 
   whatsApp = () => {
      const shareOptions = {
     title: this.state.title,
