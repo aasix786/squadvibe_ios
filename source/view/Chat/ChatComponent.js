@@ -362,7 +362,7 @@ class ChatComponent extends Component {
         console.log("getEventMessage")
         console.log(res.data)
         const msgs = [];
-        for (let elem of res.data.getSquadMessage) {
+        for (let elem of res.data.getEventMessage) {
           const obj = {
             message: elem.message,
             name: elem.user_name || elem.full_name,
@@ -407,7 +407,7 @@ class ChatComponent extends Component {
         console.log("HHHH", msgs);
         this.setState({ messages: [this.state.messages, ...msgs] });
       })
-      .catch((err) => console.log("EREEEEROR", err));
+      .catch((err) => console.log("EREEEEROR 222", err));
   };
 
   getGroupSquadMsgs = (pageNo = 1) => {
@@ -1775,6 +1775,11 @@ class ChatComponent extends Component {
                       isFromChat: true,
                       chatRoomId: this.state.chatRoomId,
                       message: message,
+                    receiverId:this.props.route.params.receiverId,
+                      userData:this.props.route.params.userData,
+                      name:this.props.route.params.name,
+                      image:this.props.route.params.image,
+                      address:this.props.route.params.address
                     });
                   }}
                 >
