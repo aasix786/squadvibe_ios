@@ -60,7 +60,7 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
 
 messaging().onMessage(async remoteMessage => {
   console.log("Notification onMessage ====> ",remoteMessage);
-  Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+  // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
   // if(AppState.currentState == 'active'){
     if(Platform.OS == 'ios'){
       PushNotificationIOS.addNotificationRequest({

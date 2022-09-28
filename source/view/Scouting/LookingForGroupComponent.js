@@ -342,7 +342,7 @@ class LookingForGroupComponent extends Component {
 
                         <TouchableOpacity activeOpacity={0.8} 
                         onPress={() => {
-                          this.likeDislikeSquad(squad.squad_id,index)
+                          this.likeDislikeSquad(squad.squad_id)
 
                           }}
                         >
@@ -601,21 +601,8 @@ class LookingForGroupComponent extends Component {
     this.getAllSquad();
     this.swiper.initDeck();
   };
-  likeDislikeSquad = (squadID,likeIndex) => {
-    let like=likeIndex
-    // console.log("squadID")
-    // console.log(squadID)
-    // console.log("likeIndex")
-    // console.log(like)
-    let isLike=!this.state.arrSquads[like].liked
-    // console.log("isLike")
-    // console.log(isLike)
-    this.state.arrSquads[like].liked=isLike
-    console.log("this.state.arrSquads[like].liked")
-    console.log(this.state.arrSquads[like])
-    this.setState({ loading: true, arrSquads:this.state.arrSquads});
-    this.state.arrSquads=this.state.arrSquads
-  
+  likeDislikeSquad = (squadID) => {
+    this.setState({ loading: true});
     var formdata = new FormData();
     formdata.append("token", this.props.userInfo.token);
     formdata.append("squad_id", squadID);
@@ -626,9 +613,8 @@ class LookingForGroupComponent extends Component {
       (success) => {
         console.log("likedislikeSquad")
         console.log(success)
-
+this.getAllSquad()
         this.setState({
-          // squadlike:this.state.arrSquads[like].liked,
           loading: false,
         });
         Toast.show(success.message)

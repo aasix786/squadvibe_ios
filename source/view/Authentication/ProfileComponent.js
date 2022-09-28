@@ -972,16 +972,7 @@ console.log("data_val",data_val)
         message:"Please Join Squad Vibe using this Link :",
       })
 
-      if (shareImage.action === Share.sharedAction) {
-        if (shareImage.activityType) {
-          // shared with activity type of result.activityType
-          Alert.alert(shareImage.activityType);
-        } else {
-          // shared
-        }
-      } else if (shareImage.action === Share.dismissedAction) {
-        // dismissed
-      }
+  
     } catch (error) {
       alert(error.message);
     }

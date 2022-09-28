@@ -100,10 +100,8 @@ class ChatComponent extends Component {
 
     messaging().onMessage(async (messageData) => {
       const title = messageData.data;
-      console.log("NOTI ", title);
       if (title.id === this.props.route.params.receiverId || title.isSquad) {
         const message = messageData.notification;
-        console.log("MSG", message);
         if (title.type == "event") {
           if (title.isSquad == "true") {
             this.setState({ messages: [] }, () => this.getSquadMsgs(1));
@@ -113,7 +111,6 @@ class ChatComponent extends Component {
           return;
         }
         if (message.body) {
-          console.log("INSIDE");
           const obj = {
             message: title.message,
             time: new Date(),
@@ -150,7 +147,6 @@ class ChatComponent extends Component {
         }
       }
     });
-    console.log("this.props.route.params", this.props.route.params)
   }
 
   captureImage2 = () => {
@@ -183,7 +179,6 @@ class ChatComponent extends Component {
   }
 
   componentDidMount() {
-    console.log("this.props.route.params?.userData?.isEvent",this.props.route.params?.userData?.isEvent)
     this.props.navigation.addListener("focus", () => {
       this.setState({ pageNo: 1, messages: [] });
 
@@ -202,7 +197,6 @@ class ChatComponent extends Component {
           } else {
             // const intervalSimple = setInterval(() => {
             this.getMessages();
-            console.log("???????????????????????????????????????")
             // }, 4000);
             // return () => clearInterval(intervalSimple);
 
@@ -237,7 +231,6 @@ class ChatComponent extends Component {
       } else {
         // const interval = setInterval(() => {
         this.getMessages();
-        console.log("???????????????????????????????????????")
         // }, 4000);
         // return () => clearInterval(interval);
       }
@@ -273,8 +266,6 @@ class ChatComponent extends Component {
     axios
       .post("http://squadvibes.onismsolution.com/api/MergeGroupMembers", parameter)
       .then((res) => {
-        console.log("MergeGroupMembers")
-        console.log(res.data)
         let array = [];
         res.data.MergeGroupMembers.forEach((element) => {
           if (!array.find((o) => o.id == element.id)) {
@@ -297,8 +288,6 @@ class ChatComponent extends Component {
     axios
       .post("http://squadvibes.onismsolution.com/api/getSquadMessage", parameter)
       .then((res) => {
-        console.log("getSquadMessage")
-        console.log(res.data)
         const msgs = [];
         for (let elem of res.data.getSquadMessage) {
           const obj = {
@@ -342,7 +331,6 @@ class ChatComponent extends Component {
 
           msgs.push(obj);
         }
-        console.log("HHHH", msgs);
         this.setState({ messages: [this.state.messages, ...msgs] });
       })
       .catch((err) => console.log("EREEEEROR", err));
@@ -359,8 +347,6 @@ class ChatComponent extends Component {
     axios
       .post("http://squadvibes.onismsolution.com/api/getEventMessage", parameter)
       .then((res) => {
-        console.log("getEventMessage")
-        console.log(res.data)
         const msgs = [];
         for (let elem of res.data.getEventMessage) {
           const obj = {
@@ -404,7 +390,6 @@ class ChatComponent extends Component {
 
           msgs.push(obj);
         }
-        console.log("HHHH", msgs);
         this.setState({ messages: [this.state.messages, ...msgs] });
       })
       .catch((err) => console.log("EREEEEROR 222", err));
@@ -419,13 +404,10 @@ class ChatComponent extends Component {
     parameter.append("limit", limit);
     parameter.append("pageNo", pageNo);
 
-    console.log("SQUAD PARAM", parameter);
 
     axios
       .post("http://squadvibes.onismsolution.com/api/GetMergeGroupMessage", parameter)
       .then((res) => {
-        console.log("GetMergeGroupMessage")
-        console.log(res.data)
         const msgs = [];
         for (let elem of res.data.GetMergeGroupMessage) {
           const obj = {
@@ -484,16 +466,11 @@ class ChatComponent extends Component {
     parameter.append("reciever_id", this.props.route.params.receiverId);
     parameter.append("pageNo", pageNo);
     parameter.append("limit", limit);
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>")
-    console.log(parameter)
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
 
     axios
       .post("http://squadvibes.onismsolution.com/api/getAllMessages", parameter)
       .then((res) => {
         const msgs = [];
-        console.log("res.data.getAllMessages.messages")
-        console.log(res.data.getAllMessages.messages.length)
         for (let elem of res.data.getAllMessages.messages) {
           const obj = {
             message: elem.message,
@@ -601,7 +578,6 @@ class ChatComponent extends Component {
         .catch((err) => console.log("ERROR", err));
     }
     else if (this.props.route.params.userData.isEvent) {
-      console.log("this.props.route.params",this.props.route.params)
       parameter.append("event_id", this.props.route.params.receiverId);
       axios
         .post("http://squadvibes.onismsolution.com/api/sendEventMessage", parameter)
@@ -667,9 +643,6 @@ class ChatComponent extends Component {
     parameter.append("group_squad_id", item.message);
     parameter.append("squad_id", this.props.route.params.receiverId);
     parameter.append("status", status);
-
-    console.log("PARAMETER", parameter);
-
     axios
       .post("http://squadvibes.onismsolution.com/api/groupSquadPoll", parameter)
       .then((res) => {
@@ -705,12 +678,10 @@ class ChatComponent extends Component {
     parameter.append("token", this.props.userInfo.token);
     parameter.append("event_id", item.message);
 
-    console.log("EVENTT PARAM", parameter);
 
     axios
       .post("http://squadvibes.onismsolution.com/api/JoinEventConform", parameter)
       .then((res) => {
-        console.log("RESSS", res.data);
         const dupMsgs = this.state.messages.map((elem) => {
           const obj = { ...elem };
           if (elem.message === item.message) {
@@ -729,8 +700,6 @@ class ChatComponent extends Component {
   };
 
   render() {
-    console.log("this.state.message")
-    console.log(this.state.messages)
     const { isSquad, isSquadGroup, isEvent } = this.props.route.params.userData;
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -917,7 +886,6 @@ class ChatComponent extends Component {
               data={this.state.messages}
               keyExtractor={(item) => item.id}
               renderItem={({ item, index }) => {
-                console.log(this.state.senderId + "<---------->" + item.senderId + ">>>>>>>>>" + this.props.route.params.userData.id + ">>>>>" + this.props.userInfo.id)
                 if (this.props.userInfo.id == item.senderId) {
                   return (
                     <>
