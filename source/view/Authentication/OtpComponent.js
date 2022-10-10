@@ -84,7 +84,6 @@ class OtpComponent extends PureComponent {
           translucent
           barStyle="light-content"
         />
-        <View>
           <ImageBackground
             source={require("../../assets/mobCodeHeader.png")}
             style={{ width: WINDOW_WIDTH, height: 250, marginTop: -1 }}
@@ -103,7 +102,6 @@ class OtpComponent extends PureComponent {
               />
             </Ripple>
           </ImageBackground>
-        </View>
         <View style={{ marginTop: 65 }}>
           <CustomInputField
             placeholder="Enter Code"

@@ -11,6 +11,8 @@ import {
   ScrollView,
   StatusBar,
   Dimensions,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 import { colors, fonts, SCREEN_SIZE } from "../../common/colors";
 import moment, { duration } from "moment";
@@ -174,7 +176,9 @@ class AddEventComponent extends Component {
           city: mcity,
           address: placename,
           selectedlocatiom: placename,
+          showAddress:false
         });
+        
         this.placesRef && this.placesRef.setAddressText(placename);
       })
       .catch((ers) => {
@@ -245,8 +249,9 @@ class AddEventComponent extends Component {
      console.log("this.state.setlongitude")
     console.log(this.state.setLongitude)
     return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <>
-        <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={{ flex: 1, backgroundColor: "white" }}>
           <StatusBar
             backgroundColor={"transparent"}
             translucent
@@ -312,6 +317,7 @@ class AddEventComponent extends Component {
                     style={styles.inputStyle}
                     autoCorrect={false}
                     placeholder="Title"
+                    onBlur={() => this.setState({ showUsername: false })}
                     // placeholderTextColor='#8D8B82'
                     onChangeText={(title) => this.setState({ title })}
                   />
@@ -319,7 +325,7 @@ class AddEventComponent extends Component {
               </View>
             ) : (
               <TouchableOpacity
-                onPress={() => this.setState({ showUsername: true })}
+                onPress={() => this.setState({ showUsername: true, showAddress: false })}
                 style={{
                   height: 56,
                   width: WINDOW_WIDTH - 60,
@@ -357,7 +363,7 @@ class AddEventComponent extends Component {
                     Title
                   </Text>
                   <Text style={{ fontSize: 12, color: "black" }}>
-                    Beer Pong
+                   {this.state.title ? this.state.title : "Beer Pong"}
                   </Text>
                 </View>
 
@@ -388,7 +394,7 @@ class AddEventComponent extends Component {
               </>
             ) : (
               <TouchableOpacity
-                onPress={() => this.setState({ showAddress: true })}
+                onPress={() => this.setState({ showAddress: true, showUsername: false })}
                 style={{
                   marginTop: 20,
                   height: 56,
@@ -426,7 +432,7 @@ class AddEventComponent extends Component {
                   >
                     Where?
                   </Text>
-                  <Text style={{ color: "black", fontSize: 12 }}>Address</Text>
+                  <Text style={{ color: "black", fontSize: 12 }}>{this.state.address ? this.state.address : "Address"}</Text>
                 </View>
 
                 <Image
@@ -559,6 +565,8 @@ class AddEventComponent extends Component {
           </LinearGradient>
         </TouchableOpacity>
       </>
+      
+      </TouchableWithoutFeedback>
     );
   }
 
@@ -606,6 +614,7 @@ class AddEventComponent extends Component {
             fetchDetails={true}
             minLength={2}
             autoFocus={true}
+            
             onPress={(data, details = null) => {
               // 'details' is provided when fetchDetails = true
               // props.notifyChange(details.geometry.location);

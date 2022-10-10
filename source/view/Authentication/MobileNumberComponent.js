@@ -204,6 +204,7 @@ class MobileNumberComponent extends PureComponent {
                   backgroundColor: "white",
                   flexDirection: "row",
                   marginLeft: 5,
+                  paddingHorizontal:10,
                   shadowColor: "#000",
                   shadowOffset: {
                     width: 0,
@@ -270,7 +271,8 @@ class MobileNumberComponent extends PureComponent {
                 <TextInput
                   style={styles.inputStyle}
                   autoCorrect={false}
-                  placeholder="98980 98980"
+                  placeholder=""
+                  // placeholder="98980 98980"
                   placeholderTextColor="#989ba2"
                   onChangeText={(phone) => this.setState({ phone })}
                   keyboardType="number-pad"
@@ -373,6 +375,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: fonts.regular,
     marginBottom: 1,
+    paddingLeft:10
   },
   backButtonStyle: {
     height: 34,

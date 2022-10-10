@@ -97,7 +97,7 @@ class AppTrackingComponent extends PureComponent {
           activeOpacity={0.8}
           onSubmitPress={() => {
             this.requestPermissionTransparency();
-            resetStackAndNavigate(this.props.navigation, "HomeTab");
+            // resetStackAndNavigate(this.props.navigation, "HomeTab");
           }}
         >
           <LinearGradient
@@ -134,6 +134,8 @@ class AppTrackingComponent extends PureComponent {
             { text: "Don't Use", onPress: () => {} },
           ]
         );
+      }else{
+        resetStackAndNavigate(this.props.navigation, "HomeTab");
       }
     }
 

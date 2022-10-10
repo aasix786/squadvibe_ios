@@ -11,6 +11,8 @@ import {
   SafeAreaView,
   StatusBar,
 } from "react-native";
+import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Header from "../components/header";
 import Button from "../components/button";
 import Permissions, {
@@ -36,7 +38,28 @@ export default class NotificationAccess extends Component {
       this.props.navigation.navigate("AppTracking");
     }
   };
+  requestNotificationPermission = async () => {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+      this.getFcmToken();
+    }else{
+      alert("Please grant the Notification access");
+    }
+    
+  }
+  getFcmToken = async () => {
+    const fcmToken = await messaging().getToken();
+    if (fcmToken) {
+      console.log("FCM TOken", fcmToken);
+      await AsyncStorage.setItem('token', fcmToken)
+      this.props.navigation.navigate("AppTracking");
+    }
+  }
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
@@ -82,7 +105,7 @@ export default class NotificationAccess extends Component {
             you
           </Text>
         </View>
-        <TouchableOpacity activeOpacity={0.8} onPress={() => this.Click()}>
+        <TouchableOpacity activeOpacity={0.8} onPress={() => this.requestNotificationPermission()}>
           <LinearGradient
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}

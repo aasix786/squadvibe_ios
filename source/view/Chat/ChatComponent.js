@@ -100,52 +100,54 @@ class ChatComponent extends Component {
 
     messaging().onMessage(async (messageData) => {
       const title = messageData.data;
-      if (title.id === this.props.route.params.receiverId || title.isSquad) {
-        const message = messageData.notification;
-        if (title.type == "event") {
-          if (title.isSquad == "true") {
-            this.setState({ messages: [] }, () => this.getSquadMsgs(1));
-          } else {
-            this.setState({ messages: [] }, () => this.getGroupSquadMsgs(1));
-          }
-          return;
-        }
-        if (message.body) {
-          const obj = {
-            message: title.message,
-            time: new Date(),
-            name: title.full_name || title.username,
-            type: title.type,
-            event_image: title.eventImage,
-            event_name: title.eventName,
-            user_image: title.user_image,
-            user_name: title.user_name,
-            joined: title.joined,
-            date_time: title.date_time,
-          };
-          const msgDay = parseInt(title.date.slice(8, 10));
-          const date = new Date();
-          const day = date.getDate();
+   
+      // if (title.id === this.props.route.params.receiverId || title.isSquad) {
+      //   const message = messageData.notification;
+      //   if (title.type == "event") {
+      //     if (title.isSquad == "true") {
+      //       this.setState({ messages: [] }, () => this.getSquadMsgs(1));
+      //     } else {
+      //       this.setState({ messages: [] }, () => this.getGroupSquadMsgs(1));
+      //     }
+      //     return;
+      //   }
+      //   if (message.body) {
+      //     const obj = {
+      //       message: title.message,
+      //       time: new Date(),
+      //       name: title.full_name || title.username,
+      //       type: title.type,
+      //       event_image: title.eventImage,
+      //       event_name: title.eventName,
+      //       user_image: title.user_image,
+      //       user_name: title.user_name,
+      //       joined: title.joined,
+      //       date_time: title.date_time,
+      //     };
+      //     const msgDay = parseInt(title.date.slice(8, 10));
+      //     const date = new Date();
+      //     const day = date.getDate();
 
-          let am_pm = "AM";
-          if (msgDay > 12) {
-            am_pm = "PM";
-          }
-          if (day > msgDay) {
-            const month = this.getMonth(parseInt(title.date.slice(5, 7)));
-            obj.time = `${msgDay}-${month}`;
-          } else {
-            obj.time =
-              parseInt(title.date.slice(11, 13)) +
-              ":" +
-              title.date.slice(14, 16) +
-              " " +
-              am_pm;
-          }
+      //     let am_pm = "AM";
+      //     if (msgDay > 12) {
+      //       am_pm = "PM";
+      //     }
+      //     if (day > msgDay) {
+      //       const month = this.getMonth(parseInt(title.date.slice(5, 7)));
+      //       obj.time = `${msgDay}-${month}`;
+      //     } else {
+      //       obj.time =
+      //         parseInt(title.date.slice(11, 13)) +
+      //         ":" +
+      //         title.date.slice(14, 16) +
+      //         " " +
+      //         am_pm;
+      //     }
 
-          this.setState({ messages: [obj, ...this.state.messages] });
-        }
-      }
+      //     this.setState({ messages: [obj, ...this.state.messages] });
+      //   }
+      // }
+      this.loadMsgs()
     });
   }
 
@@ -620,7 +622,8 @@ class ChatComponent extends Component {
     // distanceFromTop === 0 && makeSomething();
   };
 
-  loadMsgs = (position) => {
+  loadMsgs = () => {
+    console.log("Loaded messages")
     this.setState({ pageNo: this.state.pageNo + 1 });
     if (this.props.route.params?.userData?.isSquad) {
       this.getSquadMsgs(this.state.pageNo + 1);
@@ -813,13 +816,13 @@ class ChatComponent extends Component {
                 alignItems: "center",
               }}
             >
-              <View style={{ marginTop: 30, marginBottom: 10 }}>
+              <View style={{ marginTop: 15, marginBottom: 10 }}>
                 <View style={{ height: 90 }}>
                   <Image
                     style={{
-                      width: 90,
-                      height: 90,
-                      borderRadius: 80,
+                      width: 70,
+                      height: 70,
+                      borderRadius: 70,
                       resizeMode: "cover",
                     }}
                     source={{ uri: this.props.route.params.image }}
@@ -832,12 +835,12 @@ class ChatComponent extends Component {
                       backgroundColor: "#4EF300",
                       position: "absolute",
                       zIndex: 99,
-                      bottom: 6,
+                      bottom: 15,
                       right: 4,
                     }}
                   />
                 </View>
-                <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 5 }}>
                   <Text
                     style={{
                       textAlign: "center",
@@ -877,7 +880,7 @@ class ChatComponent extends Component {
               onContentSizeChange={(contentWidth, contentHeight) => {
                 // this.flatlistMessages.scrollToOffset({ animated: false, offset: contentHeight })
               }}
-              onEndReached={(a) => this.loadMsgs(a)}
+              onEndReached={(a) => this.loadMsgs()}
               // onScroll={
               //   (event) =>
               //       this.onContentOffsetChanged(event.nativeEvent.contentOffset.y)
@@ -1719,7 +1722,7 @@ class ChatComponent extends Component {
                     onPress={() => this.openImagePicker()}
                   >
                     <Image
-                      source={require("../../assets/camera_ic_chat3.png")}
+                      source={require("../../assets/camera_ic_chat.png")}
                       style={{ width: 18, height: 18, resizeMode: "contain" }}
                     />
                   </TouchableOpacity>
@@ -1758,8 +1761,8 @@ class ChatComponent extends Component {
                   }}
                 >
                   <Image
-                    source={require("../../assets/calendar_ic3.png")}
-                    style={{ marginRight: 10, width: 18, height: 17, resizeMode: "contain" }}
+                    source={require("../../assets/calendar_ic.png")}
+                    style={{ marginRight: 0, width: 18, height: 17, resizeMode: "contain" }}
                   />
                 </TouchableOpacity>
 

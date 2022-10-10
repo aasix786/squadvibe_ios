@@ -10,6 +10,7 @@ import {
   Dimensions,
   ImageBackground,
   StatusBar,
+  KeyboardAvoidingView,
 } from "react-native";
 import { colors, fonts } from "../../common/colors";
 import { HeadingText } from "../../common/HeadingText";
@@ -45,7 +46,7 @@ class FullNameComponent extends PureComponent {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+      <KeyboardAvoidingView style={{ flex: 1, backgroundColor: colors.white }}>
         <StatusBar
           backgroundColor={"transparent"}
           translucent
@@ -97,7 +98,7 @@ class FullNameComponent extends PureComponent {
             <Text style={styles.textStyle}>NEXT</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

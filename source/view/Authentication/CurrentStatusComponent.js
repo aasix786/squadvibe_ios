@@ -4,7 +4,7 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  SafeAreaView,
+  KeyboardAvoidingView,
   StyleSheet,
   TextInput,
   FlatList,
@@ -71,7 +71,7 @@ class CurrentStatusComponent extends PureComponent {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+      <KeyboardAvoidingView style={{ flex: 1, backgroundColor: colors.white }}>
         <StatusBar
           backgroundColor={"transparent"}
           translucent
@@ -190,7 +190,7 @@ class CurrentStatusComponent extends PureComponent {
         </TouchableOpacity>
 
         <Loader loading={this.state.loading} />
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 

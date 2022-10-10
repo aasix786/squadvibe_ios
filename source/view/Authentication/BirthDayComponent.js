@@ -8,7 +8,7 @@ import {
   StyleSheet,
   TextInput,
   Keyboard,
-  Pressable,
+  KeyboardAvoidingView,
   Dimensions,
   ImageBackground,
   StatusBar,
@@ -50,7 +50,7 @@ class BirthDayComponent extends PureComponent {
   render() {
     const { day, month, year, birthDate } = this.state;
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+      <KeyboardAvoidingView style={{ flex: 1, backgroundColor: colors.white }}>
         <StatusBar
           backgroundColor={"transparent"}
           translucent
@@ -150,7 +150,7 @@ class BirthDayComponent extends PureComponent {
         >
           <Text style={styles.textStyle}>Next</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

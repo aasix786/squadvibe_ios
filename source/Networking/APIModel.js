@@ -18,7 +18,6 @@ export const postMethod = (navigation,apiName,parameter,success,failure)  => {
   axios.post(apiName,parameter,{headers:header})
   .then(response => {
     console.log("API NAME IS  >>> ",apiName)
-    console.log(response)
     if (response.data.status == 'SUCCESS') {
       success(response.data)
     } else {

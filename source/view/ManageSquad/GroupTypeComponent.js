@@ -117,7 +117,7 @@ class GroupTypeComponent extends PureComponent {
               </View>
               <View style={styles.headerTitleViewStyle}>
                 <Text style={{ fontSize: 15, fontFamily: fonts.Medium }}>
-                  Add Group
+                  Match Group
                 </Text>
               </View>
               <View style={styles.headerButtonsViewStyle} />
@@ -125,7 +125,13 @@ class GroupTypeComponent extends PureComponent {
           </View>
         </View>
         <ScrollView style={{ flexGrow: 1 }}>
-          <View style={{ marginTop: 40 }}>
+          <View>
+          <View style={{width:"100%", alignItems:"center", marginVertical:20}}>
+          <View style={{width:"80%"}}>
+          <Text style={{fontSize: 15, fontFamily: fonts.Medium, textAlign:"center"}}>Select what Groups you want to match</Text>
+
+          </View>
+          </View>
             <FlatList
               data={this.state.groupType}
               keyExtractor={(item) => item.type.toString()}
@@ -350,11 +356,8 @@ class GroupTypeComponent extends PureComponent {
           if (response.data.status == "SUCCESS") {
             this.setState({ loading: false });
             if (response.data.hasOwnProperty("createSquad")) {
-              this.props.navigation.reset({
-                index: 0,
-                routes: [{ name: "HomeTab" }],
-              });
-              this.props.navigation.navigate("HomeTab");
+            
+              this.props.navigation.navigate("HomeTab",{screen: "home"});
               this.resetData();
             }
             if (response.data.message) {

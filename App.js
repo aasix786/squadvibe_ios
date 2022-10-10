@@ -54,7 +54,6 @@ const persistor = persistStore(store);
 
 // Register background handler
 messaging().setBackgroundMessageHandler(async remoteMessage => {
-  alert("as")
   console.log('Message handled in the background!', remoteMessage);
 });
 

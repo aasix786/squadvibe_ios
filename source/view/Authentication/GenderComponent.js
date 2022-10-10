@@ -4,7 +4,7 @@ import {
   Image,
   TouchableOpacity,
   Text,
-  SafeAreaView,
+  KeyboardAvoidingView,
   StyleSheet,
   TextInput,
   FlatList,
@@ -59,7 +59,7 @@ class GenderComponent extends PureComponent {
   }
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+      <KeyboardAvoidingView style={{ flex: 1, backgroundColor: colors.white }}>
         <StatusBar
           backgroundColor={"transparent"}
           translucent
@@ -183,7 +183,7 @@ class GenderComponent extends PureComponent {
         >
           <Text style={styles.textStyle}>Next</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </KeyboardAvoidingView>
     );
   }
 }

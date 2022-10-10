@@ -53,7 +53,6 @@ class AddEventComponent extends Component {
       invite_friend: [],
       invite_squad: [],
       mode_type: 1,
-      add_to_people_group_chat: true,
       loading: false,
       modalVisible: false,
       showInput: false,
@@ -671,7 +670,7 @@ class AddEventComponent extends Component {
   };
 
   callAddEventApi = async () => {
-    const { title, address, date, details, latitude, longitude,friend, squad, eventImg } =
+    const { title, address, date, details, latitude, longitude,friend, squad, eventImg, showWhen } =
       this.props.route.params;
     console.log("latitude ", latitude);
     console.log("longitude ", longitude);
@@ -698,9 +697,9 @@ class AddEventComponent extends Component {
       "participants_limit",
       this.props.route.params.participants_limit
     );
+    formdata.append("showWhen",showWhen);
     formdata.append("lats",latitude);
     formdata.append("longs", longitude);
-    formdata.append("event_mode", this.state.mode_type);
     formdata.append("event_mode", this.state.mode_type);
     formdata.append("event_type", this.state.event_type);
 
@@ -709,7 +708,7 @@ class AddEventComponent extends Component {
     formdata.append("invite_user", friends.join(","));
     formdata.append(
       "event_chat_enabled",
-      this.state.add_to_people_group_chat ? 1 : 0
+      this.state.addPeopleInChat ? 1 : 0
     );
 
     formdata.append("min_age", String(this.state.multiSliderValue[0]));

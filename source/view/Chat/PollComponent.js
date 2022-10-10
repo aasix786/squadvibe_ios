@@ -828,7 +828,7 @@ class PollComponent extends Component {
               </View>
               <View style={styles.headerTitleViewStyle}>
                 <Text style={{ fontSize: 15, fontFamily: fonts.Medium }}>
-                  Add Event
+                  Poll
                 </Text>
               </View>
               <View style={styles.headerButtonsViewStyle}>

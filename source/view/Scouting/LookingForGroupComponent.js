@@ -106,7 +106,6 @@ class LookingForGroupComponent extends Component {
       formdata,
       (success) => {
         console.log("getsquadList")
-        console.log(success.getsquadList[0].group_member)
         const allSquads = [];
         success.getsquadList.forEach((squad, index) => {
           squad.squad_image.forEach((squadImg, ind) => {

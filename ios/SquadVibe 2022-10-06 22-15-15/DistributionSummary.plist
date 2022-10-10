@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SquadVibe.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>bitcode</key>
+			<true/>
+			<key>buildNumber</key>
+			<string>15</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>4AD1D30D40467652FF69B6561EDFA0BD20C6162A</string>
+				<key>dateExpires</key>
+				<string>12/09/2023</string>
+				<key>type</key>
+				<string>Cloud Managed Apple Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>bitcode</key>
+					<true/>
+					<key>buildNumber</key>
+					<string>15</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>4AD1D30D40467652FF69B6561EDFA0BD20C6162A</string>
+						<key>dateExpires</key>
+						<string>12/09/2023</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>OpenSSL.framework</string>
+					<key>symbols</key>
+					<true/>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>RBFC92J7BH</string>
+						<key>name</key>
+						<string>Markus Mathes</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>RBFC92J7BH.com.squadvibe.app</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>beta-reports-active</key>
+				<true/>
+				<key>com.apple.developer.applesignin</key>
+				<array>
+					<string>Default</string>
+				</array>
+				<key>com.apple.developer.team-identifier</key>
+				<string>RBFC92J7BH</string>
+				<key>get-task-allow</key>
+				<false/>
+			</dict>
+			<key>name</key>
+			<string>SquadVibe.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>796e7760-4781-4871-8a15-c17c4bea87fb</string>
+				<key>dateExpires</key>
+				<string>12/09/2023</string>
+				<key>name</key>
+				<string>iOS Team Store Provisioning Profile: com.squadvibe.app</string>
+			</dict>
+			<key>symbols</key>
+			<true/>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>RBFC92J7BH</string>
+				<key>name</key>
+				<string>Markus Mathes</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>

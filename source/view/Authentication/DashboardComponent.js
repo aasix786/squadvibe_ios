@@ -103,6 +103,7 @@ class DashboardComponent extends Component {
   };
 
   getUserProfile = async () => {
+console.log("this.props.userInfo",this.props.userInfo)
     //this.setState({ loading: true })
     const device_token = await AsyncStorage.getItem("token");
     const device_type = await AsyncStorage.getItem("device_type");
@@ -126,6 +127,7 @@ class DashboardComponent extends Component {
             userInfo.image = [userInfo.image[userInfo.image.length - 1]];
             this.props.setUserInfo(userInfo);
             AsyncStorage.setItem("user_info", JSON.stringify(userInfo));
+        
           } else {
             console.error(response.data.message);
             if (response.data.message) {

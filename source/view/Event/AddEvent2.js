@@ -10,6 +10,8 @@ import {
   Alert,
   StatusBar,
   Dimensions,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
 import { colors, fonts } from "../../common/colors";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -165,11 +167,12 @@ class AddEventComponent extends Component {
     let sex = [
 
       { label: ('Just Upon Request'), value: ('1') },
-      { label: ('Not Show any where.just show an invitation'), value: ('2') },
+      { label: ('Not Show any where just show an invitation'), value: ('2') },
     ];
     return (
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <>
-        <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View style={{ flex: 1, backgroundColor: "white" }}>
           <StatusBar
             backgroundColor={"transparent"}
             translucent
@@ -241,7 +244,7 @@ class AddEventComponent extends Component {
             ) : (
               <TouchableOpacity
                 onPress={() =>
-                  this.setState({ date: true, isDateVisible: true })
+                  this.setState({ date: true, isDateVisible: true, showAddress: false, selected_number_of_participant:false })
                 }
                 style={{
                   marginTop: 20,
@@ -281,7 +284,7 @@ class AddEventComponent extends Component {
                     Date
                   </Text>
                   <Text style={{ color: "black", fontSize: 12 }}>
-                    Add date?
+                    {this.state.eventDate ? this.state.eventDate : "Add date?"}
                   </Text>
                 </View>
 
@@ -391,7 +394,7 @@ class AddEventComponent extends Component {
               </View>
             ) : (
               <TouchableOpacity
-                onPress={() => this.setState({ showAddress: true })}
+                onPress={() => this.setState({ showAddress: true, date:false, selected_number_of_participant:false })}
                 style={{
                   marginTop: 20,
                   height: 56,
@@ -430,7 +433,7 @@ class AddEventComponent extends Component {
                     Details
                   </Text>
                   <Text style={{ color: "black", fontSize: 12 }}>
-                    Write Here
+                    {this.state.details ? this.state.details : "Write Here"}
                   </Text>
                 </View>
 
@@ -464,7 +467,7 @@ class AddEventComponent extends Component {
               </View>
             ) : (
               <TouchableOpacity
-                onPress={() => this.setState({ selected_number_of_participant: true })}
+                onPress={() => this.setState({ selected_number_of_participant: true,showAddress: false, date:false })}
                 style={{
                   marginTop: 20,
                   height: 56,
@@ -503,7 +506,7 @@ class AddEventComponent extends Component {
                     Participants_limit
                   </Text>
                   <Text style={{ color: "black", fontSize: 12 }}>
-                    Write Here
+                    {this.state.participants_limit ? this.state.participants_limit : "Write Here"}
                   </Text>
                 </View>
 
@@ -778,7 +781,9 @@ class AddEventComponent extends Component {
                             <RadioButtonInput
                               obj={obj}
                               index={i}
-                              onPress={(sex) => this.setState({ sex })}
+                              onPress={(sex) => {
+                                this.setState({ sex })
+                              }}
                               value={this.state.sex}
                               isSelected={this.state.sex === obj.value}
                               borderWidth={1}
@@ -841,6 +846,7 @@ class AddEventComponent extends Component {
                   squad: this.state.invite_squad,
                   participants_limit: this.state.participants_limit,
                   eventImg: this.props.route.params.eventImg,
+                  showWhen: this.state.sex,
                 });
               }
               else{
@@ -909,6 +915,8 @@ class AddEventComponent extends Component {
           }}
         /> */}
       </>
+      
+      </TouchableWithoutFeedback>
     );
   }
 
@@ -1185,85 +1193,6 @@ class AddEventComponent extends Component {
     );
   }
 
-  validation = () => {
-    if (this.state.title.trim().length == 0) {
-      Toast.show("Please enter event title");
-      return;
-    } else if (this.state.address.trim().length == 0) {
-      Toast.show("Please enter address");
-      return;
-    } else if (this.state.eventDate.trim().length == 0) {
-      Toast.show("Please select date");
-      return;
-    } else if (this.state.details.trim().length == 0) {
-      Toast.show("Please enter details");
-      return;
-    } else if (this.state.selected_number_of_participant.trim().length == 0) {
-      Toast.show("Please enter number of participant");
-      return;
-    }
-    // else if (this.state.invite_friend.length == 0) {
-    //     Toast.show('Please add perticipant')
-    //     return
-    // }
-    else if (this.state.mode_type == 0) {
-      Toast.show("Please select event mode");
-      return;
-    } else {
-      // Add event call
-      // Toast.show('event added succfully')
-      this.callAddEventApi();
-    }
-  };
-
-  callAddEventApi = async () => {
-    
-    var formdata = new FormData();
-    formdata.append("token", this.props.userInfo.token);
-    formdata.append("event_title", this.state.title);
-    formdata.append("event_address", this.state.address);
-    formdata.append("lats", this.state.location.latitude);
-    formdata.append("longs", this.state.location.longitude);
-    // formdata.append("event_date", "2021-07-30");
-    const eventDate = moment(this.state.eventDate, "DD/MM/YYYY").format(
-      "YYYY-MM-DD"
-    );
-    formdata.append("event_date", eventDate);
-    formdata.append("event_time", this.state.eventTime);
-    formdata.append("event_description", this.state.details);
-    formdata.append(
-      "participants_limit",
-      this.state.participants_limit
-    );
-    formdata.append("event_mode", this.state.mode_type);
-    formdata.append("event_participant", this.state.invite_friend.join(",")); //- need to discuss with Praveen
-    formdata.append("invite_squad", this.state.invite_squad.join(","));
-    formdata.append("invite_user", this.state.invite_friend.join(","));
-    formdata.append(
-      "event_chat_enabled",
-      this.state.add_to_people_group_chat ? 1 : 0
-    );
-    // const age_range = `${this.state.minAge}-${this.state.maxAge}`
-    // formdata.append("age_range",age_range);
-    formdata.append("min_age", String(this.state.minAge));
-    formdata.append("max_age", String(this.state.maxAge));
-
-    if (this.state.arrSomeOneBrings.length > 0) {
-      formdata.append("someone_bring", this.state.arrSomeOneBrings.join(","));
-    }
-
-    postMethod(
-      null,
-      "createEvent",
-      formdata,
-      (success) => {
-        this.props.navigation.goBack();
-      },
-      (error) => {
-        console.error("postMethod error", error);
-      }
-    );
-  };
 }
 
 const mapStateToProps = (state) => {
